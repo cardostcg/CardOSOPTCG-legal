@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CardOS OP TCG — Legal</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #0A0E1A;
+      color: #E0E6F0;
+      font-family: 'DM Sans', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #378ADD 0%, #2A6BB5 100%);
+      margin-bottom: 20px;
+    }
+
+    .logo-mark svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #6B7A9E;
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #111827;
+      border: 1px solid #1E2740;
+      border-radius: 14px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .card:hover {
+      border-color: #378ADD;
+      background: #131C2E;
+    }
+
+    .card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .card-icon.blue  { background: #378ADD22; }
+    .card-icon.teal  { background: #5DCAA522; }
+    .card-icon.red   { background: #FF444422; }
+
+    .card-icon svg { width: 22px; height: 22px; }
+
+    .card-text { text-align: left; }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 2px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #6B7A9E;
+    }
+
+    .card-arrow {
+      margin-left: auto;
+      color: #2A3A5C;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #3A4A6A;
+      line-height: 1.8;
+    }
+
+    .footer a {
+      color: #4A6A9E;
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    .divider {
+      display: inline-block;
+      margin: 0 8px;
+      color: #2A3A5C;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Logo -->
+    <div class="logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="6" width="18" height="24" rx="3" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
+        <rect x="10" y="10" width="18" height="24" rx="3" fill="white" fill-opacity="0.08" stroke="white" stroke-width="1.5"/>
+        <path d="M9 14h8M9 18h6M9 22h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <h1>CardOS OP TCG</h1>
+    <p class="tagline">Your One Stop Shop for One Piece.</p>
+
+    <!-- Link cards -->
+    <div class="cards">
+
+      <a class="card" href="https://cardostcg.github.io/CardOSOPTCG-legal/privacy-policy.html">
+        <div class="card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V6L12 2z"/>
+          </svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Privacy Policy</div>
+          <div class="card-desc">How we collect, use, and protect your data</div>
+        </div>
+        <span class="card-arrow">›</span>
+      </a>
+
+      <a class="card" href="https://cardostcg.github.io/CardOSOPTCG-legal/terms-of-service.html">
+        <div class="card-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="8" y1="13" x2="16" y2="13"/>
+            <line x1="8" y1="17" x2="12" y2="17"/>
+          </svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Terms of Service</div>
+          <div class="card-desc">Rules and conditions for using CardOS</div>
+        </div>
+        <span class="card-arrow">›</span>
+      </a>
+
+      <a class="card" href="https://cardostcg.github.io/CardOSOPTCG-legal/delete-account.html">
+        <div class="card-icon red">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF4444" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+            <path d="M10 11v6M14 11v6"/>
+            <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
+          </svg>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Delete Account</div>
+          <div class="card-desc">Request deletion of your account and data</div>
+        </div>
+        <span class="card-arrow">›</span>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <span>© 2026 CardOS TCG</span>
+      <span class="divider">·</span>
+      <span>Crown Point, IN</span>
+      <br/>
+      <a href="mailto:CardOSTCG@gmail.com">CardOSTCG@gmail.com</a>
+    </div>
+
+  </div>
+</body>
+</html>
