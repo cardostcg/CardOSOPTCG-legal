@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Confirmed — CardOS OP TCG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #0A0E1A;
+      color: #F0F4FF;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid #1E2740;
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .eyebrow-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .gold-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #EF9F27;
+      flex-shrink: 0;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: #EF9F27;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .headline {
+      font-size: 34px;
+      font-weight: 700;
+      color: #F0F4FF;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .body {
+      font-size: 15px;
+      font-weight: 400;
+      color: #6B7A99;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .body strong {
+      color: #378ADD;
+      font-weight: 600;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: #1E2740;
+      border-radius: 2px;
+      margin: 0 auto 32px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #6B7A9966;
+      letter-spacing: 0.3px;
+      line-height: 1.6;
+    }
+
+    .wordmark-row {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .wordmark {
+      font-size: 13px;
+      font-weight: 700;
+      color: #F0F4FF;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .wordmark-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #378ADD;
+      margin-bottom: 1px;
+    }
+
+    .tagline {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #6B7A9966;
+      letter-spacing: 0.4px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="eyebrow-row">
+      <div class="gold-dot"></div>
+      <span class="eyebrow">Email Confirmed</span>
+    </div>
+
+    <h1 class="headline">You're in,<br/>Captain.</h1>
+
+    <p class="body">
+      Your email has been verified.<br/>
+      <strong>Head back to the CardOS app</strong> and sign in to access your vault.
+    </p>
+
+    <div class="divider"></div>
+
+    <p class="hint">
+      You can close this page.<br/>
+      CardOS OP TCG · Built for Every Player. Built for Every Pull.
+    </p>
+  </div>
+
+  <div class="wordmark-row">
+    <span class="wordmark">CardOS OP TCG</span>
+    <div class="wordmark-dot"></div>
+  </div>
+  <p class="tagline">Your One Stop Shop for One Piece.</p>
+
+</body>
+</html>
