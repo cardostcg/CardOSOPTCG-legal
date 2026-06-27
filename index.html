@@ -2,228 +2,175 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CardOS OP TCG — Legal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>CardOS OP TCG — One Piece TCG Portfolio Tracker</title>
+  <meta name="description" content="CardOS OP TCG tracks your One Piece TCG collection. Real value, personalized. Built for all users. Join the waitlist for early access." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://cardostcg.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CardOS OP TCG — One Piece TCG Portfolio Tracker" />
+  <meta property="og:description" content="Track your One Piece TCG collection. Real value, personalized. Built for all users." />
+  <meta property="og:url" content="https://cardostcg.com/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "CardOS OP TCG",
+        "url": "https://cardostcg.com/",
+        "email": "CardOSTCG@gmail.com",
+        "sameAs": [
+          "https://github.com/cardostcg"
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "CardOS OP TCG",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Android",
+        "url": "https://cardostcg.com/",
+        "description": "CardOS OP TCG tracks your One Piece TCG collection with real, personalized value. Built for all users.",
+        "author": { "@type": "Organization", "name": "CardOS OP TCG" }
+      }
+    ]
+  }
+  </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: #0A0E1A;
-      color: #E0E6F0;
-      font-family: 'DM Sans', Arial, sans-serif;
+      background: #0A0E1A;
+      color: #E8EAF0;
+      font-family: 'DM Sans', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 24px;
-    }
-
-    .container {
-      max-width: 480px;
-      width: 100%;
+      padding: 24px 24px 72px;
       text-align: center;
     }
 
-    .logo-mark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
+    .logo {
+      width: 72px;
+      height: 72px;
       border-radius: 16px;
-      background: linear-gradient(135deg, #378ADD 0%, #2A6BB5 100%);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
-    .logo-mark svg {
-      width: 36px;
-      height: 36px;
+    .wordmark {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #C7CBDA;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(93, 202, 165, 0.12);
+      border: 1px solid rgba(93, 202, 165, 0.4);
+      color: #5DCAA5;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 100px;
+      margin-bottom: 26px;
     }
 
     h1 {
-      font-size: 24px;
+      font-size: clamp(27px, 5.5vw, 44px);
       font-weight: 700;
-      color: #FFFFFF;
-      letter-spacing: -0.3px;
-      margin-bottom: 6px;
+      line-height: 1.18;
+      max-width: 540px;
+      margin-bottom: 16px;
     }
 
-    .tagline {
-      font-size: 14px;
-      color: #6B7A9E;
-      margin-bottom: 40px;
+    h1 span { color: #5DCAA5; }
+
+    .sub {
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: #8A8FA8;
+      max-width: 420px;
+      line-height: 1.6;
+      margin-bottom: 34px;
     }
 
-    .cards {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 40px;
-    }
-
-    .card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: #111827;
-      border: 1px solid #1E2740;
-      border-radius: 14px;
-      padding: 18px 20px;
+    .cta {
+      display: inline-block;
+      background: #378ADD;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
       text-decoration: none;
-      color: inherit;
-      transition: border-color 0.15s, background 0.15s;
+      padding: 14px 38px;
+      border-radius: 12px;
+      transition: background 0.15s ease, transform 0.1s ease;
     }
 
-    .card:hover {
-      border-color: #378ADD;
-      background: #131C2E;
-    }
+    .cta:hover { background: #2a6bb5; }
+    .cta:active { transform: scale(0.97); }
 
-    .card-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      flex-shrink: 0;
-    }
-
-    .card-icon.blue  { background: #378ADD22; }
-    .card-icon.teal  { background: #5DCAA522; }
-    .card-icon.red   { background: #FF444422; }
-
-    .card-icon svg { width: 22px; height: 22px; }
-
-    .card-text { text-align: left; }
-
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #FFFFFF;
-      margin-bottom: 2px;
-    }
-
-    .card-desc {
+    .reassure {
       font-size: 13px;
-      color: #6B7A9E;
+      color: #5A5F78;
+      margin-top: 14px;
     }
 
-    .card-arrow {
-      margin-left: auto;
-      color: #2A3A5C;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .footer {
+    footer {
+      position: fixed;
+      bottom: 18px;
+      left: 0;
+      right: 0;
       font-size: 12px;
-      color: #3A4A6A;
+      color: #4A4F66;
       line-height: 1.8;
     }
 
-    .footer a {
-      color: #4A6A9E;
-      text-decoration: none;
-    }
-
-    .footer a:hover { text-decoration: underline; }
-
-    .divider {
-      display: inline-block;
-      margin: 0 8px;
-      color: #2A3A5C;
-    }
+    footer a { color: #4A4F66; text-decoration: underline; }
+    footer a:hover { color: #8A8FA8; }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <!-- Logo -->
-    <div class="logo-mark">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="6" width="18" height="24" rx="3" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
-        <rect x="10" y="10" width="18" height="24" rx="3" fill="white" fill-opacity="0.08" stroke="white" stroke-width="1.5"/>
-        <path d="M9 14h8M9 18h6M9 22h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </div>
+  <img class="logo" src="icon.png" width="72" height="72" alt="CardOS OP TCG logo" />
 
-    <h1>CardOS OP TCG</h1>
-    <p class="tagline">Your One Stop Shop for One Piece.</p>
+  <div class="wordmark">CardOS OP TCG</div>
 
-    <!-- Link cards -->
-    <div class="cards">
+  <div class="badge">Now in Closed Beta</div>
 
-      <a class="card" href="https://cardostcg.github.io/CardOSOPTCG-legal/privacy-policy.html">
-        <div class="card-icon blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V6L12 2z"/>
-          </svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Privacy Policy</div>
-          <div class="card-desc">How we collect, use, and protect your data</div>
-        </div>
-        <span class="card-arrow">›</span>
-      </a>
+  <h1>Track your One Piece TCG collection.<br /><span>Real value, personalized.</span></h1>
 
-      <a class="card" href="https://cardostcg.github.io/CardOSOPTCG-legal/terms-of-service.html">
-        <div class="card-icon teal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="8" y1="13" x2="16" y2="13"/>
-            <line x1="8" y1="17" x2="12" y2="17"/>
-          </svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Terms of Service</div>
-          <div class="card-desc">Rules and conditions for using CardOS</div>
-        </div>
-        <span class="card-arrow">›</span>
-      </a>
+  <p class="sub">Built for all users. Built by a collector, for collectors.</p>
 
-      <a class="card" href="https://cardostcg.github.io/CardOSOPTCG-legal/delete-account.html">
-        <div class="card-icon red">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#FF4444" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3 6 5 6 21 6"/>
-            <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
-            <path d="M10 11v6M14 11v6"/>
-            <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
-          </svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Delete Account</div>
-          <div class="card-desc">Request deletion of your account and data</div>
-        </div>
-        <span class="card-arrow">›</span>
-      </a>
+  <a class="cta" href="https://forms.gle/6SNSipz2KTDQumFK9" target="_blank" rel="noopener">
+    Join the Waitlist
+  </a>
 
-      <a class="card" href="https://cardostcg.github.io/CardOSOPTCG-legal/waitlist.html">
-        <div class="card-icon" style="background:#EF9F2718;border:1.5px solid #EF9F2733">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#EF9F27" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.12 1.22 2 2 0 012.1 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
-          </svg>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Join the Waitlist</div>
-          <div class="card-desc">Get early access to CardOS OP TCG</div>
-        </div>
-        <span class="card-arrow">›</span>
-      </a>
+  <div class="reassure">Early access. No spam.</div>
 
-    </div>
+  <footer>
+    <a href="https://cardostcg.github.io/CardOSOPTCG-legal/privacy.html">Privacy</a>
+    &nbsp;·&nbsp;
+    <a href="https://cardostcg.github.io/CardOSOPTCG-legal/tos.html">Terms</a>
+    &nbsp;·&nbsp;
+    <a href="https://cardostcg.com/delete-account.html">Delete Account</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:CardOSTCG@gmail.com">CardOSTCG@gmail.com</a>
+    <br />© 2026 CardOS OP TCG
+  </footer>
 
-    <!-- Footer -->
-    <div class="footer">
-      <span>© 2026 CardOS TCG</span>
-      <span class="divider">·</span>
-      <span>Crown Point, IN</span>
-      <br/>
-      <a href="mailto:CardOSTCG@gmail.com">CardOSTCG@gmail.com</a>
-    </div>
-
-  </div>
 </body>
 </html>
