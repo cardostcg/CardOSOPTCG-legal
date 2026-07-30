@@ -14,11 +14,11 @@
   <meta property="og:description" content="One Piece TCG tracker and One Piece card value tracker (OP TCG). Tracks profit, not just worth. Free core, forever. No paywall on the basics." />
   <meta property="og:url" content="https://cardostcg.com/" />
   <meta property="og:site_name" content="CardOS OP TCG" />
-  <meta property="og:image" content="https://cardostcg.com/hero-portfolio-vault.png" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://cardostcg.com/icon.png" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="One Piece TCG Tracker & One Piece Card Value Tracker | CardOS OP TCG" />
   <meta name="twitter:description" content="One Piece TCG tracker and One Piece card value tracker (OP TCG). Tracks profit, not just worth. Free core, forever. No paywall on the basics." />
-  <meta name="twitter:image" content="https://cardostcg.com/hero-portfolio-vault.png" />
+  <meta name="twitter:image" content="https://cardostcg.com/icon.png" />
   <meta name="theme-color" content="#0A0E1A" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -122,13 +122,10 @@
       margin-bottom: 26px;
     }
 
-    .hero-shot {
-      width: min(680px, 94vw);
-      height: auto;
-      margin: 36px 0 40px;
-      border-radius: 18px;
-      border: 1px solid rgba(232, 234, 240, 0.10);
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+    img {
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
     }
 
     .features {
@@ -192,7 +189,7 @@
 </head>
 <body>
 
-  <img class="logo" src="icon.png" width="72" height="72" alt="CardOS OP TCG logo, a One Piece TCG tracker and graded card vault" />
+  <img class="logo" src="icon.png" width="72" height="72" draggable="false" alt="CardOS OP TCG logo, a One Piece TCG tracker and graded card vault" />
 
   <div class="wordmark">CardOS OP TCG</div>
 
@@ -204,16 +201,8 @@
 
   <p class="free-line">Free core, forever. No paywall on the basics.</p>
 
-  <a class="cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg" target="_blank" rel="noopener">
-  Get it on Google Play
-  </a>
-
-  <img class="hero-shot" src="hero-portfolio-vault.png"
-       alt="CardOS OP TCG app screenshot showing the portfolio tracker and 9-company graded vault for One Piece TCG cards"
-       width="1080" height="720" fetchpriority="high" decoding="async" />
-
   <ul class="features">
-    <li>9-company graded vault: PSA, BGS, CGC, and more plus raw.</li>
+    <li>Track PSA, BGS, and CGC graded slabs, plus raw. Full 9-company vault under the hood.</li>
     <li>DON!! and promos, dedicated tab</li>
   </ul>
 
