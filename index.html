@@ -77,7 +77,6 @@
       }
       body > .logo { animation-delay: 0.02s; }
       body > .wordmark { animation-delay: 0.05s; }
-      body > .badge { animation-delay: 0.08s; }
       body > h1 { animation-delay: 0.11s; }
       body > .sub { animation-delay: 0.14s; }
       body > .free-line { animation-delay: 0.17s; }
@@ -86,11 +85,30 @@
       body > .catalog-teaser { animation-delay: 0.26s; }
       body > .cta { animation-delay: 0.29s; }
       body > .ios-note { animation-delay: 0.32s; }
+
+      body > .badge {
+        animation:
+          fadeUp 0.45s ease 0.08s both,
+          badgePulse 2.4s ease-in-out 0.7s infinite;
+      }
     }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes badgePulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(93, 202, 165, 0);
+        border-color: rgba(93, 202, 165, 0.4);
+        background: rgba(93, 202, 165, 0.12);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(93, 202, 165, 0.12);
+        border-color: rgba(93, 202, 165, 0.65);
+        background: rgba(93, 202, 165, 0.18);
+      }
     }
 
     .logo {
@@ -121,6 +139,13 @@
       padding: 5px 13px;
       border-radius: 100px;
       margin-bottom: 26px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .badge {
+        animation: none !important;
+        box-shadow: none;
+      }
     }
 
     h1 {
@@ -172,10 +197,28 @@
       line-height: 1.5;
     }
 
+    .features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      text-align: left;
+    }
+
     .features li::before {
-      content: "✓ ";
-      color: #5DCAA5;
-      font-weight: 700;
+      content: "";
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
+      margin-top: 0.28em;
+      background-color: #5DCAA5;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.2 8.2 6.4 11.4 12.8 4.6' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.2 8.2 6.4 11.4 12.8 4.6' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
     }
 
     .catalog-teaser {
@@ -225,14 +268,55 @@
       padding: 14px 38px;
       border-radius: 12px;
       border: 1px solid transparent;
-      transition: background 0.15s ease, transform 0.1s ease, border-color 0.15s ease, color 0.15s ease;
+      box-shadow: 0 4px 14px rgba(55, 138, 221, 0.28);
+      transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
     }
 
-    .cta:hover { background: #2a6bb5; }
-    .cta:active { transform: scale(0.97); }
+    .cta:hover {
+      background: #2a6bb5;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(55, 138, 221, 0.38);
+    }
+
+    .cta:active {
+      transform: scale(0.97) translateY(0);
+      box-shadow: 0 2px 8px rgba(55, 138, 221, 0.22);
+      opacity: 0.92;
+    }
+
     .cta:focus-visible {
       outline: 2px solid #5DCAA5;
       outline-offset: 3px;
+    }
+
+    .cta-play {
+      position: relative;
+      min-width: 240px;
+    }
+
+    .cta-play .cta-spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      vertical-align: -0.15em;
+      margin-left: 10px;
+    }
+
+    .cta-play.is-loading {
+      pointer-events: none;
+      opacity: 0.88;
+    }
+
+    .cta-play.is-loading .cta-spinner {
+      display: inline-block;
+      animation: ctaSpin 0.55s linear infinite;
+    }
+
+    @keyframes ctaSpin {
+      to { transform: rotate(360deg); }
     }
 
     .cta-ghost {
@@ -246,16 +330,22 @@
       padding: 14px 38px;
       border-radius: 12px;
       border: 1px solid rgba(138, 143, 168, 0.45);
-      transition: background 0.15s ease, transform 0.1s ease, border-color 0.15s ease, color 0.15s ease;
+      box-shadow: none;
+      transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
     }
 
     .cta-ghost:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(93, 202, 165, 0.45);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(93, 202, 165, 0.5);
       color: #E8EAF0;
+      transform: translateY(-1px);
     }
 
-    .cta-ghost:active { transform: scale(0.97); }
+    .cta-ghost:active {
+      transform: scale(0.97) translateY(0);
+      opacity: 0.9;
+    }
+
     .cta-ghost:focus-visible {
       outline: 2px solid #5DCAA5;
       outline-offset: 3px;
@@ -264,9 +354,12 @@
     @media (prefers-reduced-motion: reduce) {
       .cta,
       .cta-ghost { transition: none; }
+      .cta:hover,
+      .cta-ghost:hover,
       .cta:active,
       .cta-ghost:active { transform: none; }
       .catalog-teaser { transition: none; }
+      .cta-play.is-loading .cta-spinner { animation: none; }
     }
 
     .ios-note {
@@ -322,7 +415,7 @@
     <a class="cta-ghost" href="https://app.cardostcg.com/">Sign in/Create account</a>
   </section>
 
-  <a class="cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Get it on Google Play</a>
+  <a class="cta cta-play" id="play-cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Get it on Google Play<span class="cta-spinner" aria-hidden="true"></span></a>
 
   <p class="ios-note">iOS coming soon</p>
   <span class="visually-hidden">CardOS OP TCG is a One Piece TCG tracker and TCG portfolio tracker with a dedicated graded card vault.</span>
@@ -338,5 +431,29 @@
     <br />Not affiliated with or endorsed by Bandai.
     <br />© 2026 CardOS OP TCG
   </footer>
+
+  <script>
+  (function () {
+    var play = document.getElementById("play-cta");
+    if (!play) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    play.addEventListener("click", function (e) {
+      if (play.classList.contains("is-loading")) {
+        e.preventDefault();
+        return;
+      }
+      if (reduce) return;
+      e.preventDefault();
+      play.classList.add("is-loading");
+      play.setAttribute("aria-busy", "true");
+      var href = play.href;
+      window.setTimeout(function () {
+        window.open(href, "_blank", "noopener");
+        play.classList.remove("is-loading");
+        play.removeAttribute("aria-busy");
+      }, 420);
+    });
+  })();
+  </script>
 </body>
 </html>
