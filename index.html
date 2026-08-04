@@ -243,11 +243,22 @@
       padding: 14px 38px;
       border-radius: 12px;
       border: 1px solid transparent;
-      transition: background 0.15s ease, transform 0.1s ease, border-color 0.15s ease, color 0.15s ease;
+      box-shadow: 0 4px 14px rgba(55, 138, 221, 0.28);
+      transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
     }
 
-    .cta:hover { background: #2a6bb5; }
-    .cta:active { transform: scale(0.97); }
+    .cta:hover {
+      background: #2a6bb5;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(55, 138, 221, 0.38);
+    }
+
+    .cta:active {
+      transform: scale(0.97) translateY(0);
+      box-shadow: 0 2px 8px rgba(55, 138, 221, 0.22);
+      opacity: 0.92;
+    }
+
     .cta:focus-visible {
       outline: 2px solid #5DCAA5;
       outline-offset: 3px;
@@ -264,16 +275,22 @@
       padding: 14px 38px;
       border-radius: 12px;
       border: 1px solid rgba(138, 143, 168, 0.45);
-      transition: background 0.15s ease, transform 0.1s ease, border-color 0.15s ease, color 0.15s ease;
+      box-shadow: none;
+      transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
     }
 
     .cta-ghost:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(93, 202, 165, 0.45);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(93, 202, 165, 0.5);
       color: #E8EAF0;
+      transform: translateY(-1px);
     }
 
-    .cta-ghost:active { transform: scale(0.97); }
+    .cta-ghost:active {
+      transform: scale(0.97) translateY(0);
+      opacity: 0.9;
+    }
+
     .cta-ghost:focus-visible {
       outline: 2px solid #5DCAA5;
       outline-offset: 3px;
@@ -282,6 +299,8 @@
     @media (prefers-reduced-motion: reduce) {
       .cta,
       .cta-ghost { transition: none; }
+      .cta:hover,
+      .cta-ghost:hover,
       .cta:active,
       .cta-ghost:active { transform: none; }
       .catalog-teaser { transition: none; }
