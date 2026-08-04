@@ -22,6 +22,7 @@
   <meta name="theme-color" content="#0A0E1A" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <script type="application/ld+json">
@@ -54,7 +55,10 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: #0A0E1A;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(55, 138, 221, 0.14), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(93, 202, 165, 0.08), transparent 50%),
+        #0A0E1A;
       color: #E8EAF0;
       font-family: 'DM Sans', sans-serif;
       min-height: 100vh;
@@ -65,6 +69,28 @@
       justify-content: safe center;
       padding: 24px 24px 72px;
       text-align: center;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      body > :not(footer):not(.visually-hidden) {
+        animation: fadeUp 0.45s ease both;
+      }
+      body > .logo { animation-delay: 0.02s; }
+      body > .wordmark { animation-delay: 0.05s; }
+      body > .badge { animation-delay: 0.08s; }
+      body > h1 { animation-delay: 0.11s; }
+      body > .sub { animation-delay: 0.14s; }
+      body > .free-line { animation-delay: 0.17s; }
+      body > .support-line { animation-delay: 0.2s; }
+      body > .features { animation-delay: 0.23s; }
+      body > .catalog-teaser { animation-delay: 0.26s; }
+      body > .cta { animation-delay: 0.29s; }
+      body > .ios-note { animation-delay: 0.32s; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .logo {
@@ -139,6 +165,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      max-width: 460px;
       margin-bottom: 34px;
       color: #8A8FA8;
       font-size: 14px;
@@ -159,6 +186,12 @@
       border: 1px solid rgba(138, 143, 168, 0.28);
       border-radius: 14px;
       background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .catalog-teaser:hover {
+      border-color: rgba(93, 202, 165, 0.35);
+      background: rgba(255, 255, 255, 0.045);
     }
 
     .catalog-teaser h2 {
@@ -195,6 +228,16 @@
 
     .cta:hover { background: #2a6bb5; }
     .cta:active { transform: scale(0.97); }
+    .cta:focus-visible {
+      outline: 2px solid #5DCAA5;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta { transition: none; }
+      .cta:active { transform: none; }
+      .catalog-teaser { transition: none; }
+    }
 
     .ios-note {
       font-size: 12px;
@@ -230,7 +273,7 @@
 
   <div class="badge">NOW LIVE ON GOOGLE PLAY</div>
 
-  <h1>Every card logged. Every <span>dollar</span> tracked.</h1>
+  <h1>Every <span>card</span> logged. Every <span>dollar</span> tracked.</h1>
 
   <p class="sub">The One Piece TCG portfolio tracker.</p>
 
@@ -249,9 +292,7 @@
     <a class="cta" href="https://app.cardostcg.com/">Sign in</a>
   </section>
 
-  <a class="cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">
-  Get it on Google Play
-  </a>
+  <a class="cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Get it on Google Play</a>
 
   <p class="ios-note">iOS coming soon</p>
   <span class="visually-hidden">CardOS OP TCG is a One Piece TCG tracker and TCG portfolio tracker with a dedicated graded card vault.</span>
