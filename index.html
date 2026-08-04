@@ -77,7 +77,6 @@
       }
       body > .logo { animation-delay: 0.02s; }
       body > .wordmark { animation-delay: 0.05s; }
-      body > .badge { animation-delay: 0.08s; }
       body > h1 { animation-delay: 0.11s; }
       body > .sub { animation-delay: 0.14s; }
       body > .free-line { animation-delay: 0.17s; }
@@ -86,11 +85,30 @@
       body > .catalog-teaser { animation-delay: 0.26s; }
       body > .cta { animation-delay: 0.29s; }
       body > .ios-note { animation-delay: 0.32s; }
+
+      body > .badge {
+        animation:
+          fadeUp 0.45s ease 0.08s both,
+          badgePulse 2.4s ease-in-out 0.7s infinite;
+      }
     }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes badgePulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(93, 202, 165, 0);
+        border-color: rgba(93, 202, 165, 0.4);
+        background: rgba(93, 202, 165, 0.12);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(93, 202, 165, 0.12);
+        border-color: rgba(93, 202, 165, 0.65);
+        background: rgba(93, 202, 165, 0.18);
+      }
     }
 
     .logo {
@@ -121,6 +139,13 @@
       padding: 5px 13px;
       border-radius: 100px;
       margin-bottom: 26px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .badge {
+        animation: none !important;
+        box-shadow: none;
+      }
     }
 
     h1 {
