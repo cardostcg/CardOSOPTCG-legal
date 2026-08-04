@@ -264,6 +264,36 @@
       outline-offset: 3px;
     }
 
+    .cta-play {
+      position: relative;
+      min-width: 240px;
+    }
+
+    .cta-play .cta-spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      vertical-align: -0.15em;
+      margin-left: 10px;
+    }
+
+    .cta-play.is-loading {
+      pointer-events: none;
+      opacity: 0.88;
+    }
+
+    .cta-play.is-loading .cta-spinner {
+      display: inline-block;
+      animation: ctaSpin 0.55s linear infinite;
+    }
+
+    @keyframes ctaSpin {
+      to { transform: rotate(360deg); }
+    }
+
     .cta-ghost {
       display: inline-block;
       background: transparent;
@@ -304,6 +334,7 @@
       .cta:active,
       .cta-ghost:active { transform: none; }
       .catalog-teaser { transition: none; }
+      .cta-play.is-loading .cta-spinner { animation: none; }
     }
 
     .ios-note {
@@ -359,7 +390,7 @@
     <a class="cta-ghost" href="https://app.cardostcg.com/">Sign in/Create account</a>
   </section>
 
-  <a class="cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Get it on Google Play</a>
+  <a class="cta cta-play" id="play-cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Get it on Google Play<span class="cta-spinner" aria-hidden="true"></span></a>
 
   <p class="ios-note">iOS coming soon</p>
   <span class="visually-hidden">CardOS OP TCG is a One Piece TCG tracker and TCG portfolio tracker with a dedicated graded card vault.</span>
@@ -375,5 +406,29 @@
     <br />Not affiliated with or endorsed by Bandai.
     <br />© 2026 CardOS OP TCG
   </footer>
+
+  <script>
+  (function () {
+    var play = document.getElementById("play-cta");
+    if (!play) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    play.addEventListener("click", function (e) {
+      if (play.classList.contains("is-loading")) {
+        e.preventDefault();
+        return;
+      }
+      if (reduce) return;
+      e.preventDefault();
+      play.classList.add("is-loading");
+      play.setAttribute("aria-busy", "true");
+      var href = play.href;
+      window.setTimeout(function () {
+        window.open(href, "_blank", "noopener");
+        play.classList.remove("is-loading");
+        play.removeAttribute("aria-busy");
+      }, 420);
+    });
+  })();
+  </script>
 </body>
 </html>
