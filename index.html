@@ -15,11 +15,14 @@
   <meta property="og:url" content="https://cardostcg.com/" />
   <meta property="og:site_name" content="CardOS OP TCG" />
   <meta property="og:image" content="https://cardostcg.com/icon.png" />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Every card logged. Every dollar tracked. | CardOS OP TCG" />
   <meta name="twitter:description" content="Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker (OP TCG). Free core, forever. No paywall on the basics." />
   <meta name="twitter:image" content="https://cardostcg.com/icon.png" />
   <meta name="theme-color" content="#0A0E1A" />
+
+  <link rel="icon" href="/icon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,16 +38,22 @@
         "url": "https://cardostcg.com/",
         "email": "CardOSTCG@gmail.com",
         "sameAs": [
-          "https://github.com/cardostcg"
+          "https://github.com/cardostcg",
+          "https://apps.apple.com/app/id6792994816",
+          "https://play.google.com/store/apps/details?id=com.cardos.optcg"
         ]
       },
       {
         "@type": "SoftwareApplication",
         "name": "CardOS OP TCG",
         "applicationCategory": "FinanceApplication",
-        "operatingSystem": "Android",
+        "operatingSystem": "iOS, Android",
         "url": "https://cardostcg.com/",
-        "description": "Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker. Track your One Piece TCG collection's real value, cost basis, and profit/loss. Graded vault for all 9 grading companies (PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, AGS). Free core, forever.",
+        "downloadUrl": [
+          "https://apps.apple.com/app/id6792994816",
+          "https://play.google.com/store/apps/details?id=com.cardos.optcg"
+        ],
+        "description": "Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker. Track your One Piece TCG collection's real value, cost basis, and profit/loss. Graded vault for all 9 grading companies (PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, AGS). Free core, forever. Now on iOS and Android.",
         "author": { "@type": "Organization", "name": "CardOS OP TCG" }
       }
     ]
@@ -82,9 +91,8 @@
       body > .free-line { animation-delay: 0.17s; }
       body > .support-line { animation-delay: 0.2s; }
       body > .features { animation-delay: 0.23s; }
-      body > .catalog-teaser { animation-delay: 0.26s; }
-      body > .cta { animation-delay: 0.29s; }
-      body > .ios-note { animation-delay: 0.32s; }
+      body > .store-ctas { animation-delay: 0.26s; }
+      body > .catalog-teaser { animation-delay: 0.29s; }
 
       body > .badge {
         animation:
@@ -221,10 +229,26 @@
       mask-position: center;
     }
 
+    .store-ctas {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 420px;
+      margin-bottom: 28px;
+    }
+
+    .store-ctas .cta {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
+
     .catalog-teaser {
       width: 100%;
       max-width: 420px;
-      margin-bottom: 40px;
+      margin-bottom: 8px;
       padding: 22px 24px;
       border: 1px solid rgba(138, 143, 168, 0.28);
       border-radius: 14px;
@@ -289,12 +313,12 @@
       outline-offset: 3px;
     }
 
-    .cta-play {
+    .cta-store {
       position: relative;
       min-width: 240px;
     }
 
-    .cta-play .cta-spinner {
+    .cta-store .cta-spinner {
       display: none;
       width: 16px;
       height: 16px;
@@ -305,12 +329,12 @@
       margin-left: 10px;
     }
 
-    .cta-play.is-loading {
+    .cta-store.is-loading {
       pointer-events: none;
       opacity: 0.88;
     }
 
-    .cta-play.is-loading .cta-spinner {
+    .cta-store.is-loading .cta-spinner {
       display: inline-block;
       animation: ctaSpin 0.55s linear infinite;
     }
@@ -359,13 +383,7 @@
       .cta:active,
       .cta-ghost:active { transform: none; }
       .catalog-teaser { transition: none; }
-      .cta-play.is-loading .cta-spinner { animation: none; }
-    }
-
-    .ios-note {
-      font-size: 12px;
-      color: #5A5F78;
-      margin-top: 12px;
+      .cta-store.is-loading .cta-spinner { animation: none; }
     }
 
     .visually-hidden {
@@ -394,7 +412,7 @@
 
   <div class="wordmark">CardOS OP TCG</div>
 
-  <div class="badge">NOW LIVE ON GOOGLE PLAY</div>
+  <div class="badge">NOW LIVE ON iOS &amp; ANDROID</div>
 
   <h1>Every <span>card</span> logged. Every <span>dollar</span> tracked.</h1>
 
@@ -409,16 +427,18 @@
     <li>Log any card, any set. Raw or graded.</li>
   </ul>
 
+  <div class="store-ctas">
+    <a class="cta cta-store" id="appstore-cta" href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener">Download on the App Store<span class="cta-spinner" aria-hidden="true"></span></a>
+    <a class="cta cta-store" id="play-cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Get it on Google Play<span class="cta-spinner" aria-hidden="true"></span></a>
+  </div>
+
   <section class="catalog-teaser" aria-labelledby="catalog-teaser-heading">
     <h2 id="catalog-teaser-heading">Search the catalog</h2>
     <p>Sign in to search the live catalog</p>
     <a class="cta-ghost" href="https://app.cardostcg.com/">Sign in/Create account</a>
   </section>
 
-  <a class="cta cta-play" id="play-cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Get it on Google Play<span class="cta-spinner" aria-hidden="true"></span></a>
-
-  <p class="ios-note">iOS coming soon</p>
-  <span class="visually-hidden">CardOS OP TCG is a One Piece TCG tracker and TCG portfolio tracker with a dedicated graded card vault.</span>
+  <span class="visually-hidden">CardOS OP TCG is a One Piece TCG tracker and TCG portfolio tracker with a dedicated graded card vault. Available on iOS and Android.</span>
 
   <footer>
     <a href="https://cardostcg.com/privacy-policy.html">Privacy</a>
@@ -434,24 +454,26 @@
 
   <script>
   (function () {
-    var play = document.getElementById("play-cta");
-    if (!play) return;
+    var stores = document.querySelectorAll(".cta-store");
+    if (!stores.length) return;
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    play.addEventListener("click", function (e) {
-      if (play.classList.contains("is-loading")) {
+    Array.prototype.forEach.call(stores, function (btn) {
+      btn.addEventListener("click", function (e) {
+        if (btn.classList.contains("is-loading")) {
+          e.preventDefault();
+          return;
+        }
+        if (reduce) return;
         e.preventDefault();
-        return;
-      }
-      if (reduce) return;
-      e.preventDefault();
-      play.classList.add("is-loading");
-      play.setAttribute("aria-busy", "true");
-      var href = play.href;
-      window.setTimeout(function () {
-        window.open(href, "_blank", "noopener");
-        play.classList.remove("is-loading");
-        play.removeAttribute("aria-busy");
-      }, 420);
+        btn.classList.add("is-loading");
+        btn.setAttribute("aria-busy", "true");
+        var href = btn.href;
+        window.setTimeout(function () {
+          window.open(href, "_blank", "noopener");
+          btn.classList.remove("is-loading");
+          btn.removeAttribute("aria-busy");
+        }, 420);
+      });
     });
   })();
   </script>
