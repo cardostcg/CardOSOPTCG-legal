@@ -31,7 +31,6 @@
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
-      text-transform: uppercase;
       padding: 5px 14px;
       border-radius: 100px;
       margin-bottom: 28px;
@@ -55,6 +54,37 @@
       margin-bottom: 36px;
     }
 
+    .signup {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .signup input {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #E8EAF0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(138, 143, 168, 0.45);
+      border-radius: 12px;
+      padding: 13px 16px;
+      flex: 1 1 220px;
+      min-width: 0;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .signup input::placeholder { color: #5A5F78; }
+
+    .signup input:hover { border-color: rgba(138, 143, 168, 0.7); }
+
+    .signup input:focus-visible {
+      outline: 2px solid #5DCAA5;
+      outline-offset: 2px;
+    }
+
     .cta {
       display: inline-block;
       background: #378ADD;
@@ -65,11 +95,33 @@
       text-decoration: none;
       padding: 14px 36px;
       border-radius: 12px;
+      border: none;
+      cursor: pointer;
       transition: background 0.15s ease, transform 0.1s ease;
     }
 
     .cta:hover { background: #2a6bb5; }
     .cta:active { transform: scale(0.97); }
+
+    .cta:focus-visible {
+      outline: 2px solid #5DCAA5;
+      outline-offset: 3px;
+    }
+
+    .form-note {
+      font-size: 14px;
+      color: #5DCAA5;
+      margin-top: 18px;
+      margin-bottom: 0;
+      min-height: 1.5em;
+    }
+
+    .hidden-submit { display: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta, .signup input { transition: none; }
+      .cta:active { transform: none; }
+    }
 
     footer {
       position: fixed;
@@ -84,21 +136,39 @@
 </head>
 <body>
 
-  <div class="badge">Coming Soon · Android</div>
+  <div class="badge">Product Updates</div>
 
-  <h1>Your One Piece TCG<br /><span>Financial OS.</span></h1>
+  <h1>CardOS <span>updates,</span><br />in your inbox.</h1>
 
-  <p>Track your collection. Know what it's worth. Built for every player. Built for every pull.</p>
+  <p>Occasional product updates and One Piece TCG market insights. No spam, unsubscribe anytime.</p>
 
-  <a class="cta" href="https://forms.gle/9FaEKYwk9imXY3f27" target="_blank" rel="noopener">
-    Join the Waitlist
-  </a>
+  <form class="signup" id="signup-form" action="https://docs.google.com/forms/d/e/1FAIpQLScsxzGSr8nC3G-xw27x7XSBlrvu7MYDN0WRC3O-wdFH8vyCUA/formResponse" method="POST" target="hidden-submit">
+    <input type="email" name="entry.483077468" placeholder="you@example.com" required autocomplete="email" inputmode="email" aria-label="Email address" />
+    <button class="cta" type="submit">Join the mailing list</button>
+  </form>
+  <iframe class="hidden-submit" id="hidden-submit" name="hidden-submit" title="Signup submission" aria-hidden="true" tabindex="-1"></iframe>
+  <p class="form-note" id="form-note" role="status"></p>
 
   <footer>
     <a href="https://cardostcg.com/privacy-policy.html">Privacy Policy</a>
     &nbsp;·&nbsp;
     <a href="https://cardostcg.com/terms-of-service.html">Terms of Service</a>
   </footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById("signup-form");
+      var frame = document.getElementById("hidden-submit");
+      var note = document.getElementById("form-note");
+      var submitted = false;
+      form.addEventListener("submit", function () { submitted = true; });
+      frame.addEventListener("load", function () {
+        if (!submitted) return;
+        form.style.display = "none";
+        note.textContent = "You're on the list. First update lands with the next release.";
+      });
+    })();
+  </script>
 
 </body>
 </html>
