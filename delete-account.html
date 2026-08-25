@@ -3,21 +3,235 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>Delete Your Account — CardOS OP TCG</title>
+  <meta name="description" content="How to delete your CardOS OP TCG account and permanently remove your collection, vault, wishlist, and portfolio data — in-app, no email required." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://cardostcg.com/delete-account.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Delete Your Account — CardOS OP TCG" />
+  <meta property="og:description" content="How to delete your CardOS OP TCG account and permanently remove your collection, vault, wishlist, and portfolio data — in-app, no email required." />
+  <meta property="og:url" content="https://cardostcg.com/delete-account.html" />
+  <meta property="og:site_name" content="CardOS OP TCG" />
+  <meta property="og:image" content="https://cardostcg.com/og-share.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Delete Your Account — CardOS OP TCG" />
+  <meta name="twitter:description" content="How to delete your CardOS OP TCG account and permanently remove your collection, vault, wishlist, and portfolio data — in-app, no email required." />
+  <meta name="twitter:image" content="https://cardostcg.com/og-share.png" />
+  <meta name="theme-color" content="#0A0E1A" />
+
+  <link rel="icon" href="/icon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "Delete Your Account — CardOS OP TCG",
+        "url": "https://cardostcg.com/delete-account.html",
+        "description": "How to delete your CardOS OP TCG account and permanently remove your collection, vault, wishlist, and portfolio data — in-app, no email required.",
+        "isPartOf": { "@type": "WebSite", "name": "CardOS OP TCG", "url": "https://cardostcg.com/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cardostcg.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Delete Account" }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <style>
-    body { font-family: Arial, sans-serif; max-width: 860px; margin: 40px auto; padding: 0 24px; color: #595959; line-height: 1.6; }
-    h1 { font-size: 26px; color: #000; }
-    h2 { font-size: 19px; color: #000; margin-top: 36px; }
-    h3 { font-size: 17px; color: #000; }
-    .subtitle { color: #595959; font-size: 14px; margin-bottom: 32px; }
-    a { color: #3030F1; word-break: break-word; }
-    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
-    th, td { border: 1px solid #000; padding: 8px 12px; font-size: 14px; vertical-align: top; }
+    :root {
+      --bg: #0A0E1A;
+      --text: #B9BECE;
+      --heading: #E8EAF0;
+      --muted: #8A8FA8;
+      --faint: #4A4F66;
+      --accent: #5DCAA5;
+      --border: #262C42;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background:
+        radial-gradient(ellipse 80% 400px at 50% -120px, rgba(55, 138, 221, 0.13), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    .site-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-name {
+      color: var(--heading);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .site-nav {
+      margin-top: 14px;
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 18px;
+    }
+
+    .site-nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .site-nav a:hover { color: var(--accent); }
+    .site-nav a[aria-current="page"] { color: var(--accent); }
+
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 32px 24px 8px;
+    }
+
+    h1 {
+      color: var(--heading);
+      font-size: 30px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+
+    h2 {
+      color: var(--heading);
+      font-size: 20px;
+      line-height: 1.35;
+      margin: 40px 0 12px;
+    }
+
+    h3 {
+      color: var(--heading);
+      font-size: 16px;
+      margin: 28px 0 8px;
+    }
+
+    p { margin: 0 0 16px; }
+
+    strong { color: #D8DBE6; }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    a { color: var(--accent); word-break: break-word; }
+    a:hover { color: #83D9BA; }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 3px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+      margin: 0 0 16px;
+    }
+
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--accent); }
     ul { list-style-type: square; }
     ul > li > ul { list-style-type: circle; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--heading);
+    }
+
+    .site-footer {
+      max-width: 680px;
+      margin: 40px auto 0;
+      padding: 24px 24px 48px;
+      border-top: 1px solid #1A2036;
+      font-size: 12px;
+      color: var(--faint);
+      line-height: 1.8;
+    }
+
+    .site-footer a { color: var(--faint); text-decoration: underline; }
+    .site-footer a:hover { color: var(--muted); }
   </style>
 </head>
 <body>
+
+<header class="site-header">
+  <a class="brand" href="https://cardostcg.com/">
+    <img src="/icon.png" width="28" height="28" alt="CardOS OP TCG logo" />
+    <span class="brand-name">CardOS OP TCG</span>
+  </a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="https://cardostcg.com/">Home</a>
+    <a href="https://cardostcg.com/privacy-policy.html">Privacy</a>
+    <a href="https://cardostcg.com/terms-of-service.html">Terms</a>
+    <a href="https://cardostcg.com/delete-account.html" aria-current="page">Delete Account</a>
+    <a href="https://app.cardostcg.com/">Open App</a>
+  </nav>
+</header>
+
+<main class="wrap">
 
 <h1>DELETE YOUR ACCOUNT</h1>
 <p class="subtitle"><strong>Last updated July 30, 2026</strong></p>
@@ -77,6 +291,21 @@
   Crown Point, IN<br/>
   United States
 </p>
+
+</main>
+
+<footer class="site-footer">
+  <a href="https://cardostcg.com/privacy-policy.html">Privacy</a>
+  &nbsp;·&nbsp;
+  <a href="https://cardostcg.com/terms-of-service.html">Terms</a>
+  &nbsp;·&nbsp;
+  <a href="https://cardostcg.com/delete-account.html">Delete Account</a>
+  &nbsp;·&nbsp;
+  <a href="mailto:CardOSTCG@gmail.com">CardOSTCG@gmail.com</a>
+  <br />Get the app: <a href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener">App Store</a> &nbsp;·&nbsp; <a href="https://play.google.com/store/apps/details?id=com.cardos.optcg&amp;utm_source=web&amp;utm_medium=teaser&amp;utm_campaign=p37" target="_blank" rel="noopener">Google Play</a>
+  <br />Not affiliated with or endorsed by Bandai.
+  <br />© 2026 CardOS OP TCG
+</footer>
 
 </body>
 </html>
