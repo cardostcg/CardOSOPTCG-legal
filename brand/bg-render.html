@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 2048px; height: 2048px; overflow: hidden; background: #0A0E1A; }
+
+  .stage {
+    position: relative;
+    width: 2048px;
+    height: 2048px;
+    background: #0A0E1A;
+    overflow: hidden;
+  }
+
+  /* Generated gold-smoke atmosphere, full bleed */
+  .texture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.82) saturate(1.08);
+  }
+
+  /* Gold halo echoing the logo's circuit traces */
+  .halo {
+    position: absolute;
+    width: 1900px;
+    height: 1900px;
+    right: -380px;
+    top: -420px;
+    background: radial-gradient(circle, rgba(239, 159, 39, 0.24), rgba(239, 159, 39, 0.07) 42%, transparent 68%);
+    filter: blur(10px);
+  }
+
+  /* Ghosted emblem: the real logo, upscaled, gradient-blurred, dim */
+  .emblem {
+    position: absolute;
+    width: 1150px;
+    height: 1150px;
+    right: -120px;
+    top: -60px;
+    object-fit: contain;
+    opacity: 0.21;
+    filter: blur(30px) saturate(1.15) brightness(1.06);
+  }
+
+  /* Soft secondary echo, lower-left, keeps portrait crops interesting */
+  .echo {
+    position: absolute;
+    width: 780px;
+    height: 780px;
+    left: -260px;
+    bottom: -200px;
+    object-fit: contain;
+    opacity: 0.07;
+    filter: blur(48px) saturate(1.1);
+  }
+
+  /* Cool counter-tone so the gold reads expensive, not warm-flat */
+  .cool {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 18% 88%, rgba(55, 138, 221, 0.10), transparent 60%),
+      radial-gradient(ellipse 50% 36% at 82% 96%, rgba(93, 202, 165, 0.05), transparent 55%);
+  }
+
+  /* Vignette: calm dark center for text, deep edges */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 62% 52% at 50% 44%, rgba(10, 14, 26, 0.42), rgba(10, 14, 26, 0.10) 55%, rgba(8, 11, 20, 0.72) 100%);
+  }
+
+  /* Cinematic grain */
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <img class="texture" src="gold-smoke-texture.png" alt="" />
+    <div class="halo"></div>
+    <img class="emblem" src="../icon.png" alt="" />
+    <img class="echo" src="../icon.png" alt="" />
+    <div class="cool"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
+</body>
+</html>
