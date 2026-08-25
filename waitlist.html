@@ -186,13 +186,21 @@
     <a href="https://cardostcg.com/terms-of-service.html">Terms of Service</a>
   </footer>
 
+  <script src="/ph-boot.js"></script>
+  <script src="/ph.js"></script>
   <script>
     (function () {
       var form = document.getElementById("signup-form");
       var frame = document.getElementById("hidden-submit");
       var note = document.getElementById("form-note");
       var submitted = false;
-      form.addEventListener("submit", function () { submitted = true; });
+      form.addEventListener("submit", function () {
+        if (submitted) return;
+        submitted = true;
+        if (window.ph && typeof window.ph.track === "function") {
+          window.ph.track("waitlist_submitted");
+        }
+      });
       frame.addEventListener("load", function () {
         if (!submitted) return;
         form.style.display = "none";
