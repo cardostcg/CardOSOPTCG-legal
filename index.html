@@ -454,7 +454,7 @@
   </ul>
 
   <div class="store-ctas">
-    <a class="store-badge" id="appstore-cta" href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener" aria-label="Download on the App Store">
+    <a class="store-badge" id="appstore-cta" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
       <img src="/badge-app-store.svg" alt="Download on the App Store" width="144" height="48" draggable="false" />
     </a>
     <a class="store-badge" id="play-cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get it on Google Play">
@@ -465,7 +465,7 @@
   <section class="catalog-teaser" aria-labelledby="catalog-teaser-heading">
     <h2 id="catalog-teaser-heading">Search the catalog</h2>
     <p>Sign in to search the live catalog</p>
-    <a class="cta-ghost" href="https://app.cardostcg.com/">Sign in/Create account</a>
+    <a class="cta-ghost" id="web-app-cta" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Sign in/Create account</a>
   </section>
 
   <span class="visually-hidden">CardOS OP TCG is a One Piece TCG tracker and TCG portfolio tracker with a dedicated graded card vault. Available on iOS and Android.</span>
@@ -482,13 +482,26 @@
     <br />© 2026 CardOS OP TCG
   </footer>
 
+  <script src="/ph-boot.js"></script>
+  <script src="/ph.js"></script>
   <script>
   (function () {
+    function trackCta(cta) {
+      if (window.ph && typeof window.ph.track === 'function') {
+        window.ph.track('landing_cta_tapped', { cta: cta });
+      }
+    }
+    var web = document.getElementById('web-app-cta');
+    if (web) {
+      web.addEventListener('click', function () { trackCta('web_app'); });
+    }
     var stores = document.querySelectorAll(".store-badge");
     if (!stores.length) return;
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     Array.prototype.forEach.call(stores, function (btn) {
       btn.addEventListener("click", function (e) {
+        var cta = btn.id === 'play-cta' ? 'play' : (btn.id === 'appstore-cta' ? 'app_store' : '');
+        if (cta) trackCta(cta);
         if (btn.classList.contains("is-loading")) {
           e.preventDefault();
           return;
