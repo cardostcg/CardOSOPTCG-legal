@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>One Piece TCG Tracker & One Piece Card Value Tracker | CardOS OP TCG</title>
-  <meta name="description" content="Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker (OP TCG). Free core, forever. No paywall on the basics." />
+  <meta name="description" content="Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker (OP TCG). Free core, forever. Vault, cost basis, and basic P&amp;L." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://cardostcg.com/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Every card logged. Every dollar tracked. | CardOS OP TCG" />
-  <meta property="og:description" content="Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker (OP TCG). Free core, forever. No paywall on the basics." />
+  <meta property="og:description" content="Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker (OP TCG). Free core, forever. Vault, cost basis, and basic P&amp;L." />
   <meta property="og:url" content="https://cardostcg.com/" />
   <meta property="og:site_name" content="CardOS OP TCG" />
   <meta property="og:image" content="https://cardostcg.com/og-share.png" />
@@ -19,17 +19,26 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Every card logged. Every dollar tracked. | CardOS OP TCG" />
-  <meta name="twitter:description" content="Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker (OP TCG). Free core, forever. No paywall on the basics." />
+  <meta name="twitter:description" content="Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker (OP TCG). Free core, forever. Vault, cost basis, and basic P&amp;L." />
   <meta name="twitter:image" content="https://cardostcg.com/og-share.png" />
   <meta name="theme-color" content="#0A0E1A" />
 
   <link rel="icon" href="/icon.png" type="image/png" />
   <link rel="apple-touch-icon" href="/icon.png" />
   <link rel="preload" as="image" href="/bg-vault.webp" type="image/webp" />
+  <link rel="preload" as="image" href="/hero-pnl.webp" type="image/webp" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <script>
+    (function () {
+      var ua = navigator.userAgent || '';
+      var os = /iPhone|iPad|iPod/i.test(ua) ? 'ios' : /Android/i.test(ua) ? 'android' : 'desktop';
+      document.documentElement.setAttribute('data-os', os);
+    })();
+  </script>
 
   <script type="application/ld+json">
   {
@@ -50,13 +59,13 @@
         "@type": "SoftwareApplication",
         "name": "CardOS OP TCG",
         "applicationCategory": "FinanceApplication",
-        "operatingSystem": "iOS, Android",
+        "operatingSystem": "iOS, Android, Web",
         "url": "https://cardostcg.com/",
         "downloadUrl": [
           "https://apps.apple.com/app/id6792994816",
           "https://play.google.com/store/apps/details?id=com.cardos.optcg"
         ],
-        "description": "Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker. Track your One Piece TCG collection's real value, cost basis, and profit/loss. Graded vault for all 9 grading companies (PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, AGS). Free core, forever. Now on iOS and Android.",
+        "description": "Every card logged. Every dollar tracked. One Piece TCG tracker and One Piece card value tracker. Track your One Piece TCG collection's real value, cost basis, and profit/loss. Graded vault for all 9 grading companies (PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, AGS). Free core, forever. Vault, cost basis, and basic P&L. On iOS, Android, and web.",
         "author": { "@type": "Organization", "name": "CardOS OP TCG" }
       }
     ]
@@ -96,49 +105,40 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      justify-content: safe center;
-      padding: 24px 24px 72px;
+      justify-content: flex-start;
+      padding: 40px 24px 72px;
       text-align: center;
     }
 
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 540px;
+    }
+
     @media (prefers-reduced-motion: no-preference) {
-      body > :not(footer):not(.visually-hidden) {
+      main > * {
         animation: fadeUp 0.45s ease both;
       }
-      body > .logo { animation-delay: 0.02s; }
-      body > .wordmark { animation-delay: 0.05s; }
-      body > h1 { animation-delay: 0.11s; }
-      body > .sub { animation-delay: 0.14s; }
-      body > .free-line { animation-delay: 0.17s; }
-      body > .support-line { animation-delay: 0.2s; }
-      body > .features { animation-delay: 0.23s; }
-      body > .store-ctas { animation-delay: 0.26s; }
-      body > .catalog-teaser { animation-delay: 0.29s; }
-
-      body > .badge {
-        animation:
-          fadeUp 0.45s ease 0.08s both,
-          badgePulse 2.4s ease-in-out 0.7s infinite;
-      }
+      main > .logo { animation-delay: 0.02s; }
+      main > .wordmark { animation-delay: 0.05s; }
+      main > .badge { animation-delay: 0.08s; }
+      main > h1 { animation-delay: 0.11s; }
+      main > .sub { animation-delay: 0.14s; }
+      main > .free-line { animation-delay: 0.17s; }
+      main > .support-line { animation-delay: 0.2s; }
+      main > .features { animation-delay: 0.23s; }
+      main > .proof { animation-delay: 0.26s; }
+      main > .store-ctas { animation-delay: 0.29s; }
+      main > .why { animation-delay: 0.32s; }
+      main > .store-ctas-repeat { animation-delay: 0.35s; }
     }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes badgePulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(93, 202, 165, 0);
-        border-color: rgba(93, 202, 165, 0.4);
-        background: rgba(93, 202, 165, 0.12);
-      }
-      50% {
-        box-shadow: 0 0 0 6px rgba(93, 202, 165, 0.12);
-        border-color: rgba(93, 202, 165, 0.65);
-        background: rgba(93, 202, 165, 0.18);
-      }
     }
 
     .logo {
@@ -168,13 +168,6 @@
       padding: 5px 13px;
       border-radius: 100px;
       margin-bottom: 26px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .badge {
-        animation: none !important;
-        box-shadow: none;
-      }
     }
 
     h1 {
@@ -218,7 +211,8 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      width: 100%;
       max-width: 460px;
       margin-bottom: 24px;
       color: #8A8FA8;
@@ -250,6 +244,42 @@
       mask-position: center;
     }
 
+    .grader-rest {
+      display: block;
+      margin-top: 2px;
+      font-size: 12px;
+      color: #5A5F78;
+    }
+
+    .why-features strong {
+      display: block;
+      color: #E8EAF0;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .proof {
+      width: 100%;
+      max-width: 380px;
+      margin: 0 0 28px;
+    }
+
+    .phone {
+      display: block;
+      padding: 10px;
+      background: #12172a;
+      border: 1px solid rgba(138, 143, 168, 0.28);
+      border-radius: 28px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .phone img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+    }
+
     .store-ctas {
       display: flex;
       flex-direction: column;
@@ -257,7 +287,12 @@
       gap: 12px;
       width: 100%;
       max-width: 420px;
-      margin-bottom: 28px;
+      margin-bottom: 36px;
+    }
+
+    .store-ctas-repeat {
+      margin-top: 8px;
+      margin-bottom: 8px;
     }
 
     .store-badge {
@@ -286,122 +321,69 @@
       outline-offset: 3px;
     }
 
-    .store-badge.is-loading {
-      pointer-events: none;
-      opacity: 0.75;
-    }
-
-    .catalog-teaser {
-      width: 100%;
-      max-width: 420px;
-      margin-bottom: 8px;
-      padding: 22px 24px;
-      border: 1px solid rgba(138, 143, 168, 0.28);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      transition: border-color 0.15s ease, background 0.15s ease;
-    }
-
-    .catalog-teaser:hover {
-      border-color: rgba(93, 202, 165, 0.35);
-      background: rgba(255, 255, 255, 0.045);
-    }
-
-    .catalog-teaser h2 {
-      font-size: 17px;
-      font-weight: 700;
-      color: #E8EAF0;
-      margin-bottom: 8px;
-    }
-
-    .catalog-teaser p {
-      font-size: 14px;
-      color: #8A8FA8;
-      line-height: 1.5;
-      margin-bottom: 16px;
-    }
-
-    .catalog-teaser .cta,
-    .catalog-teaser .cta-ghost {
-      padding: 12px 28px;
-      font-size: 15px;
-    }
-
-    .cta {
-      display: inline-block;
-      background: #378ADD;
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      text-decoration: none;
-      padding: 14px 38px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      box-shadow: 0 4px 14px rgba(55, 138, 221, 0.28);
-      transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
-    }
-
-    .cta:hover {
-      background: #2a6bb5;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(55, 138, 221, 0.38);
-    }
-
-    .cta:active {
-      transform: scale(0.97) translateY(0);
-      box-shadow: 0 2px 8px rgba(55, 138, 221, 0.22);
-      opacity: 0.92;
-    }
-
-    .cta:focus-visible {
-      outline: 2px solid #5DCAA5;
-      outline-offset: 3px;
-    }
-
-    .cta-ghost {
-      display: inline-block;
-      background: transparent;
+    .store-alt {
+      display: none;
       color: #C7CBDA;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      text-decoration: none;
-      padding: 14px 38px;
-      border-radius: 12px;
-      border: 1px solid rgba(138, 143, 168, 0.45);
-      box-shadow: none;
-      transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
-    .cta-ghost:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(93, 202, 165, 0.5);
-      color: #E8EAF0;
-      transform: translateY(-1px);
-    }
-
-    .cta-ghost:active {
-      transform: scale(0.97) translateY(0);
-      opacity: 0.9;
-    }
-
-    .cta-ghost:focus-visible {
+    .store-alt:hover { color: #E8EAF0; }
+    .store-alt:focus-visible {
       outline: 2px solid #5DCAA5;
       outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    html[data-os="ios"] .store-badge[data-store="play"],
+    html[data-os="android"] .store-badge[data-store="ios"] {
+      display: none;
+    }
+
+    html[data-os="ios"] .store-alt[data-store="play"],
+    html[data-os="android"] .store-alt[data-store="ios"] {
+      display: inline;
+    }
+
+    .web-cta {
+      color: #8A8FA8;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .web-cta:hover { color: #C7CBDA; }
+    .web-cta:focus-visible {
+      outline: 2px solid #5DCAA5;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .why {
+      width: 100%;
+      max-width: 460px;
+      margin: 4px 0 16px;
+    }
+
+    .why h2 {
+      font-size: clamp(18px, 3vw, 22px);
+      font-weight: 700;
+      color: #E8EAF0;
+      margin-bottom: 18px;
+      line-height: 1.3;
+    }
+
+    .why .features {
+      margin-bottom: 0;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .cta,
-      .cta-ghost,
       .store-badge { transition: none; }
-      .cta:hover,
-      .cta-ghost:hover,
       .store-badge:hover,
-      .cta:active,
-      .cta-ghost:active,
       .store-badge:active { transform: none; }
-      .catalog-teaser { transition: none; }
     }
 
     .visually-hidden {
@@ -422,6 +404,14 @@
 
     footer a { color: #4A4F66; text-decoration: underline; }
     footer a:hover { color: #8A8FA8; }
+
+    footer .legal-quiet {
+      font-size: 11px;
+      color: #3A3F54;
+    }
+
+    footer .legal-quiet a { color: #3A3F54; }
+    footer .legal-quiet a:hover { color: #4A4F66; }
   </style>
 </head>
 <body>
@@ -434,51 +424,125 @@
     <div class="bg-scrim"></div>
   </div>
 
-  <img class="logo" src="icon.png" width="72" height="72" draggable="false" alt="CardOS OP TCG logo, a One Piece TCG tracker and graded card vault" />
+  <main>
+    <img class="logo" src="icon.png" width="72" height="72" draggable="false" alt="CardOS OP TCG logo, a One Piece TCG tracker and graded card vault" />
 
-  <div class="wordmark">CardOS OP TCG</div>
+    <div class="wordmark">CardOS OP TCG</div>
 
-  <div class="badge">NOW LIVE ON iOS &amp; ANDROID</div>
+    <div class="badge">iOS, Android, and web</div>
 
-  <h1>Every <span>card</span> logged. Every <span>dollar</span> tracked.</h1>
+    <h1>Every <span>card</span> logged. Every <span>dollar</span> tracked.</h1>
 
-  <p class="sub">The One Piece TCG portfolio tracker.</p>
+    <p class="sub">The One Piece TCG portfolio tracker.</p>
 
-  <p class="free-line">Free core, forever. No paywall on the basics.</p>
+    <p class="free-line">Free core, forever. Vault, cost basis, and basic P&amp;L.</p>
 
-  <p class="support-line">Tracks profit, not just worth.</p>
+    <p class="support-line">Tracks profit, not just worth.</p>
 
-  <ul class="features">
-    <li>PSA, BGS, and CGC graded slabs, plus raw. Full 9-company vault under the hood.</li>
-    <li>Log any card, any set. Raw or graded.</li>
-  </ul>
+    <ul class="features">
+      <li>
+        <span>
+          9-company graded vault. PSA. BGS. CGC. All nine. Raw and slabs, one place.
+          <span class="grader-rest">ACE, SGC, HGA, TAG, ARS, AGS.</span>
+        </span>
+      </li>
+      <li>Log any card. Any set. Fast add. The pull hits the vault.</li>
+    </ul>
 
-  <div class="store-ctas">
-    <a class="store-badge" id="appstore-cta" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
-      <img src="/badge-app-store.svg" alt="Download on the App Store" width="144" height="48" draggable="false" />
-    </a>
-    <a class="store-badge" id="play-cta" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get it on Google Play">
-      <img src="/badge-google-play.png" alt="Get it on Google Play" width="161" height="48" draggable="false" />
-    </a>
-  </div>
+    <figure class="proof">
+      <div class="phone">
+        <picture>
+          <source srcset="/hero-pnl.webp" type="image/webp" />
+          <img src="/hero-pnl.jpg" width="780" height="551" alt="CardOS cost basis and P&amp;L: vault value, amount invested, and profit on the collection you own" decoding="async" draggable="false" />
+        </picture>
+      </div>
+    </figure>
 
-  <section class="catalog-teaser" aria-labelledby="catalog-teaser-heading">
-    <h2 id="catalog-teaser-heading">Search the catalog</h2>
-    <p>Sign in to search the live catalog</p>
-    <a class="cta-ghost" id="web-app-cta" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Sign in/Create account</a>
-  </section>
+    <div class="store-ctas" aria-label="Download CardOS">
+      <a class="store-badge" id="appstore-cta" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
+        <img src="/badge-app-store.svg" alt="Download on the App Store" width="144" height="48" draggable="false" />
+      </a>
+      <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+        <img src="/badge-google-play.png" alt="Get it on Google Play" width="161" height="48" draggable="false" />
+      </a>
+      <a class="store-alt" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Also on Google Play</a>
+      <a class="store-alt" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener">Also on the App Store</a>
+      <a class="web-cta" id="web-app-cta" data-cta="web_app" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Open in the browser</a>
+    </div>
 
-  <span class="visually-hidden">CardOS OP TCG is a One Piece TCG tracker and TCG portfolio tracker with a dedicated graded card vault. Available on iOS and Android.</span>
+    <section class="why" aria-labelledby="why-heading">
+      <h2 id="why-heading">Why this instead of a spreadsheet</h2>
+      <ul class="features why-features">
+        <li>
+          <span>
+            <strong>What you paid. Still there.</strong>
+            Cost sits on every card. Worth is not the whole story.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Profit, not a guess.</strong>
+            See what you are up, down, or even on the collection you actually own.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Sealed sits in the same book.</strong>
+            Boxes, cases, bundles, Illustration Boxes, priced with the singles.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>DON!!, promos, boxes, slabs.</strong>
+            One vault. Not four apps.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Your numbers, your override.</strong>
+            Hate the estimate? Put your price. We tag Est. so it stays honest.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>Free core, forever.</strong>
+            Log it all. See current value. Basic P&amp;L.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>iOS, Android, and web.</strong>
+            Same collection. Sign in and it is there.
+          </span>
+        </li>
+      </ul>
+    </section>
+
+    <div class="store-ctas store-ctas-repeat" aria-label="Download CardOS">
+      <a class="store-badge" id="appstore-cta-2" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
+        <img src="/badge-app-store.svg" alt="Download on the App Store" width="144" height="48" draggable="false" />
+      </a>
+      <a class="store-badge" id="play-cta-2" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+        <img src="/badge-google-play.png" alt="Get it on Google Play" width="161" height="48" draggable="false" />
+      </a>
+      <a class="store-alt" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Also on Google Play</a>
+      <a class="store-alt" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener">Also on the App Store</a>
+      <a class="web-cta" id="web-app-cta-2" data-cta="web_app" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Open in the browser</a>
+    </div>
+  </main>
+
+  <span class="visually-hidden">CardOS OP TCG is a One Piece TCG tracker and TCG portfolio tracker with a dedicated graded card vault. Available on iOS, Android, and web.</span>
 
   <footer>
     <a href="https://cardostcg.com/privacy-policy.html">Privacy</a>
     &nbsp;·&nbsp;
     <a href="https://cardostcg.com/terms-of-service.html">Terms</a>
     &nbsp;·&nbsp;
-    <a href="https://cardostcg.com/delete-account.html">Delete Account</a>
-    &nbsp;·&nbsp;
     <a href="mailto:CardOSTCG@gmail.com">CardOSTCG@gmail.com</a>
-    <br />Not affiliated with or endorsed by Bandai.
+    <div class="legal-quiet">
+      <a href="https://cardostcg.com/delete-account.html">Delete Account</a>
+    </div>
+    Not affiliated with or endorsed by Bandai.
     <br />© 2026 CardOS OP TCG
   </footer>
 
@@ -486,37 +550,13 @@
   <script src="/ph.js"></script>
   <script>
   (function () {
-    function trackCta(cta) {
-      if (window.ph && typeof window.ph.track === 'function') {
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-cta]');
+      if (!el) return;
+      var cta = el.getAttribute('data-cta');
+      if (cta && window.ph && typeof window.ph.track === 'function') {
         window.ph.track('landing_cta_tapped', { cta: cta });
       }
-    }
-    var web = document.getElementById('web-app-cta');
-    if (web) {
-      web.addEventListener('click', function () { trackCta('web_app'); });
-    }
-    var stores = document.querySelectorAll(".store-badge");
-    if (!stores.length) return;
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    Array.prototype.forEach.call(stores, function (btn) {
-      btn.addEventListener("click", function (e) {
-        var cta = btn.id === 'play-cta' ? 'play' : (btn.id === 'appstore-cta' ? 'app_store' : '');
-        if (cta) trackCta(cta);
-        if (btn.classList.contains("is-loading")) {
-          e.preventDefault();
-          return;
-        }
-        if (reduce) return;
-        e.preventDefault();
-        btn.classList.add("is-loading");
-        btn.setAttribute("aria-busy", "true");
-        var href = btn.href;
-        window.setTimeout(function () {
-          window.open(href, "_blank", "noopener");
-          btn.classList.remove("is-loading");
-          btn.removeAttribute("aria-busy");
-        }, 420);
-      });
     });
   })();
   </script>
