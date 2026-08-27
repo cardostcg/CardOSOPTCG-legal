@@ -127,12 +127,9 @@
       main > .badge { animation-delay: 0.08s; }
       main > h1 { animation-delay: 0.11s; }
       main > .sub { animation-delay: 0.14s; }
-      main > .free-line { animation-delay: 0.17s; }
-      main > .support-line { animation-delay: 0.2s; }
-      main > .features { animation-delay: 0.23s; }
-      main > .proof { animation-delay: 0.26s; }
-      main > .store-ctas { animation-delay: 0.29s; }
-      main > .why { animation-delay: 0.32s; }
+      main > .proof { animation-delay: 0.18s; }
+      main > .store-ctas { animation-delay: 0.22s; }
+      main > .why { animation-delay: 0.26s; }
     }
 
     @keyframes fadeUp {
@@ -184,20 +181,7 @@
       color: #8A8FA8;
       max-width: 460px;
       line-height: 1.6;
-      margin-bottom: 10px;
-    }
-
-    .free-line {
-      font-size: 14px;
-      font-weight: 500;
-      color: #5DCAA5;
-      margin-bottom: 8px;
-    }
-
-    .support-line {
-      font-size: 13px;
-      color: #5A5F78;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
     img {
@@ -243,33 +227,22 @@
       mask-position: center;
     }
 
-    .grader-rest {
-      display: block;
-      margin-top: 2px;
-      font-size: 12px;
-      color: #5A5F78;
-    }
-
-    .why-features strong {
-      display: block;
-      color: #E8EAF0;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
+    .why-features a { color: #C7CBDA; }
+    .why-features a:hover { color: #E8EAF0; }
 
     .proof {
       width: 100%;
-      max-width: 380px;
-      margin: 0 0 28px;
+      max-width: 420px;
+      margin: 0 0 24px;
     }
 
     .phone {
       display: block;
-      padding: 10px;
+      padding: 8px;
       background: #12172a;
       border: 1px solid rgba(138, 143, 168, 0.28);
-      border-radius: 28px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      border-radius: 22px;
+      box-shadow: 0 12px 32px rgba(10, 14, 26, 0.55);
     }
 
     .phone img {
@@ -281,7 +254,9 @@
 
     .store-ctas {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
       gap: 12px;
       width: 100%;
@@ -290,15 +265,18 @@
     }
 
     .store-badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      height: 40px;
       line-height: 0;
-      border-radius: 10px;
+      border-radius: 8px;
       transition: transform 0.12s ease, opacity 0.15s ease;
     }
 
     .store-badge img {
-      height: 48px;
+      height: 40px;
       width: auto;
+      max-height: 40px;
     }
 
     .store-badge:hover {
@@ -338,10 +316,13 @@
 
     html[data-os="ios"] .store-alt[data-store="play"],
     html[data-os="android"] .store-alt[data-store="ios"] {
-      display: inline;
+      display: block;
+      flex-basis: 100%;
+      text-align: center;
     }
 
     .web-cta {
+      flex-basis: 100%;
       color: #8A8FA8;
       font-size: 14px;
       font-weight: 500;
@@ -360,6 +341,7 @@
       width: 100%;
       max-width: 460px;
       margin: 4px 0 16px;
+      text-align: left;
     }
 
     .why h2 {
@@ -427,21 +409,7 @@
 
     <h1>Every <span>card</span> logged. Every <span>dollar</span> tracked.</h1>
 
-    <p class="sub">The One Piece TCG portfolio tracker.</p>
-
-    <p class="free-line">Free core, forever. Vault, cost basis, and basic P&amp;L.</p>
-
-    <p class="support-line">Tracks profit, not just worth.</p>
-
-    <ul class="features">
-      <li>
-        <span>
-          9-company graded vault. PSA, BGS, CGC, and six more. Raw and slabs in one place.
-          <span class="grader-rest">ACE, SGC, HGA, TAG, ARS, AGS.</span>
-        </span>
-      </li>
-      <li>Log any card from any set. Add it and it lands in the vault.</li>
-    </ul>
+    <p class="sub">The One Piece TCG portfolio tracker. Tracks profit, not just worth. Free core, forever.</p>
 
     <figure class="proof">
       <div class="phone">
@@ -454,10 +422,10 @@
 
     <div class="store-ctas" aria-label="Download CardOS">
       <a class="store-badge" id="appstore-cta" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
-        <img src="/badge-app-store.svg" alt="Download on the App Store" width="144" height="48" draggable="false" />
+        <img src="/badge-app-store.svg" alt="Download on the App Store" width="120" height="40" draggable="false" />
       </a>
       <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get it on Google Play">
-        <img src="/badge-google-play.png" alt="Get it on Google Play" width="161" height="48" draggable="false" />
+        <img src="/badge-google-play.png" alt="Get it on Google Play" width="134" height="40" draggable="false" />
       </a>
       <a class="store-alt" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Also on Google Play</a>
       <a class="store-alt" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener">Also on the App Store</a>
@@ -467,48 +435,13 @@
     <section class="why" aria-labelledby="why-heading">
       <h2 id="why-heading">Why this instead of a spreadsheet</h2>
       <ul class="features why-features">
-        <li>
-          <span>
-            <strong>Cost basis.</strong>
-            What you paid sits on every card.
-          </span>
-        </li>
-        <li>
-          <span>
-            <strong>Profit and loss.</strong>
-            See whether you are up, down, or even.
-          </span>
-        </li>
-        <li>
-          <span>
-            <strong>Sealed product.</strong>
-            Boxes, cases, bundles, and Illustration Boxes sit with your singles.
-          </span>
-        </li>
-        <li>
-          <span>
-            <strong>DON!!, promos, boxes, and slabs.</strong>
-            They live in the same vault.
-          </span>
-        </li>
-        <li>
-          <span>
-            <strong>Your price.</strong>
-            If you disagree with an estimate, enter your own. We tag it Est.
-          </span>
-        </li>
-        <li>
-          <span>
-            <strong>Free core.</strong>
-            Log everything, see current value, and get basic P&amp;L.
-          </span>
-        </li>
-        <li>
-          <span>
-            <strong>iOS, Android, and web.</strong>
-            Same collection after you sign in.
-          </span>
-        </li>
+        <li>Log any card from any set: DON!!, promos, boxes, slabs, and singles in one vault.</li>
+        <li>Graded vault for PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, and AGS.</li>
+        <li>Cost sits on every card. P&amp;L shows whether you are up, down, or even.</li>
+        <li>Sealed product lists Bandai MSRP next to market price.</li>
+        <li>If an estimate is wrong, enter your own price. Tagged Est.</li>
+        <li>Free core covers logging, current value, and basic P&amp;L.</li>
+        <li>Collection data is not sold. Details are in the <a href="https://cardostcg.com/privacy-policy.html">privacy policy</a>.</li>
       </ul>
     </section>
   </main>
