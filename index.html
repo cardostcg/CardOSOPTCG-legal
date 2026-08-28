@@ -32,14 +32,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 
-  <script>
-    (function () {
-      var ua = navigator.userAgent || '';
-      var os = /iPhone|iPad|iPod/i.test(ua) ? 'ios' : /Android/i.test(ua) ? 'android' : 'desktop';
-      document.documentElement.setAttribute('data-os', os);
-    })();
-  </script>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -293,34 +285,6 @@
       outline-offset: 3px;
     }
 
-    .store-alt {
-      display: none;
-      color: #C7CBDA;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .store-alt:hover { color: #E8EAF0; }
-    .store-alt:focus-visible {
-      outline: 2px solid #5DCAA5;
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    html[data-os="ios"] .store-badge[data-store="play"],
-    html[data-os="android"] .store-badge[data-store="ios"] {
-      display: none;
-    }
-
-    html[data-os="ios"] .store-alt[data-store="play"],
-    html[data-os="android"] .store-alt[data-store="ios"] {
-      display: block;
-      flex-basis: 100%;
-      text-align: center;
-    }
-
     .web-cta {
       flex-basis: 100%;
       color: #8A8FA8;
@@ -427,8 +391,6 @@
       <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get it on Google Play">
         <img src="/badge-google-play.png" alt="Get it on Google Play" width="134" height="40" draggable="false" />
       </a>
-      <a class="store-alt" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener">Also on Google Play</a>
-      <a class="store-alt" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener">Also on the App Store</a>
       <a class="web-cta" id="web-app-cta" data-cta="web_app" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Open in the browser</a>
     </div>
 
