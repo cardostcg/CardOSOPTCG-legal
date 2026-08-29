@@ -141,8 +141,8 @@
       width: 72px;
       height: 72px;
       border-radius: 16px;
-      margin-bottom: 22px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
     }
 
     .wordmark {
@@ -150,7 +150,7 @@
       font-weight: 700;
       letter-spacing: 0.04em;
       color: #C7CBDA;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .badge {
@@ -163,15 +163,16 @@
       letter-spacing: 0.08em;
       padding: 5px 13px;
       border-radius: 100px;
-      margin-bottom: 26px;
+      margin-bottom: 28px;
     }
 
     h1 {
       font-size: clamp(27px, 5.5vw, 44px);
       font-weight: 700;
       line-height: 1.18;
+      letter-spacing: -0.01em;
       max-width: 540px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     h1 span { color: #5DCAA5; }
@@ -229,6 +230,10 @@
 
     .why-features a { color: #C7CBDA; }
     .why-features a:hover { color: #E8EAF0; }
+    .why-features a:focus-visible {
+      outline: 1px solid #5DCAA5;
+      outline-offset: 2px;
+    }
 
     .proof {
       width: 100%;
@@ -374,20 +379,28 @@
     footer {
       margin-top: 64px;
       font-size: 12px;
-      color: #4A4F66;
+      color: #6B7094;
       line-height: 1.8;
     }
 
-    footer a { color: #4A4F66; text-decoration: underline; }
+    footer a {
+      color: #6B7094;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
     footer a:hover { color: #8A8FA8; }
+    footer a:focus-visible {
+      outline: 1px solid #5DCAA5;
+      outline-offset: 2px;
+    }
 
     footer .legal-quiet {
       font-size: 11px;
-      color: #3A3F54;
+      color: #5A5F78;
     }
 
-    footer .legal-quiet a { color: #3A3F54; }
-    footer .legal-quiet a:hover { color: #4A4F66; }
+    footer .legal-quiet a { color: #5A5F78; }
+    footer .legal-quiet a:hover { color: #6B7094; }
   </style>
 </head>
 <body>
