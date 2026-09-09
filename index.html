@@ -67,6 +67,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { scroll-behavior: smooth; }
+
     .bg-layer {
       position: fixed;
       inset: 0;
@@ -157,6 +159,15 @@
       padding: 5px 13px;
       border-radius: 100px;
       margin-bottom: 28px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .badge:visited { color: #5DCAA5; }
+
+    .badge:focus-visible {
+      outline: 2px solid #5DCAA5;
+      outline-offset: 3px;
     }
 
     h1 {
@@ -333,6 +344,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
       .store-badge { transition: none; }
       .store-badge:hover,
       .store-badge:active { transform: none; }
@@ -389,7 +401,7 @@
 
     <div class="wordmark">CardOS OP TCG</div>
 
-    <div class="badge">iOS, Android, and web</div>
+    <a class="badge" href="#store-ctas">iOS, Android, and web</a>
 
     <h1>Tracks <span>profit</span>, not just worth.</h1>
 
@@ -406,7 +418,7 @@
       </div>
     </figure>
 
-    <div class="store-ctas" aria-label="Download CardOS">
+    <div class="store-ctas" id="store-ctas" aria-label="Download CardOS">
       <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get on Google Play">
         <img src="/badge-google-play.png" alt="Get on Google Play" width="134" height="40" draggable="false" />
       </a>
