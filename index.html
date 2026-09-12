@@ -272,6 +272,14 @@
       main > .why { animation-delay: 0.26s; }
       main > .grid-section { animation-delay: 0.28s; }
       main > .faq { animation-delay: 0.30s; }
+
+      .grid .card { animation: fadeUp 0.45s ease both; }
+      .grid .card:nth-child(1) { animation-delay: 0.30s; }
+      .grid .card:nth-child(2) { animation-delay: 0.33s; }
+      .grid .card:nth-child(3) { animation-delay: 0.36s; }
+      .grid .card:nth-child(4) { animation-delay: 0.39s; }
+      .grid .card:nth-child(5) { animation-delay: 0.42s; }
+      .grid .card:nth-child(6) { animation-delay: 0.45s; }
     }
 
     @keyframes fadeUp {
@@ -284,7 +292,7 @@
       height: 72px;
       border-radius: 16px;
       margin-bottom: 20px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 48px rgba(239, 159, 39, 0.16);
     }
 
     .wordmark {
@@ -308,9 +316,15 @@
       margin-bottom: 28px;
       text-decoration: none;
       cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .badge:visited { color: #5DCAA5; }
+
+    .badge:hover {
+      border-color: rgba(93, 202, 165, 0.7);
+      box-shadow: 0 0 18px rgba(93, 202, 165, 0.15);
+    }
 
     .badge:focus-visible {
       outline: 2px solid #5DCAA5;
@@ -318,19 +332,36 @@
     }
 
     h1 {
-      font-size: clamp(27px, 5.5vw, 44px);
+      font-size: clamp(28px, 6vw, 48px);
       font-weight: 700;
-      line-height: 1.18;
-      letter-spacing: -0.01em;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
       max-width: 540px;
       margin-bottom: 14px;
     }
 
-    h1 span { color: #5DCAA5; }
+    .hl-text {
+      background: linear-gradient(92deg, #5DCAA5 0%, #378ADD 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hl-gold {
+      background: linear-gradient(transparent 62%, rgba(239, 159, 39, 0.32) 62%);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    ::selection {
+      background: rgba(239, 159, 39, 0.28);
+      color: #E8EAF0;
+    }
 
     .sub {
       font-size: clamp(15px, 2.5vw, 18px);
-      color: #8A8FA8;
+      color: #B9BECE;
       max-width: 460px;
       line-height: 1.6;
       margin-bottom: 8px;
@@ -403,10 +434,10 @@
     .phone {
       display: block;
       padding: 8px;
-      background: #12172a;
+      background: rgba(18, 23, 42, 0.85);
       border: 1px solid rgba(138, 143, 168, 0.28);
       border-radius: 22px;
-      box-shadow: 0 12px 32px rgba(10, 14, 26, 0.55);
+      box-shadow: 0 12px 32px rgba(10, 14, 26, 0.55), 0 0 80px rgba(239, 159, 39, 0.07);
     }
 
     .phone img {
@@ -418,7 +449,8 @@
 
     .store-ctas {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       gap: 10px;
@@ -457,14 +489,20 @@
     }
 
     .web-cta {
-      color: #8A8FA8;
+      flex-basis: 100%;
+      text-align: center;
+      color: #B9BECE;
       font-size: 14px;
       font-weight: 500;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      text-decoration: none;
+      border: 1px solid rgba(138, 143, 168, 0.28);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-top: 4px;
+      transition: border-color 0.15s ease, color 0.15s ease;
     }
 
-    .web-cta:hover { color: #C7CBDA; }
+    .web-cta:hover { color: #E8EAF0; border-color: rgba(138, 143, 168, 0.5); }
     .web-cta:focus-visible {
       outline: 2px solid #5DCAA5;
       outline-offset: 3px;
@@ -523,10 +561,19 @@
     }
 
     .grid .card {
-      background: #12172a;
-      border: 1px solid rgba(138, 143, 168, 0.28);
-      border-radius: 14px;
-      padding: 14px 16px;
+      background: rgba(18, 23, 42, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(138, 143, 168, 0.22);
+      border-radius: 16px;
+      padding: 16px 18px;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .grid .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(93, 202, 165, 0.35);
+      box-shadow: 0 8px 24px rgba(10, 14, 26, 0.4);
     }
 
     .grid .card h3 {
@@ -534,6 +581,17 @@
       font-weight: 700;
       color: #E8EAF0;
       margin-bottom: 5px;
+    }
+
+    .grid .card h3::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5DCAA5;
+      margin-right: 8px;
+      vertical-align: 2px;
     }
 
     .grid .card p {
@@ -567,9 +625,15 @@
     .faq h3 {
       font-size: 15px;
       font-weight: 700;
-      color: #C7CBDA;
-      margin-bottom: 6px;
+      color: #E8EAF0;
+      margin: 22px 0 6px;
       line-height: 1.4;
+      border-left: 2px solid #5DCAA5;
+      padding-left: 10px;
+    }
+
+    .faq h2 + h3 {
+      margin-top: 0;
     }
 
     .faq p {
@@ -577,6 +641,7 @@
       color: #8A8FA8;
       line-height: 1.6;
       margin-bottom: 18px;
+      padding-left: 12px;
     }
 
     .faq a { color: #C7CBDA; }
@@ -588,9 +653,13 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .store-badge { transition: none; }
+      .store-badge,
+      .grid .card,
+      .web-cta,
+      .badge { transition: none; }
       .store-badge:hover,
-      .store-badge:active { transform: none; }
+      .store-badge:active,
+      .grid .card:hover { transform: none; }
     }
 
     .visually-hidden {
@@ -604,6 +673,10 @@
 
     footer {
       margin-top: 64px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(138, 143, 168, 0.16);
+      width: 100%;
+      max-width: 460px;
       font-size: 12px;
       color: #6B7094;
       line-height: 1.8;
@@ -651,7 +724,7 @@
 
     <a class="badge" href="#store-ctas">iOS, Android, and web</a>
 
-    <h1>Every card logged. Every dollar tracked.</h1>
+    <h1>Every card logged. <span class="hl-text">Every dollar tracked.</span></h1>
 
     <p class="sub">Tracks profit, not just worth.</p>
 
@@ -670,12 +743,14 @@
       <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get on Google Play">
         <img src="/badge-google-play.png" alt="Get on Google Play" width="134" height="40" draggable="false" />
       </a>
-      <a class="web-cta" id="appstore-cta" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener">App Store</a>
+      <a class="store-badge" id="appstore-cta" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
+        <img src="/badge-app-store.svg" alt="Download on the App Store" width="120" height="40" draggable="false" />
+      </a>
       <a class="web-cta" id="web-app-cta" data-cta="web_app" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Open in the browser</a>
     </div>
 
     <section class="why" aria-labelledby="why-heading">
-      <h2 id="why-heading">Why this instead of a spreadsheet</h2>
+      <h2 id="why-heading">Why this instead of <span class="hl-gold">a spreadsheet</span></h2>
       <ul class="features why-features">
         <li>Log any card, any set. Raw or graded. PSA, BGS, or CGC.</li>
         <li>Cost sits on every card. P&amp;L shows up, down, or even. Wrong estimate? Enter your own. Tagged Est.</li>
@@ -685,7 +760,7 @@
     </section>
 
     <section class="grid-section" aria-labelledby="tools-heading">
-      <h2 id="tools-heading">Everything you need to track your One Piece TCG collection</h2>
+      <h2 id="tools-heading">Everything you need to track your <span class="hl-gold">One Piece TCG collection</span></h2>
       <p class="grid-sub">Cost-basis tracking, a graded vault, sealed product pricing, and alerts. One place, phone and desktop.</p>
       <div class="grid">
         <div class="card">
