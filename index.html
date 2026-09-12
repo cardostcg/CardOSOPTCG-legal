@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://cardostcg.com/og-share.png" />
   <meta name="keywords" content="One Piece TCG tracker, OP TCG portfolio, graded card tracker, PSA BGS CGC tracker, One Piece card value, TCG P&L, One Piece TCG app" />
   <meta name="author" content="CardOS TCG" />
-  <meta property="og:image:alt" content="CardOS OP TCG — One Piece TCG portfolio tracker preview" />
+  <meta property="og:image:alt" content="CardOS OP TCG: One Piece TCG portfolio tracker preview" />
   <meta name="apple-itunes-app" content="app-id=6792994816" />
   <meta name="theme-color" content="#0A0E1A" />
 
@@ -79,7 +79,7 @@
         "@id": "https://cardostcg.com/#app",
         "name": "CardOS OP TCG",
         "alternateName": ["CardOS", "CardOS TCG"],
-        "description": "One Piece TCG portfolio tracker for collector-investors. Tracks realized profit and cost basis, not just collection worth. Log raw cards and graded slabs from all 9 grading companies — PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, AGS — plus ungraded cards. Free core features. Available on Android, iOS, and web.",
+        "description": "One Piece TCG portfolio tracker for collector-investors. Tracks realized profit and cost basis, not just collection worth. Log raw cards and graded slabs from all 9 grading companies (PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, AGS) plus ungraded cards. Free core features. Available on Android, iOS, and web.",
         "applicationCategory": "FinanceApplication",
         "applicationSubCategory": "Portfolio Tracker",
         "operatingSystem": "iOS, Android, and web",
@@ -102,7 +102,7 @@
               "@type": "UnitPriceSpecification",
               "price": "0",
               "priceCurrency": "USD",
-              "name": "Free — unlimited card logging, graded vault, basic P&L"
+              "name": "Free: unlimited card logging, graded vault, basic P&L"
             },
             {
               "@type": "UnitPriceSpecification",
@@ -129,6 +129,7 @@
           "CSV import and export",
           "Portfolio value over time",
           "Editable price overrides with Est. label",
+          "Price verification via TCGPlayer and eBay links",
           "Web app at app.cardostcg.com"
         ],
         "screenshot": [
@@ -175,7 +176,7 @@
             "name": "Is there an app to track One Piece TCG profit and cost basis?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "CardOS OP TCG tracks realized profit and loss using FIFO cost-basis lots — the same method used in stock portfolio apps. Every card has a cost basis attached, and when you sell, the app calculates your actual realized gain or loss. Price estimates are always labeled Est. and every field is editable. Core P&L features are free."
+              "text": "CardOS OP TCG tracks realized profit and loss using FIFO cost-basis lots, the same method used in stock portfolio apps. Every card has a cost basis attached, and when you sell, the app calculates your actual realized gain or loss. Price estimates are always labeled Est., every field is editable, and each estimate links to TCGPlayer and eBay for verification. Core P&L features are free."
             }
           },
           {
@@ -191,7 +192,7 @@
             "name": "Is CardOS OP TCG free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "CardOS OP TCG is free for core features: unlimited card logging, the full graded vault (all 9 graders), current estimated value, basic P&L, price alerts, and CSV import. A Pro tier ($3.99/month or $29.99/year) unlocks advanced P&L drill-down, chart history, and CSV export. Your card data is never gated — only analysis depth is Pro."
+              "text": "CardOS OP TCG is free for core features: unlimited card logging, the full graded vault (all 9 graders), current estimated value, basic P&L, price alerts, and CSV import. A Pro tier ($3.99/month or $29.99/year) adds advanced P&L drill-down, chart history, and CSV export. Your card data is never gated. Only analysis depth is Pro."
             }
           },
           {
@@ -199,7 +200,7 @@
             "name": "Does CardOS track sealed One Piece TCG products?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. CardOS OP TCG tracks sealed One Piece TCG products — booster boxes, starter decks, and case lots — showing set MSRP next to current market price so you can see margin at a glance."
+              "text": "Yes. CardOS OP TCG tracks sealed One Piece TCG products: booster boxes, starter decks, and case lots, with set MSRP next to current market price so you can see margin at a glance."
             }
           }
         ]
@@ -541,6 +542,13 @@
       line-height: 1.55;
     }
 
+    .grid .card a { color: #C7CBDA; }
+    .grid .card a:hover { color: #E8EAF0; }
+    .grid .card a:focus-visible {
+      outline: 1px solid #5DCAA5;
+      outline-offset: 2px;
+    }
+
     .faq {
       width: 100%;
       max-width: 460px;
@@ -678,19 +686,19 @@
 
     <section class="grid-section" aria-labelledby="tools-heading">
       <h2 id="tools-heading">Everything you need to track your One Piece TCG collection</h2>
-      <p class="grid-sub">Cost-basis tracking, a graded vault, sealed product pricing, and alerts — in one place, on phone and desktop.</p>
+      <p class="grid-sub">Cost-basis tracking, a graded vault, sealed product pricing, and alerts. One place, phone and desktop.</p>
       <div class="grid">
         <div class="card">
           <h3>Realized P&amp;L</h3>
-          <p>Every card carries its cost basis in FIFO lots. When you sell, the gain or loss is actual — not an estimate. Wrong price? Enter your own. Tagged Est.</p>
+          <p>Every card carries its cost basis in FIFO lots. When you sell, the gain or loss is actual, not an estimate. Wrong price? Enter your own. Tagged Est.</p>
         </div>
         <div class="card">
           <h3>Graded vault</h3>
-          <p>Track slabs from all 9 grading companies — PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, AGS — plus raw cards. Unlimited logging, free.</p>
+          <p>Track slabs from all 9 grading companies: PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, AGS. Raw cards too. Unlimited logging, free.</p>
         </div>
         <div class="card">
           <h3>Sealed products</h3>
-          <p>Booster boxes, starter decks, and case lots, with set MSRP next to current market price. Margin at a glance.</p>
+          <p>Booster boxes, starter decks, and case lots, with set MSRP next to current market price. Margin at a glance. Verify any price on <a href="https://www.tcgplayer.com/categories/trading-and-collectible-card-games/one-piece-card-game" target="_blank" rel="noopener">TCGPlayer</a> or <a href="https://www.ebay.com/sch/i.html?_nkw=one+piece+card+game" target="_blank" rel="noopener">eBay</a>.</p>
         </div>
         <div class="card">
           <h3>Price alerts &amp; wishlist</h3>
@@ -726,23 +734,23 @@
       <p>CardOS OP TCG has a dedicated graded card vault that supports all 9 major grading companies: PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, and AGS, plus raw ungraded cards. You can log your slabs, track their current estimated value, and see your realized gains when you sell. The graded vault is free with no limits.</p>
 
       <h3>Is there an app to track One Piece TCG profit and cost basis?</h3>
-      <p>CardOS OP TCG tracks realized profit and loss using FIFO cost-basis lots — the same method used in stock portfolio apps. Every card has a cost basis attached, and when you sell, the app calculates your actual realized gain or loss. Price estimates are always labeled Est. and every field is editable. Core P&amp;L features are free.</p>
+      <p>CardOS OP TCG tracks realized profit and loss using FIFO cost-basis lots, the same method used in stock portfolio apps. Every card has a cost basis attached, and when you sell, the app calculates your actual realized gain or loss. Price estimates are always labeled Est., every field is editable, and each estimate links to <a href="https://www.tcgplayer.com/categories/trading-and-collectible-card-games/one-piece-card-game" target="_blank" rel="noopener">TCGPlayer</a> and <a href="https://www.ebay.com/sch/i.html?_nkw=one+piece+card+game" target="_blank" rel="noopener">eBay</a> for verification. Core P&amp;L features are free.</p>
 
       <h3>What One Piece TCG apps are available on both iPhone and Android?</h3>
-      <p>CardOS OP TCG is available on Android (<a href="https://play.google.com/store/apps/details?id=com.cardos.optcg" target="_blank" rel="noopener">Google Play</a>), iOS (<a href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener">App Store</a>), and as a web app at <a href="https://app.cardostcg.com">app.cardostcg.com</a>. Your collection syncs across platforms.</p>
+      <p>CardOS OP TCG is available on Android (<a href="https://play.google.com/store/apps/details?id=com.cardos.optcg" target="_blank" rel="noopener">Google Play</a>), iOS (<a href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener">App Store ID 6792994816</a>), and as a web app at <a href="https://app.cardostcg.com">app.cardostcg.com</a>. Your collection syncs across platforms.</p>
 
       <h3>Is CardOS OP TCG free?</h3>
-      <p>CardOS OP TCG is free for core features: unlimited card logging, the full graded vault (all 9 graders), current estimated value, basic P&amp;L, price alerts, and CSV import. A Pro tier ($3.99/month or $29.99/year) unlocks advanced P&amp;L drill-down, chart history, and CSV export. Your card data is never gated — only analysis depth is Pro.</p>
+      <p>CardOS OP TCG is free for core features: unlimited card logging, the full graded vault (all 9 graders), current estimated value, basic P&amp;L, price alerts, and CSV import. A Pro tier ($3.99/month or $29.99/year) adds advanced P&amp;L drill-down, chart history, and CSV export. Your card data is never gated. Only analysis depth is Pro.</p>
 
       <h3>Does CardOS track sealed One Piece TCG products?</h3>
-      <p>Yes. CardOS OP TCG tracks sealed One Piece TCG products — booster boxes, starter decks, and case lots — showing set MSRP next to current market price so you can see margin at a glance.</p>
+      <p>Yes. CardOS OP TCG tracks sealed One Piece TCG products: booster boxes, starter decks, and case lots, with set MSRP next to current market price so you can see margin at a glance.</p>
     </section>
   </main>
 
   <span class="visually-hidden">CardOS OP TCG is a One Piece TCG portfolio tracker. Tracks profit, not just worth. Available on iOS, Android, and web.</span>
 
   <footer>
-    <p class="tagline">CardOS OP TCG is the One Piece Trading Card Game portfolio tracker for iOS, Android, and web — cost basis, realized P&amp;L, sealed pricing, and a graded vault across PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, and AGS.</p>
+    <p class="tagline">CardOS OP TCG is the One Piece Trading Card Game portfolio tracker for iOS, Android, and web. Cost basis, realized P&amp;L, sealed pricing, and a graded vault across PSA, BGS, CGC, ACE, SGC, HGA, TAG, ARS, and AGS.</p>
     <a href="https://cardostcg.com/privacy-policy.html">Privacy</a>
     &nbsp;·&nbsp;
     <a href="https://cardostcg.com/terms-of-service.html">Terms</a>
