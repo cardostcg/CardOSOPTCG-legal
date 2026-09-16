@@ -611,6 +611,35 @@
       font-style: normal;
     }
 
+    .proof-strip h2 {
+      font-size: clamp(18px, 3vw, 22px);
+      font-weight: 700;
+      color: #E8EAF0;
+      margin-bottom: 14px;
+      line-height: 1.3;
+      text-align: left;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    @media (min-width: 480px) {
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .reviews-grid .quote { margin-bottom: 0; }
+
+    .stars {
+      color: #5DCAA5;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
     .chips {
       list-style: none;
       display: flex;
@@ -1066,11 +1095,30 @@
       <a class="web-cta" id="web-app-cta" data-cta="web_app" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Open in the browser</a>
     </div>
 
-    <section class="proof-strip" aria-label="Collector feedback">
-      <blockquote class="quote">
-        <p>&ldquo;Amazing for helping me organize my collection&hellip; sleek and easy to use.&rdquo;</p>
-        <cite>— Tifakneee, App Store review</cite>
-      </blockquote>
+    <section class="proof-strip" aria-labelledby="reviews-heading">
+      <h2 id="reviews-heading">Five stars from <span class="hl-gold">One Piece TCG</span> collectors</h2>
+      <div class="reviews-grid">
+        <blockquote class="quote">
+          <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
+          <p>&ldquo;The only collection tracker that actually makes me want to keep it up to date. The UI is beautiful and easy to use.&rdquo;</p>
+          <cite>5-star review, Google Play</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
+          <p>&ldquo;Great app for tracking profit on your collection. The developer is responsive to feedback and quick to fix any bugs.&rdquo;</p>
+          <cite>5-star review, Google Play</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
+          <p>&ldquo;Best app for keeping up with your collection. Tracks all the new releases and promo cards and lets you know the value of your collection.&rdquo;</p>
+          <cite>5-star review, Google Play</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
+          <p>&ldquo;I've often wondered what my collection is really worth&hellip; This app has become the place I can do that easily.&rdquo;</p>
+          <cite>5-star review, App Store</cite>
+        </blockquote>
+      </div>
       <ul class="chips">
         <li><a href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener"><span class="star">★</span> 5.0 on the App Store</a></li>
         <li>All 9 grading companies</li>
@@ -1146,25 +1194,25 @@
 
     <section class="compare" aria-labelledby="compare-heading">
       <h2 id="compare-heading">The field, <span class="hl-gold">honestly</span></h2>
-      <p class="grid-sub">Other trackers are built for scanning and decks. CardOS is built for the money side. Both are fair — pick what you need.</p>
+      <p class="grid-sub">Other trackers are built for scanning and decks. CardOS is built for the money side. Both are fair. Pick what you need.</p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr><th scope="col"><span class="visually-hidden">Feature</span></th><th scope="col" class="us">CardOS</th><th scope="col">Other trackers</th><th scope="col">Spreadsheet</th></tr>
           </thead>
           <tbody>
-            <tr><th scope="row">Realized P&amp;L, FIFO cost basis</th><td class="us yes">Yes</td><td>—</td><td>Manual</td></tr>
-            <tr><th scope="row">Graded vault, all 9 companies</th><td class="us yes">Yes</td><td>—</td><td>Manual</td></tr>
-            <tr><th scope="row">Sealed MSRP vs market margin</th><td class="us yes">Yes</td><td>—</td><td>Manual</td></tr>
-            <tr><th scope="row">Price alerts &amp; wishlist</th><td class="us yes">Yes</td><td>Varies</td><td>—</td></tr>
+            <tr><th scope="row">Realized P&amp;L, FIFO cost basis</th><td class="us yes">Yes</td><td>No</td><td>Manual</td></tr>
+            <tr><th scope="row">Graded vault, all 9 companies</th><td class="us yes">Yes</td><td>No</td><td>Manual</td></tr>
+            <tr><th scope="row">Sealed MSRP vs market margin</th><td class="us yes">Yes</td><td>No</td><td>Manual</td></tr>
+            <tr><th scope="row">Price alerts &amp; wishlist</th><td class="us yes">Yes</td><td>Varies</td><td>No</td></tr>
             <tr><th scope="row">CSV import &amp; export</th><td class="us yes">Yes</td><td>Varies</td><td>You are the CSV</td></tr>
             <tr><th scope="row">Multi-currency</th><td class="us yes">Yes</td><td>Yes</td><td>Manual</td></tr>
-            <tr><th scope="row">AI card scanner</th><td class="us">—</td><td class="yes">Yes</td><td>—</td></tr>
-            <tr><th scope="row">Deck builder &amp; meta</th><td class="us">—</td><td class="yes">Yes</td><td>—</td></tr>
+            <tr><th scope="row">AI card scanner</th><td class="us">No</td><td class="yes">Yes</td><td>No</td></tr>
+            <tr><th scope="row">Deck builder &amp; meta</th><td class="us">No</td><td class="yes">Yes</td><td>No</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="compare-note">Scanners and decks are genuinely useful — that's why the others lead with them. Nobody else tracks what you actually made.</p>
+      <p class="compare-note">Scanners and decks are genuinely useful, and that's why the others lead with them. Nobody else tracks what you actually made.</p>
     </section>
 
     <section class="showcase" aria-label="App screenshots">
@@ -1175,7 +1223,7 @@
             <img src="/hero-pnl.jpg" width="780" height="551" alt="CardOS portfolio view showing realized P&amp;L and cost basis per card" loading="lazy" decoding="async" draggable="false" />
           </picture>
         </div>
-        <figcaption>Portfolio P&amp;L — cost basis and realized gain on every card.</figcaption>
+        <figcaption>Portfolio P&amp;L: cost basis and realized gain on every card.</figcaption>
       </figure>
       <figure>
         <div class="phone">
@@ -1184,7 +1232,7 @@
             <img src="/hero-explore.jpg" width="780" height="551" alt="CardOS Explore with Trending and New to Catalog" loading="lazy" decoding="async" draggable="false" />
           </picture>
         </div>
-        <figcaption>Explore — Trending and New to Catalog, updated with every set.</figcaption>
+        <figcaption>Explore: Trending and New to Catalog, updated with every set.</figcaption>
       </figure>
     </section>
 
@@ -1210,13 +1258,13 @@
       <p>Yes. CardOS OP TCG tracks sealed One Piece TCG products: booster boxes, starter decks, and case lots, with set MSRP next to current market price so you can see margin at a glance.</p>
 
       <h3 id="faq-riftbound">Does CardOS track Riftbound cards?</h3>
-      <p>Yes. CardOS tracks Riftbound: League of Legends alongside One Piece TCG — the same cost basis, realized P&amp;L, graded vault, and sealed product tracking, in one portfolio. RIFTBOUND: LEAGUE OF LEGENDS manufactured by UVS Games under license from Riot Games. ™ &amp; © 2026 Riot Games, Inc.</p>
+      <p>Yes. CardOS tracks Riftbound: League of Legends alongside One Piece TCG, with the same cost basis, realized P&amp;L, graded vault, and sealed product tracking in one portfolio. RIFTBOUND: LEAGUE OF LEGENDS manufactured by UVS Games under license from Riot Games. ™ &amp; © 2026 Riot Games, Inc.</p>
 
       <h3>Is there a ManaBox-style tracker for One Piece TCG?</h3>
-      <p>CardOS OP TCG is built to be exactly that for One Piece TCG and Riftbound: a dedicated tracker with daily prices, portfolio value, and collection organization. Where it goes further than a box tracker is the money side — FIFO cost basis on every card, realized profit when you sell, a graded vault across all 9 grading companies, and sealed MSRP next to market price. Free core features on iOS, Android, and web.</p>
+      <p>CardOS OP TCG is built to be exactly that for One Piece TCG and Riftbound: a dedicated tracker with daily prices, portfolio value, and collection organization. Where it goes further than a box tracker is the money side: FIFO cost basis on every card, realized profit when you sell, a graded vault across all 9 grading companies, and sealed MSRP next to market price. Free core features on iOS, Android, and web.</p>
 
       <h3>How does CardOS compare to OP.TCG, Logia, or OP TCG Dex?</h3>
-      <p>Those are capable collection managers: OP.TCG leads on AI scanning, decks, and tournament meta; Logia adds a web dashboard with folders and binders; OP TCG Dex covers many languages and marketplaces. CardOS OP TCG is the portfolio tracker of the group — the only one built around realized profit with FIFO cost-basis lots, a 9-company graded vault, and sealed MSRP-vs-market margins. If you want decks and scanning, they fit. If you want to know what you actually made, that's CardOS.</p>
+      <p>Those are capable collection managers: OP.TCG leads on AI scanning, decks, and tournament meta; Logia adds a web dashboard with folders and binders; OP TCG Dex covers many languages and marketplaces. CardOS OP TCG is the portfolio tracker of the group: the only one built around realized profit with FIFO cost-basis lots, a 9-company graded vault, and sealed MSRP-vs-market margins. If you want decks and scanning, they fit. If you want to know what you actually made, that's CardOS.</p>
 
       <h3>Can I see prices in my currency?</h3>
       <p>Yes. CardOS shows prices and portfolio totals in your currency, converting between USD, EUR, JPY, and more. EU pricing appears across card views, so European collectors skip the conversion guesswork.</p>
@@ -1281,7 +1329,7 @@
       var sign = pnl > 0.004 ? 1 : (pnl < -0.004 ? -1 : 0);
       var word = sign > 0 ? 'up' : (sign < 0 ? 'down' : 'even');
       out.className = 'calc-out ' + word;
-      out.textContent = (sign > 0 ? '+' : '') + money(pnl) + ' realized — ' + word +
+      out.textContent = (sign > 0 ? '+' : '') + money(pnl) + ' realized, ' + word +
         (b > 0 ? ' ' + Math.abs(pct).toFixed(0) + '%' : '') +
         ' after ' + money(feeAmt) + ' fees';
     }
