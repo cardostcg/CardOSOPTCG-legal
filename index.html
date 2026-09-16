@@ -309,6 +309,7 @@
       main > .proof { animation-delay: 0.18s; }
       main > .store-ctas { animation-delay: 0.22s; }
       main > .proof-strip { animation-delay: 0.24s; }
+      main > .calc { animation-delay: 0.25s; }
       main > .why { animation-delay: 0.26s; }
       main > .grid-section { animation-delay: 0.28s; }
       main > .compare { animation-delay: 0.29s; }
@@ -636,6 +637,93 @@
     .chips a:hover { color: #E8EAF0; }
 
     .chips .star { color: #5DCAA5; }
+
+    .calc {
+      width: 100%;
+      max-width: 460px;
+      margin: 0 0 36px;
+      text-align: left;
+    }
+
+    .calc h2 {
+      font-size: clamp(18px, 3vw, 22px);
+      font-weight: 700;
+      color: #E8EAF0;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .calc-sub {
+      font-size: 14px;
+      color: #8A8FA8;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .calc-box {
+      background: rgba(18, 23, 42, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(138, 143, 168, 0.22);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+
+    .calc-fields {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .calc-fields label {
+      flex: 1 1 110px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #8A8FA8;
+    }
+
+    .calc-fields input {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      color: #E8EAF0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(138, 143, 168, 0.45);
+      border-radius: 10px;
+      padding: 10px 12px;
+      width: 100%;
+    }
+
+    .calc-fields input:focus-visible {
+      outline: 2px solid #5DCAA5;
+      outline-offset: 2px;
+    }
+
+    .calc-out {
+      font-size: 15px;
+      font-weight: 700;
+      color: #B9BECE;
+      line-height: 1.5;
+      min-height: 1.5em;
+    }
+
+    .calc-out.up { color: #5DCAA5; }
+    .calc-out.down { color: #E57373; }
+
+    .calc-cta {
+      font-size: 13px;
+      color: #6B7094;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    .calc-cta a { color: #C7CBDA; }
+    .calc-cta a:hover { color: #E8EAF0; }
 
     .why {
       width: 100%;
@@ -991,6 +1079,26 @@
       </ul>
     </section>
 
+    <section class="calc" aria-labelledby="calc-heading">
+      <h2 id="calc-heading">Try the math</h2>
+      <p class="calc-sub">What did that sale actually make you?</p>
+      <div class="calc-box">
+        <div class="calc-fields">
+          <label>Bought for, $
+            <input type="number" id="calc-buy" inputmode="decimal" min="0" step="0.01" value="20" />
+          </label>
+          <label>Sold for, $
+            <input type="number" id="calc-sell" inputmode="decimal" min="0" step="0.01" value="35" />
+          </label>
+          <label>Fees, %
+            <input type="number" id="calc-fees" inputmode="decimal" min="0" max="100" step="0.1" value="13" />
+          </label>
+        </div>
+        <p class="calc-out" id="calc-out" role="status"></p>
+      </div>
+      <p class="calc-cta">CardOS does this for every card automatically. <a href="#store-ctas">Get the app</a>.</p>
+    </section>
+
     <section class="why" aria-labelledby="why-heading">
       <h2 id="why-heading">Why this instead of <span class="hl-gold">a spreadsheet</span></h2>
       <ul class="features why-features">
@@ -1148,6 +1256,43 @@
         window.ph.track('landing_cta_tapped', { cta: cta });
       }
     });
+  })();
+  (function () {
+    var buy = document.getElementById('calc-buy');
+    var sell = document.getElementById('calc-sell');
+    var fees = document.getElementById('calc-fees');
+    var out = document.getElementById('calc-out');
+    if (!buy || !sell || !fees || !out) return;
+    function money(n) { return (n < 0 ? '-$' : '$') + Math.abs(n).toFixed(2); }
+    function compute() {
+      var b = parseFloat(buy.value);
+      var s = parseFloat(sell.value);
+      var f = parseFloat(fees.value);
+      if (isNaN(b) || isNaN(s) || b < 0 || s < 0) {
+        out.className = 'calc-out';
+        out.textContent = 'Enter a buy and sell price.';
+        return;
+      }
+      if (isNaN(f) || f < 0) f = 0;
+      if (f > 100) f = 100;
+      var feeAmt = s * f / 100;
+      var pnl = s - feeAmt - b;
+      var pct = b > 0 ? (pnl / b) * 100 : 0;
+      var sign = pnl > 0.004 ? 1 : (pnl < -0.004 ? -1 : 0);
+      var word = sign > 0 ? 'up' : (sign < 0 ? 'down' : 'even');
+      out.className = 'calc-out ' + word;
+      out.textContent = (sign > 0 ? '+' : '') + money(pnl) + ' realized — ' + word +
+        (b > 0 ? ' ' + Math.abs(pct).toFixed(0) + '%' : '') +
+        ' after ' + money(feeAmt) + ' fees';
+    }
+    function onInput() {
+      if (window.ph && typeof window.ph.trackOnce === 'function') {
+        window.ph.trackOnce('calc_used', 'landing_calc_used');
+      }
+      compute();
+    }
+    [buy, sell, fees].forEach(function (el) { el.addEventListener('input', onInput); });
+    compute();
   })();
   </script>
 </body>
