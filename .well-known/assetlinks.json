@@ -1,10 +1,15 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.cardos.optcg",
-    "sha256_cert_fingerprints": [
-      "PLACEHOLDER_SHA256_FINGERPRINT_FROM_PLAY_CONSOLE"
-    ]
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.cardos.optcg",
+      "sha256_cert_fingerprints": [
+        "F7:A9:AA:58:BC:2C:52:9B:78:DB:6F:C2:10:5C:C4:73:F1:75:56:D4:0B:A1:60:B1:D2:56:DD:6D:D6:C9:D7:15"
+      ]
+    }
   }
-}]
+]
