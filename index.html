@@ -831,6 +831,18 @@
       line-height: 1.55;
     }
 
+    .grid .card .price-line {
+      font-weight: 700;
+      color: #5DCAA5;
+      margin-bottom: 10px;
+    }
+
+    .card-features {
+      margin-bottom: 0;
+      font-size: 13px;
+      gap: 8px;
+    }
+
     .grid .card a { color: #C7CBDA; }
     .grid .card a:hover { color: #E8EAF0; }
     .grid .card a:focus-visible {
@@ -1066,7 +1078,7 @@
       <div class="phone">
         <picture>
           <source srcset="/hero-explore.webp" type="image/webp" />
-          <img src="/hero-explore.jpg" width="780" height="551" alt="CardOS Explore with Trending and New to Catalog" decoding="async" draggable="false" />
+          <img src="/hero-explore.jpg" width="1242" height="2688" fetchpriority="high" alt="CardOS Explore with Trending and New to Catalog" decoding="async" draggable="false" />
         </picture>
       </div>
     </figure>
@@ -1220,11 +1232,38 @@
         <div class="phone">
           <picture>
             <source srcset="/hero-explore.webp" type="image/webp" />
-            <img src="/hero-explore.jpg" width="780" height="551" alt="CardOS Explore with Trending and New to Catalog" loading="lazy" decoding="async" draggable="false" />
+            <img src="/hero-explore.jpg" width="1242" height="2688" alt="CardOS Explore with Trending and New to Catalog" loading="lazy" decoding="async" draggable="false" />
           </picture>
         </div>
         <figcaption>Explore. Trending and New to Catalog, updated with every set.</figcaption>
       </figure>
+    </section>
+
+    <section class="grid-section" aria-labelledby="pricing-heading">
+      <h2 id="pricing-heading">Free core, <span class="hl-gold">Pro depth</span></h2>
+      <p class="grid-sub">Your card data is never gated. Only analysis depth is Pro.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Free</h3>
+          <p class="price-line">$0, forever</p>
+          <ul class="features card-features">
+            <li>Unlimited card logging, raw and graded</li>
+            <li>Full graded vault: all 9 grading companies</li>
+            <li>Current estimated value and basic P&amp;L</li>
+            <li>Price alerts and wishlist</li>
+            <li>CSV import</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Pro</h3>
+          <p class="price-line">$3.99/month · $29.99/year · $69.99 lifetime</p>
+          <ul class="features card-features">
+            <li>Advanced P&amp;L drill-down</li>
+            <li>Chart history</li>
+            <li>CSV export</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section class="faq" aria-labelledby="faq-heading">
