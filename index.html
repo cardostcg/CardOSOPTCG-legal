@@ -137,8 +137,9 @@
           "Raw and graded One Piece TCG card tracking",
           "Sealed product tracking with MSRP vs market price comparison",
           "Price alerts and wishlist",
-          "Multi-currency price conversion (USD, EUR, GBP)",
-          "CSV import and export",
+          "Multi-currency price conversion (USD, EUR, JPY, and more)",
+          "CSV import",
+          "CSV export (Pro)",
           "Prices captured nightly",
           "Editable price overrides with Est. label",
           "Price verification via TCGPlayer and eBay links",
@@ -164,7 +165,7 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is the best app to track One Piece TCG card values?",
+            "name": "What is the best app to track One Piece TCG profit?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "CardOS OP TCG tracks One Piece and Riftbound cards with cost basis and profit, not just a collection total. Log any card by hand. Free core features on Android, iOS, and the web app at app.cardostcg.com."
@@ -298,8 +299,7 @@
     }
 
     a:focus-visible,
-    summary:focus-visible,
-    input:focus-visible {
+    summary:focus-visible {
       outline: 2px solid var(--os-blue);
       outline-offset: 2px;
       border-radius: 4px;
@@ -566,7 +566,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .fade, .calc-num.tick { animation: none; }
+      .fade { animation: none; }
     }
 
     /* Glyph band */
@@ -691,8 +691,11 @@
 
     /* Features grid */
     .features-grid { grid-template-columns: 1fr; }
-    @media (min-width: 900px) {
-      .features-grid { grid-template-columns: repeat(3, 1fr); }
+    @media (min-width: 720px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(4, 1fr); }
     }
     .feature { padding: 24px 20px; }
     .feature .sec-index { margin-bottom: 14px; }
@@ -701,62 +704,13 @@
       font-size: 15.5px;
       line-height: 1.55;
     }
+    .feature a { color: var(--text); text-underline-offset: 3px; }
+    .feature a:hover { color: var(--teal); }
     .also {
       color: var(--muted);
       font-size: 14.5px;
       margin-top: 18px;
     }
-
-    /* Calculator */
-    .calc-box {
-      background: var(--surface);
-      border: 1px solid var(--hairline);
-      border-radius: var(--radius-card);
-      padding: 20px;
-      max-width: 640px;
-    }
-    .calc-fields {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-    .calc-fields label {
-      flex: 1 1 130px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      color: var(--muted);
-    }
-    .calc-fields input {
-      font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
-      font-size: 16px;
-      font-variant-numeric: tabular-nums;
-      color: var(--text);
-      background: color-mix(in srgb, var(--text) 4%, transparent);
-      border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
-      border-radius: 10px;
-      padding: 11px 12px;
-      width: 100%;
-    }
-    .calc-out {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--muted);
-      line-height: 1.55;
-      min-height: 1.55em;
-      font-variant-numeric: tabular-nums;
-    }
-    .calc-out.up { color: var(--teal); }
-    .calc-out.down { color: var(--down); }
-    .calc-out.flat { color: var(--muted); }
-    .calc-cta {
-      font-size: 14.5px;
-      color: var(--muted);
-      margin-top: 14px;
-    }
-    .calc-cta a { color: var(--text); }
-    .calc-cta a:hover { color: var(--teal); }
 
     /* Comparison table */
     .table-wrap {
@@ -800,6 +754,16 @@
     }
     .compare .us { background: color-mix(in srgb, var(--teal) 6%, transparent); }
     .compare td.yes { color: var(--teal); font-weight: 600; }
+    .pro-pill {
+      display: inline-flex;
+      align-items: center;
+      background: color-mix(in srgb, var(--os-blue) 16%, transparent);
+      color: var(--os-blue);
+      border-radius: var(--radius-pill);
+      padding: 2px 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
 
     /* Explore */
     .explore-fig { margin: 0; display: flex; justify-content: center; }
@@ -945,7 +909,7 @@
           <a class="btn btn-ghost" href="https://app.cardostcg.com/?utm_source=web&amp;utm_medium=teaser" data-cta="web_app">Open web app</a>
         </div>
         <div class="store-badges" id="store-ctas" role="group" aria-label="Download CardOS">
-          <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&amp;utm_source=web&amp;utm_medium=teaser&amp;utm_campaign=landing" target="_blank" rel="noopener" aria-label="Get on Google Play">
+          <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&amp;utm_source=web&amp;utm_medium=teaser&amp;utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get on Google Play">
             <img src="/badge-google-play.png" alt="Get on Google Play" width="134" height="40" draggable="false" />
           </a>
           <a class="store-badge" id="appstore-cta" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&amp;utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
@@ -1026,7 +990,8 @@
 
     <section class="features dotzone section-pad" aria-labelledby="features-heading">
       <div class="wrap">
-        <h2 id="features-heading">What the tracker actually does</h2>
+        <h2 id="features-heading">Everything you need to track your One Piece and Riftbound collection</h2>
+        <p class="section-sub">Cost-basis tracking, a graded vault, sealed product pricing, and alerts. Log on phone or desktop.</p>
         <div class="bgrid features-grid">
           <div class="feature">
             <p class="sec-index mono">01 · Realized P&amp;L</p>
@@ -1037,33 +1002,31 @@
             <p>Track slabs from any grading company, plus raw cards.</p>
           </div>
           <div class="feature">
-            <p class="sec-index mono">03 · Sealed</p>
-            <p>Booster boxes, starter decks, and case lots, with set MSRP next to market price.</p>
+            <p class="sec-index mono">03 · Sealed products</p>
+            <p>Booster boxes, starter decks, and case lots, with set MSRP next to current market price. Margin at a glance. Verify any price on <a href="https://www.tcgplayer.com/categories/trading-and-collectible-card-games/one-piece-card-game" target="_blank" rel="noopener">TCGPlayer</a> or <a href="https://www.ebay.com/sch/i.html?_nkw=one+piece+card+game" target="_blank" rel="noopener">eBay</a>.</p>
+          </div>
+          <div class="feature">
+            <p class="sec-index mono">04 · Price alerts &amp; wishlist</p>
+            <p>Watch a card, get alerted when it moves. Keep a wishlist of what to pick up next.</p>
+          </div>
+          <div class="feature">
+            <p class="sec-index mono">05 · Multi-currency</p>
+            <p>See prices and portfolio totals in your currency. Convert between USD, EUR, JPY, and more.</p>
+          </div>
+          <div class="feature">
+            <p class="sec-index mono">06 · CSV import</p>
+            <p>Yes. Bring a spreadsheet in on the free core.</p>
+          </div>
+          <div class="feature">
+            <p class="sec-index mono">07 · CSV export</p>
+            <p>Pro. Take your data out when you want a file.</p>
+          </div>
+          <div class="feature">
+            <p class="sec-index mono">08 · iOS, Android &amp; web</p>
+            <p>Log on your phone, review on a bigger screen at <a href="https://app.cardostcg.com">app.cardostcg.com</a>. The collection syncs across devices.</p>
           </div>
         </div>
         <p class="also">Also: price alerts, wishlist, multi-currency, CSV import and export, sync across iOS, Android, web.</p>
-      </div>
-    </section>
-
-    <section class="calc dotzone section-pad" aria-labelledby="calc-heading">
-      <div class="wrap">
-        <h2 id="calc-heading">Try the math</h2>
-        <p class="section-sub">What did that sale actually make you?</p>
-        <div class="calc-box">
-          <div class="calc-fields">
-            <label class="mono">Bought for, $
-              <input type="number" id="calc-buy" inputmode="decimal" min="0" step="0.01" value="20" />
-            </label>
-            <label class="mono">Sold for, $
-              <input type="number" id="calc-sell" inputmode="decimal" min="0" step="0.01" value="35" />
-            </label>
-            <label class="mono">Fees, %
-              <input type="number" id="calc-fees" inputmode="decimal" min="0" max="100" step="0.1" value="13" />
-            </label>
-          </div>
-          <p class="calc-out" id="calc-out" role="status" aria-live="polite"></p>
-        </div>
-        <p class="calc-cta">CardOS does this for every card automatically. <a href="#store-ctas">Get the app</a>.</p>
       </div>
     </section>
 
@@ -1082,7 +1045,8 @@
               <tr><th scope="row">Manual card entry</th><td class="us yes">Yes</td><td>Yes</td></tr>
               <tr><th scope="row">Sealed MSRP vs market margin</th><td class="us yes">Yes</td><td>Manual</td></tr>
               <tr><th scope="row">Price alerts &amp; wishlist</th><td class="us yes">Yes</td><td>No</td></tr>
-              <tr><th scope="row">CSV import &amp; export</th><td class="us yes">Yes</td><td>You are the CSV</td></tr>
+              <tr><th scope="row">CSV import</th><td class="us yes">Yes</td><td>You are the CSV</td></tr>
+              <tr><th scope="row">CSV export</th><td class="us"><span class="pro-pill">Pro</span></td><td>You are the CSV</td></tr>
               <tr><th scope="row">Multi-currency</th><td class="us yes">Yes</td><td>Manual</td></tr>
               <tr><th scope="row">Prices captured nightly</th><td class="us yes">Yes</td><td>Manual</td></tr>
             </tbody>
@@ -1159,7 +1123,7 @@
         <h2 id="faq-heading">Common questions</h2>
 
         <details>
-          <summary>What is the best app to track One Piece TCG card values?</summary>
+          <summary>What is the best app to track One Piece TCG profit?</summary>
           <p>CardOS OP TCG tracks One Piece and Riftbound cards with cost basis and profit, not just a collection total. Log any card by hand. Free core features on Android, iOS, and the web app at <a href="https://app.cardostcg.com">app.cardostcg.com</a>.</p>
         </details>
 
@@ -1248,57 +1212,6 @@
         window.ph.track('landing_cta_tapped', { cta: cta });
       }
     });
-  })();
-  (function () {
-    var buy = document.getElementById('calc-buy');
-    var sell = document.getElementById('calc-sell');
-    var fees = document.getElementById('calc-fees');
-    var out = document.getElementById('calc-out');
-    if (!buy || !sell || !fees || !out) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function money(n) { return (n < 0 ? '-$' : '$') + Math.abs(n).toFixed(2); }
-    function compute() {
-      var rawB = buy.value.trim();
-      var rawS = sell.value.trim();
-      var rawF = fees.value.trim();
-      var b = parseFloat(rawB);
-      var s = parseFloat(rawS);
-      var f = parseFloat(rawF);
-      if (rawB === '' || rawS === '' || rawF === '' || isNaN(b) || isNaN(s) || isNaN(f) || b < 0 || s < 0 || f < 0 || f > 100) {
-        out.className = 'calc-out';
-        out.textContent = '\u2014';
-        return;
-      }
-      var feeAmt = s * f / 100;
-      var pnl = s - feeAmt - b;
-      var pct = b > 0 ? (pnl / b) * 100 : 0;
-      var sign = pnl > 0.004 ? 1 : (pnl < -0.004 ? -1 : 0);
-      var word = sign > 0 ? 'up' : (sign < 0 ? 'down' : 'even');
-      var tone = sign > 0 ? 'up' : (sign < 0 ? 'down' : 'flat');
-      var num = (sign > 0 ? '+' : '') + money(pnl);
-      var rest = ' realized, ' + word +
-        (b > 0 ? ' ' + Math.abs(pct).toFixed(0) + '%' : '') +
-        ' after ' + money(feeAmt) + ' fees';
-      out.className = 'calc-out ' + tone;
-      out.textContent = '';
-      var span = document.createElement('span');
-      span.className = 'calc-num';
-      span.textContent = num;
-      out.appendChild(span);
-      out.appendChild(document.createTextNode(rest));
-      if (!reduce) {
-        void span.offsetWidth;
-        span.classList.add('tick');
-      }
-    }
-    function onInput() {
-      if (window.ph && typeof window.ph.trackOnce === 'function') {
-        window.ph.trackOnce('calc_used', 'landing_calc_used');
-      }
-      compute();
-    }
-    [buy, sell, fees].forEach(function (el) { el.addEventListener('input', onInput); });
-    compute();
   })();
   </script>
 </body>
