@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -140,9 +140,10 @@
           "Raw and graded One Piece TCG card tracking",
           "Sealed product tracking with MSRP vs market price comparison",
           "Price alerts and wishlist",
-          "Multi-currency price conversion (USD, EUR, GBP)",
-          "CSV import and export",
-          "Prices captured nightly",
+          "Multi-currency price conversion (USD, EUR, JPY, and more)",
+          "CSV import",
+          "CSV export (Pro)",
+          "Prices updated weekly, within reason",
           "Editable price overrides with Est. label",
           "Price verification via TCGPlayer and eBay links",
           "Web app at app.cardostcg.com"
@@ -167,7 +168,7 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is the best app to track One Piece TCG card values?",
+            "name": "What is the best app to track One Piece TCG profit?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "CardOS OP TCG tracks One Piece and Riftbound cards with cost basis and profit, not just a collection total. Log any card by hand. Free core features on Android, iOS, and the web app at app.cardostcg.com."
@@ -252,6 +253,22 @@
   </script>
 
   <style>
+    :root {
+      --bg: #0A0E1A;
+      --text: #E8EAF0;
+      --muted: #8A8FA8;
+      --accent: #5DCAA5;
+      --link: #8FC1F2;
+      --danger: #E57373;
+      --space-8: 8px;
+      --space-16: 16px;
+      --space-24: 24px;
+      --space-40: 40px;
+      --space-64: 64px;
+      --content: 720px;
+      --font: "DM Sans", sans-serif;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -276,7 +293,7 @@
       inset: 0;
       z-index: -1;
       overflow: hidden;
-      background: var(--abyss);
+      background: var(--bg);
     }
 
     .bg-layer img {
@@ -294,16 +311,17 @@
     }
 
     body {
-      background: var(--abyss);
+      background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
-      font-size: var(--fs-md);
-      line-height: 1.5;
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 400;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px 16px 64px;
+      justify-content: flex-start;
+      padding: var(--space-40) var(--space-24) var(--space-64);
       text-align: center;
     }
 
@@ -312,12 +330,38 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: 720px;
+      max-width: var(--content);
     }
 
     @media (prefers-reduced-motion: no-preference) {
-      .reveal { animation: fadeIn 0.45s ease both; }
-      .calc-num.tick { animation: fadeIn 0.25s ease; }
+      main > * {
+        animation: fadeUp 0.45s ease both;
+      }
+      main > .logo { animation-delay: 0.02s; }
+      main > .wordmark { animation-delay: 0.05s; }
+      main > .badge-row { animation-delay: 0.08s; }
+      main > h1 { animation-delay: 0.11s; }
+      main > .lead { animation-delay: 0.14s; }
+      main > .sub { animation-delay: 0.17s; }
+      main > .proof { animation-delay: 0.18s; }
+      main > .store-ctas { animation-delay: 0.22s; }
+      main > .est-proof { animation-delay: 0.24s; }
+      main > .why { animation-delay: 0.26s; }
+      main > .grid-section { animation-delay: 0.28s; }
+      main > .compare { animation-delay: 0.29s; }
+      main > .showcase { animation-delay: 0.30s; }
+      main > .faq { animation-delay: 0.31s; }
+      main > .proof-strip { animation-delay: 0.33s; }
+
+      .grid .card { animation: fadeUp 0.45s ease both; }
+      .grid .card:nth-child(1) { animation-delay: 0.30s; }
+      .grid .card:nth-child(2) { animation-delay: 0.33s; }
+      .grid .card:nth-child(3) { animation-delay: 0.36s; }
+      .grid .card:nth-child(4) { animation-delay: 0.39s; }
+      .grid .card:nth-child(5) { animation-delay: 0.42s; }
+      .grid .card:nth-child(6) { animation-delay: 0.45s; }
+      .grid .card:nth-child(7) { animation-delay: 0.48s; }
+      .grid .card:nth-child(8) { animation-delay: 0.51s; }
     }
 
     @keyframes fadeIn {
@@ -336,17 +380,85 @@
       font-size: var(--fs-sm);
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: var(--body);
-      margin-bottom: 16px;
+      color: #C7CBDA;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(93, 202, 165, 0.12);
+      border: 1px solid rgba(93, 202, 165, 0.4);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: var(--space-8) var(--space-16);
+      border-radius: 100px;
+      margin-bottom: var(--space-24);
+      text-decoration: none;
+      cursor: default;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .badge:visited { color: #5DCAA5; }
+
+    .badge:hover {
+      border-color: rgba(93, 202, 165, 0.7);
+      box-shadow: 0 0 18px rgba(93, 202, 165, 0.15);
+    }
+
+    .badge:focus-visible {
+      outline: 2px solid #5DCAA5;
+      outline-offset: 3px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-8);
+      margin-bottom: var(--space-24);
+    }
+
+    .badge-row .badge { margin-bottom: 0; }
+    .badge-row a.badge { cursor: pointer; }
+
+    .badge-blue {
+      background: rgba(55, 138, 221, 0.12);
+      border: 1px solid rgba(55, 138, 221, 0.4);
+      color: #8FC1F2;
+    }
+
+    .badge-blue:visited { color: #8FC1F2; }
+
+    .badge-blue:hover {
+      border-color: rgba(55, 138, 221, 0.7);
+      box-shadow: 0 0 18px rgba(55, 138, 221, 0.15);
+    }
+
+    .badge-blue:focus-visible {
+      outline: 2px solid #8FC1F2;
+      outline-offset: 3px;
     }
 
     h1 {
-      font-size: var(--fs-xl);
+      font-size: 36px;
       font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.02em;
-      max-width: 16em;
-      margin-bottom: 10px;
+      max-width: var(--content);
+      margin-bottom: var(--space-16);
+    }
+
+    @media (min-width: 720px) {
+      h1 { font-size: 40px; }
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
     }
 
     h2 {
@@ -369,19 +481,21 @@
     }
 
     .sub {
-      font-size: var(--fs-lg);
-      color: var(--body);
-      max-width: 28em;
-      line-height: 1.5;
-      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--muted);
+      max-width: var(--content);
+      line-height: 1.6;
+      margin-bottom: var(--space-24);
     }
 
     .lead {
-      font-size: var(--fs-md);
-      color: var(--muted);
-      max-width: 32em;
-      line-height: 1.5;
-      margin-bottom: 20px;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text);
+      max-width: var(--content);
+      line-height: 1.6;
+      margin-bottom: var(--space-8);
     }
 
     img {
@@ -390,10 +504,54 @@
       -webkit-touch-callout: none;
     }
 
+    .features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+      width: 100%;
+      max-width: var(--content);
+      margin-bottom: var(--space-24);
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      text-align: left;
+    }
+
+    .features li::before {
+      content: "";
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
+      margin-top: 0.28em;
+      background-color: #5DCAA5;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.2 8.2 6.4 11.4 12.8 4.6' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.2 8.2 6.4 11.4 12.8 4.6' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+    }
+
+    .why-features a { color: var(--link); }
+    .why-features a:hover { color: #E8EAF0; }
+    .why-features a:focus-visible {
+      outline: 1px solid #5DCAA5;
+      outline-offset: 2px;
+    }
+
     .proof {
       width: 100%;
       max-width: 420px;
-      margin: 20px 0 0;
+      margin: 0 0 var(--space-24);
     }
 
     .phone {
@@ -413,13 +571,46 @@
 
     .store-ctas {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: var(--space-16);
       width: 100%;
-      max-width: 420px;
+      max-width: var(--content);
+      margin-bottom: var(--space-40);
+    }
+
+    .primary-cta {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 48px;
+      padding: var(--space-16) var(--space-24);
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .primary-cta:hover { color: var(--bg); }
+    .primary-cta:visited { color: var(--bg); }
+    .primary-cta:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .store-secondary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-8);
+      opacity: 0.72;
     }
 
     .store-badge {
@@ -443,21 +634,27 @@
       outline-offset: 3px;
     }
 
-    .web-cta {
-      flex-basis: 100%;
-      color: var(--body);
-      font-size: var(--fs-md);
-      font-weight: 500;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    .proof-strip {
+      width: 100%;
+      max-width: var(--content);
+      margin: var(--space-40) 0 0;
     }
 
-    .web-cta:hover { color: var(--text); }
-
-    .trust {
+    .est-proof {
       width: 100%;
-      max-width: 540px;
-      margin: 28px 0 8px;
+      max-width: var(--content);
+      margin: 0 0 var(--space-40);
+    }
+
+    .est-proof p {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.5;
+      background: rgba(18, 23, 42, 0.72);
+      border: 1px solid rgba(138, 143, 168, 0.22);
+      border-radius: 16px;
+      padding: var(--space-24);
     }
 
     .trust ul {
@@ -467,124 +664,101 @@
       gap: 8px;
     }
 
-    .trust li {
-      font-size: var(--fs-sm);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--body);
-      border: 1px solid rgba(154, 163, 184, 0.28);
-      border-radius: 100px;
-      padding: 8px 14px;
-    }
-
-    @media (min-width: 768px) {
-      .trust ul {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-    }
-
-    .calc,
-    .moat,
-    .compare,
-    .showcase,
-    .reviews,
-    .faq {
-      width: 100%;
-      max-width: 640px;
-      margin: 28px 0 0;
+    .quote {
+      background: rgba(18, 23, 42, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(138, 143, 168, 0.22);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin: 0;
       text-align: left;
     }
 
-    .calc-sub,
-    .moat-also,
-    .grid-sub,
-    .compare-note {
-      font-size: var(--fs-md);
-      color: var(--muted);
-      margin-bottom: 14px;
-      line-height: 1.5;
+    .quote p {
+      font-size: 14px;
+      color: #C7CBDA;
+      line-height: 1.6;
+      margin-bottom: 8px;
     }
 
-    .calc-box,
-    .quote,
-    .moat .card,
-    .table-wrap {
-      background: rgba(18, 23, 42, 0.92);
-      border: 1px solid rgba(154, 163, 184, 0.22);
-      border-radius: 16px;
+    .quote cite {
+      font-size: 12px;
+      color: #6B7094;
+      font-style: normal;
     }
 
-    .calc-box { padding: 16px; }
-
-    .calc-fields {
+    .chips {
+      list-style: none;
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 12px;
+      justify-content: center;
+      gap: 8px;
     }
 
-    .calc-fields label {
-      flex: 1 1 140px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: var(--fs-sm);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+    .chips li {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
       color: var(--muted);
+      border: 1px solid rgba(138, 143, 168, 0.28);
+      border-radius: 100px;
+      padding: var(--space-8) var(--space-16);
     }
 
-    .calc-fields input {
-      font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
-      font-size: var(--fs-md);
-      font-variant-numeric: tabular-nums;
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(154, 163, 184, 0.45);
-      border-radius: 10px;
-      padding: 10px 12px;
+    .chips a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .chips a:hover { color: #E8EAF0; }
+
+    .chips .star { color: #5DCAA5; }
+
+    .price-note {
+      font-size: 11px;
+      color: #6B7094;
+      margin: 10px 0 0;
+      text-align: center;
+    }
+
+    .why {
       width: 100%;
+      max-width: var(--content);
+      margin: 0 0 var(--space-40);
+      text-align: left;
     }
 
-    .calc-fields input:focus-visible {
-      outline: 2px solid var(--teal);
-      outline-offset: 2px;
+    .why h2 {
+      margin-bottom: var(--space-16);
     }
 
-    .calc-out {
-      font-size: var(--fs-md);
-      font-weight: 700;
+    .why .features {
+      margin-bottom: 0;
+    }
+
+    .grid-section {
+      width: 100%;
+      max-width: var(--content);
+      margin: 0 0 var(--space-40);
+      text-align: left;
+    }
+
+    .grid-section h2 {
+      margin-bottom: var(--space-8);
+    }
+
+    .grid-sub {
+      font-size: 16px;
       color: var(--muted);
-      line-height: 1.5;
-      min-height: 1.5em;
-      font-variant-numeric: tabular-nums;
+      line-height: 1.6;
+      margin-bottom: var(--space-16);
     }
 
-    .calc-out.up { color: var(--teal); }
-    .calc-out.down { color: var(--down); }
-    .calc-out.flat { color: var(--muted); }
-
-    .calc-cta {
-      font-size: var(--fs-sm);
-      color: var(--muted);
-      line-height: 1.5;
-      margin-top: 12px;
-    }
-
-    .calc-cta a,
-    .moat a,
-    .faq a { color: var(--body); }
-    .calc-cta a:hover,
-    .moat a:hover,
-    .faq a:hover { color: var(--text); }
-
-    .moat-grid {
+    .grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 10px;
+      gap: var(--space-16);
     }
 
     @media (min-width: 768px) {
@@ -610,23 +784,43 @@
       vertical-align: 2px;
     }
 
-    .moat .card p,
-    .faq p,
-    .quote p {
-      font-size: var(--fs-md);
+    .grid .card p {
+      font-size: 16px;
       color: var(--muted);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    .moat-also { margin: 14px 0 0; }
+    .grid .card a { color: var(--link); }
+    .grid .card a:hover { color: #E8EAF0; }
+    .grid .card a:focus-visible {
+      outline: 1px solid #5DCAA5;
+      outline-offset: 2px;
+    }
 
-    .table-wrap { overflow-x: auto; }
+    .compare {
+      width: 100%;
+      max-width: var(--content);
+      margin: 0 0 var(--space-40);
+      text-align: left;
+    }
+
+    .compare h2 {
+      margin-bottom: var(--space-8);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid rgba(138, 143, 168, 0.22);
+      border-radius: 16px;
+      background: rgba(18, 23, 42, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
 
     .compare table {
       width: 100%;
       border-collapse: collapse;
-      font-size: var(--fs-sm);
-      font-variant-numeric: tabular-nums;
+      font-size: 16px;
     }
 
     .compare th,
@@ -661,12 +855,29 @@
     }
 
     .compare .us { background: rgba(93, 202, 165, 0.06); }
-    .compare td.yes { color: var(--teal); font-weight: 700; }
+
+    .compare td.yes { color: #5DCAA5; font-weight: 700; }
+
+    .compare td.us:not(.yes) { color: var(--muted); font-weight: 500; }
+
+    .compare-note {
+      font-size: 13px;
+      color: #6B7094;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
 
     .showcase {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 14px;
+      gap: var(--space-16);
+      width: 100%;
+      max-width: var(--content);
+      margin: 0 0 var(--space-40);
+    }
+
+    @media (min-width: 480px) {
+      .showcase { grid-template-columns: 1fr 1fr; }
     }
 
     .showcase figure { margin: 0; }
@@ -678,21 +889,15 @@
       margin-top: 8px;
     }
 
-    .quotes { display: flex; flex-direction: column; gap: 8px; }
-
-    .quote { padding: 16px; }
-
-    .quote p { margin-bottom: 8px; color: var(--body); }
-
-    .quote cite {
-      font-size: var(--fs-sm);
-      color: var(--muted);
-      font-style: normal;
+    .faq {
+      width: 100%;
+      max-width: var(--content);
+      margin: 0 0 var(--space-24);
+      text-align: left;
     }
 
-    .rating {
-      margin-top: 12px;
-      font-size: var(--fs-sm);
+    .faq h2 {
+      margin-bottom: var(--space-16);
     }
 
     .rating a { color: var(--body); font-weight: 700; text-decoration: none; }
@@ -711,7 +916,31 @@
 
     .faq h2 + h3 { margin-top: 0; }
 
-    .faq p { margin-bottom: 4px; padding-left: 12px; }
+    .faq p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: var(--space-16);
+      padding-left: 12px;
+    }
+
+    .faq a { color: var(--link); }
+    .faq a:hover { color: #E8EAF0; }
+    .faq a:focus-visible {
+      outline: 1px solid #5DCAA5;
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .store-badge,
+      .grid .card,
+      .primary-cta,
+      .badge { transition: none; }
+      .store-badge:hover,
+      .store-badge:active,
+      .grid .card:hover { transform: none; }
+    }
 
     .visually-hidden {
       position: absolute;
@@ -728,14 +957,14 @@
     }
 
     footer {
-      margin-top: 48px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(154, 163, 184, 0.16);
+      margin-top: var(--space-64);
+      padding-top: var(--space-24);
+      border-top: 1px solid rgba(138, 143, 168, 0.16);
       width: 100%;
-      max-width: 640px;
-      font-size: var(--fs-sm);
+      max-width: var(--content);
+      font-size: 13px;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.8;
     }
 
     footer .tagline {
@@ -769,21 +998,17 @@
 
     <div class="wordmark reveal">CardOS OP TCG</div>
 
-    <h1 class="reveal">Every card logged. Every dollar tracked.</h1>
-
-    <p class="sub reveal">Tracks profit, not just worth.</p>
-
-    <p class="lead reveal">The One Piece and Riftbound TCG portfolio tracker. Free core features for collecting and tracking.</p>
-
-    <div class="store-ctas reveal" id="store-ctas" aria-label="Download CardOS">
-      <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&amp;utm_source=web&amp;utm_medium=teaser&amp;utm_campaign=landing" target="_blank" rel="noopener" aria-label="Get on Google Play">
-        <img src="/badge-google-play.png" alt="Get on Google Play" width="134" height="40" draggable="false" />
-      </a>
-      <a class="store-badge" id="appstore-cta" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&amp;utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
-        <img src="/badge-app-store.svg" alt="Download on the App Store" width="120" height="40" draggable="false" />
-      </a>
-      <a class="web-cta" id="web-app-cta" data-cta="web_app" href="https://app.cardostcg.com/?utm_source=web&amp;utm_medium=teaser">Open in the browser</a>
+    <div class="badge-row">
+      <span class="badge">Free core.</span>
+      <a class="badge" href="#store-ctas">iOS, Android, and web</a>
+      <a class="badge badge-blue" href="#faq-riftbound">One Piece + Riftbound</a>
     </div>
+
+    <h1>Tracks profit, not just worth.</h1>
+
+    <p class="lead">The One Piece and Riftbound TCG portfolio tracker. Free core features for collecting and tracking.</p>
+
+    <p class="sub">Every card logged. Every dollar tracked.</p>
 
     <figure class="proof">
       <div class="phone">
@@ -794,37 +1019,36 @@
       </div>
     </figure>
 
-    <section class="trust reveal" aria-label="Product facts">
-      <ul>
-        <li>Prices captured nightly</li>
-        <li>Any grading company</li>
-        <li>Free core, forever</li>
+    <div class="store-ctas" id="store-ctas" aria-label="Log your first card">
+      <a class="primary-cta" id="log-cta" data-cta="log_first_card" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Log your first card</a>
+      <div class="store-secondary">
+        <a class="store-badge" id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener" aria-label="Get on Google Play">
+          <img src="/badge-google-play.png" alt="Get on Google Play" width="134" height="40" draggable="false" />
+        </a>
+        <a class="store-badge" id="appstore-cta" data-store="ios" data-cta="app_store" href="https://apps.apple.com/app/id6792994816?utm_source=web&utm_medium=teaser" target="_blank" rel="noopener" aria-label="Download on the App Store">
+          <img src="/badge-app-store.svg" alt="Download on the App Store" width="120" height="40" draggable="false" />
+        </a>
+      </div>
+    </div>
+
+    <section class="est-proof" aria-label="How paid, estimated, and sold prices work">
+      <p>Paid stays. Est. sits. Sold updates the lot.</p>
+    </section>
+
+    <section class="why" aria-labelledby="why-heading">
+      <h2 id="why-heading">Why this instead of <span class="hl-gold">a spreadsheet</span></h2>
+      <ul class="features why-features">
+        <li>Log any card, any set. Raw or graded. Type it in if you need to.</li>
+        <li>Any grading company. PSA, BGS, CGC, or whatever slab you have.</li>
+        <li>Cost sits on every card. P&amp;L shows up, down, or even. Wrong estimate? Enter your own. Tagged Est.</li>
+        <li>Sealed product lists set MSRP next to market price.</li>
       </ul>
     </section>
 
-    <section class="calc reveal" aria-labelledby="calc-heading">
-      <h2 id="calc-heading">Try the math</h2>
-      <p class="calc-sub">What did that sale actually make you?</p>
-      <div class="calc-box">
-        <div class="calc-fields">
-          <label>Bought for, $
-            <input type="number" id="calc-buy" inputmode="decimal" min="0" step="0.01" value="20" />
-          </label>
-          <label>Sold for, $
-            <input type="number" id="calc-sell" inputmode="decimal" min="0" step="0.01" value="35" />
-          </label>
-          <label>Fees, %
-            <input type="number" id="calc-fees" inputmode="decimal" min="0" max="100" step="0.1" value="13" />
-          </label>
-        </div>
-        <p class="calc-out" id="calc-out" role="status" aria-live="polite"></p>
-      </div>
-      <p class="calc-cta">CardOS does this for every card automatically. <a href="#store-ctas">Get the app</a>.</p>
-    </section>
-
-    <section class="moat reveal" aria-labelledby="moat-heading">
-      <h2 id="moat-heading">What the tracker actually does</h2>
-      <div class="moat-grid">
+    <section class="grid-section" aria-labelledby="tools-heading">
+      <h2 id="tools-heading">Everything you need to track your <span class="hl-gold">One Piece and Riftbound</span> collection</h2>
+      <p class="grid-sub">Cost-basis tracking, a graded vault, sealed product pricing, and alerts. Log on phone or desktop.</p>
+      <div class="grid">
         <div class="card">
           <h3>Realized P&amp;L</h3>
           <p>Each card keeps its cost in FIFO lots, so a sale shows the actual gain or loss.</p>
@@ -834,8 +1058,28 @@
           <p>Track slabs from any grading company, plus raw cards.</p>
         </div>
         <div class="card">
-          <h3>Sealed</h3>
-          <p>Booster boxes, starter decks, and case lots, with set MSRP next to market price.</p>
+          <h3>Sealed products</h3>
+          <p>Booster boxes, starter decks, and case lots, with set MSRP next to current market price. Margin at a glance. Verify any price on <a href="https://www.tcgplayer.com/categories/trading-and-collectible-card-games/one-piece-card-game" target="_blank" rel="noopener">TCGPlayer</a> or <a href="https://www.ebay.com/sch/i.html?_nkw=one+piece+card+game" target="_blank" rel="noopener">eBay</a>.</p>
+        </div>
+        <div class="card">
+          <h3>Price alerts &amp; wishlist</h3>
+          <p>Watch a card, get alerted when it moves. Keep a wishlist of what to pick up next.</p>
+        </div>
+        <div class="card">
+          <h3>Multi-currency</h3>
+          <p>See prices and portfolio totals in your currency. Convert between USD, EUR, JPY, and more.</p>
+        </div>
+        <div class="card">
+          <h3>CSV import</h3>
+          <p>Yes. Bring a spreadsheet in on the free core.</p>
+        </div>
+        <div class="card">
+          <h3>CSV export</h3>
+          <p>Pro. Take your data out when you want a file.</p>
+        </div>
+        <div class="card">
+          <h3>iOS, Android &amp; web</h3>
+          <p>Log on your phone, review on a bigger screen at <a href="https://app.cardostcg.com">app.cardostcg.com</a>. The collection syncs across devices.</p>
         </div>
       </div>
       <p class="moat-also">Also: price alerts, wishlist, multi-currency, CSV import and export, sync across iOS, Android, web.</p>
@@ -855,7 +1099,8 @@
             <tr><th scope="row">Manual card entry</th><td class="us yes">Yes</td><td>Yes</td></tr>
             <tr><th scope="row">Sealed MSRP vs market margin</th><td class="us yes">Yes</td><td>Manual</td></tr>
             <tr><th scope="row">Price alerts &amp; wishlist</th><td class="us yes">Yes</td><td>—</td></tr>
-            <tr><th scope="row">CSV import &amp; export</th><td class="us yes">Yes</td><td>You are the CSV</td></tr>
+            <tr><th scope="row">CSV import</th><td class="us yes">Yes</td><td>You are the CSV</td></tr>
+            <tr><th scope="row">CSV export</th><td class="us">Pro</td><td>You are the CSV</td></tr>
             <tr><th scope="row">Multi-currency</th><td class="us yes">Yes</td><td>Manual</td></tr>
             <tr><th scope="row">Prices captured nightly</th><td class="us yes">Yes</td><td>Manual</td></tr>
           </tbody>
@@ -922,7 +1167,7 @@
     <section class="faq reveal" aria-labelledby="faq-heading">
       <h2 id="faq-heading">Common questions</h2>
 
-      <h3>What is the best app to track One Piece TCG card values?</h3>
+      <h3>What is the best app to track One Piece TCG profit?</h3>
       <p>CardOS OP TCG tracks One Piece and Riftbound cards with cost basis and profit, not just a collection total. Log any card by hand. Free core features on Android, iOS, and the web app at <a href="https://app.cardostcg.com">app.cardostcg.com</a>.</p>
 
       <h3>How do I track graded One Piece TCG cards from PSA, BGS, and CGC?</h3>
@@ -951,6 +1196,30 @@
 
       <h3>Can I see prices in my currency?</h3>
       <p>Yes. Prices and portfolio totals in USD, EUR, or GBP.</p>
+    </section>
+
+    <section class="proof-strip" aria-label="Collector feedback">
+      <div class="quotes">
+        <blockquote class="quote">
+          <p>&ldquo;Love this app! It's become my go-to for tracking my collection and checking card prices.&rdquo;</p>
+          <cite>Google Play</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <p>&ldquo;a Must for collectors! finally keeping track of my cards!&rdquo;</p>
+          <cite>Google Play</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <p>&ldquo;Its easy to use and very helpful highly recommended&rdquo;</p>
+          <cite>Google Play</cite>
+        </blockquote>
+      </div>
+      <ul class="chips">
+        <li><a href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener"><span class="star">★</span> 5.0 on the App Store</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.cardos.optcg" target="_blank" rel="noopener">Google Play</a></li>
+        <li>Any grading company</li>
+        <li>Prices updated weekly*</li>
+      </ul>
+      <p class="price-note">*within reason</p>
     </section>
   </main>
 
@@ -986,57 +1255,6 @@
         window.ph.track('landing_cta_tapped', { cta: cta });
       }
     });
-  })();
-  (function () {
-    var buy = document.getElementById('calc-buy');
-    var sell = document.getElementById('calc-sell');
-    var fees = document.getElementById('calc-fees');
-    var out = document.getElementById('calc-out');
-    if (!buy || !sell || !fees || !out) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function money(n) { return (n < 0 ? '-$' : '$') + Math.abs(n).toFixed(2); }
-    function compute() {
-      var rawB = buy.value.trim();
-      var rawS = sell.value.trim();
-      var rawF = fees.value.trim();
-      var b = parseFloat(rawB);
-      var s = parseFloat(rawS);
-      var f = parseFloat(rawF);
-      if (rawB === '' || rawS === '' || rawF === '' || isNaN(b) || isNaN(s) || isNaN(f) || b < 0 || s < 0 || f < 0 || f > 100) {
-        out.className = 'calc-out';
-        out.textContent = '\u2014';
-        return;
-      }
-      var feeAmt = s * f / 100;
-      var pnl = s - feeAmt - b;
-      var pct = b > 0 ? (pnl / b) * 100 : 0;
-      var sign = pnl > 0.004 ? 1 : (pnl < -0.004 ? -1 : 0);
-      var word = sign > 0 ? 'up' : (sign < 0 ? 'down' : 'even');
-      var tone = sign > 0 ? 'up' : (sign < 0 ? 'down' : 'flat');
-      var num = (sign > 0 ? '+' : '') + money(pnl);
-      var rest = ' realized, ' + word +
-        (b > 0 ? ' ' + Math.abs(pct).toFixed(0) + '%' : '') +
-        ' after ' + money(feeAmt) + ' fees';
-      out.className = 'calc-out ' + tone;
-      out.textContent = '';
-      var span = document.createElement('span');
-      span.className = 'calc-num';
-      span.textContent = num;
-      out.appendChild(span);
-      out.appendChild(document.createTextNode(rest));
-      if (!reduce) {
-        void span.offsetWidth;
-        span.classList.add('tick');
-      }
-    }
-    function onInput() {
-      if (window.ph && typeof window.ph.trackOnce === 'function') {
-        window.ph.trackOnce('calc_used', 'landing_calc_used');
-      }
-      compute();
-    }
-    [buy, sell, fees].forEach(function (el) { el.addEventListener('input', onInput); });
-    compute();
   })();
   </script>
 </body>
