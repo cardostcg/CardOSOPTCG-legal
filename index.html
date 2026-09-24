@@ -278,7 +278,7 @@
     p { max-width: 62ch; }
     .muted { color: var(--muted); }
     .brk { position: relative; }
-    .brk::before, .brk::after { content: ""; position: absolute; width: 12px; height: 12px; border: 0 solid var(--gold-700); pointer-events: none; }
+    .brk::before, .brk::after { content: ""; position: absolute; width: 12px; height: 12px; border: 0 solid var(--gold-700); pointer-events: none; z-index: 2; }
     .brk::before { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
     .brk::after { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
     .cells { display: grid; gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; }
@@ -303,8 +303,9 @@
     @media (max-width: 599px) { .hide-sm { display: none; } }
     /* hero */
     .stage { position: relative; min-height: 88svh; display: flex; align-items: center; background: var(--glow), var(--void); overflow: hidden; }
-    #wf { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; -webkit-mask-image: linear-gradient(90deg, transparent 30%, #000 70%); mask-image: linear-gradient(90deg, transparent 30%, #000 70%); }
-    @media (max-width: 767px) { #wf { opacity: .35; -webkit-mask-image: none; mask-image: none; } }
+    #wf { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    @media (max-width: 767px) { #wf { opacity: .35; } }
+    .stage::before { top: 16px; left: 16px; } .stage::after { bottom: 16px; right: 16px; }
     .stage .wrap { position: relative; z-index: 1; width: 100%; padding-block: 96px 120px; }
     .hero-in { margin: 0; padding: 0; }
     h1 { font: 600 clamp(2.75rem, 7.5vw, 5.5rem)/1.0 var(--sans); letter-spacing: -.035em; margin-bottom: 24px; max-width: 14ch; }
@@ -373,6 +374,7 @@
   </style>
 </head>
 <body>
+  <noscript><style>.stage { background: var(--glow), url(/poster.webp) right center / cover no-repeat, var(--void); }</style></noscript>
   <header>
     <div class="wrap">
       <a class="brand" href="#top"><img src="/icon-144.webp" width="28" height="28" alt="" />CardOS OP TCG</a>
@@ -600,7 +602,7 @@
     }
     function draw() {
       x.clearRect(0, 0, W, H); x.globalCompositeOperation = 'lighter';
-      var x0 = mob ? 0 : W * .5, span = W - x0, cy = H * .5, P = 160;
+      var x0 = mob ? 0 : Math.max(W * .5, Math.min(W * .72, 960)), span = W - x0, cy = H * .5, P = 160;
       for (var i = 0; i < N; i++) {
         var r = R[i], fan = (r.k - .5) * H * .7;
         if (px >= 0) sm[i] = lerp(sm[i], Math.max(-.4, Math.min(.4, (1 - Math.min(1, Math.abs(py - (cy + fan * .6)) / 200)) * .4)), .06); else sm[i] = lerp(sm[i], 0, .06);
