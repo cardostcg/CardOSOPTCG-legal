@@ -85,8 +85,8 @@ No purple. Gradients only: glow, gold text gradient, wavefield.
 - Reduced motion: one still frame.
 - No-JS fallback: `poster.webp`, 1280×720, 12KB, from a real canvas frame. `aria-hidden` on canvas.
 - Stage overlays, true statements only:
-  - Top-left: `SPINE // NIGHTLY PRICE CAPTURE`
-  - Bottom-left spec list: Capture nightly, 06:00 UTC · Windows 7 · 30 · 90 day · Every price tagged Est.
+  - Top-left: `PRICE HISTORY // EST.`
+  - Bottom-left spec list: Every price tagged Est. · History builds daily
   - Bottom-right (desktop): `INTERACTION // [HOVER] phase shift`
   - Never "live data", row counts, or any number that goes stale.
 
@@ -97,7 +97,7 @@ No purple. Gradients only: glow, gold text gradient, wavefield.
 |---|---|---|
 | 00 | Header | Logo · rail · MOTION chip · WEB APP link · gold "GET THE APP →". Sticky, void 85% + blur |
 | 01 | Hero | Eyebrow "TRACKS PROFIT, NOT JUST WORTH." · H1 "Every card logged. Every dollar tracked." · lede · 2 CTAs · official store badges. No rating line |
-| 02 | Readout | Nightly · FIFO · Any grader · 3 platforms |
+| 02 | Readout | Daily · FIFO · Any grader · 3 platforms |
 | 03 | Graders | Text wordmarks from `lib/constants.ts` GRADERS + "Any slab, manual entry". Trademark line |
 | 04 | The Ledger | Text only until a reconciled demo screenshot exists. Spreadsheet 4 cells |
 | 05 | Capabilities | 8 cells, indexed labels |

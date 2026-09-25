@@ -137,7 +137,7 @@
           "Multi-currency display (USD, EUR, GBP)",
           "CSV import",
           "CSV export (Pro)",
-          "Prices captured nightly",
+          "Price history, updated daily",
           "Editable price overrides with Est. label",
           "Price verification via TCGPlayer and eBay links",
           "Web app at app.cardostcg.com"
@@ -229,7 +229,7 @@
             "name": "How often are prices updated?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Prices are captured nightly. You can type your own price anytime. Estimates are tagged Est."
+              "text": "Prices update daily. You can type your own price anytime. Estimates are tagged Est."
             }
           },
           {
@@ -393,12 +393,10 @@
   <main>
     <section class="stage brk" id="top" aria-labelledby="h1">
       <canvas id="wf" aria-hidden="true" role="presentation"></canvas>
-      <span class="ov ov-tl" aria-hidden="true">Spine // nightly price capture</span>
+      <span class="ov ov-tl" aria-hidden="true">Price history // Est.</span>
       <ul class="ov ov-bl" aria-label="Price history spec">
-        <li class="dot">Spine: price history</li>
-        <li>· Capture: nightly, 06:00 UTC</li>
-        <li>· Windows: 7 · 30 · 90 day</li>
-        <li>· Every price tagged Est.</li>
+        <li class="dot">Every price tagged Est.</li>
+        <li>· History builds daily</li>
       </ul>
       <span class="ov ov-br" aria-hidden="true">Interaction // [hover] phase shift</span>
       <div class="wrap">
@@ -421,7 +419,7 @@
         <h2 id="readout-h" class="vh">Readout</h2>
         <span class="label">SEC_02 // Readout</span>
         <div class="cells readout">
-          <div><div class="big">Nightly</div><div class="small">Price capture</div></div>
+          <div><div class="big">Daily</div><div class="small">Price history</div></div>
           <div><div class="big">FIFO</div><div class="small">Cost-basis lots</div></div>
           <div><div class="big">Any grader</div><div class="small">Graded vault</div></div>
           <div><div class="big">3 platforms</div><div class="small">iOS · Android · Web</div></div>
@@ -496,7 +494,7 @@
               <tr><th scope="row">CSV import</th><td class="yes">Yes</td><td>You are the CSV</td></tr>
               <tr><th scope="row">CSV export</th><td><span class="pro">Pro</span></td><td>You are the CSV</td></tr>
               <tr><th scope="row">Multi-currency</th><td class="yes">Yes</td><td>Manual</td></tr>
-              <tr><th scope="row">Prices captured nightly</th><td class="yes">Yes</td><td>Manual</td></tr>
+              <tr><th scope="row">Price history, updated daily</th><td class="yes">Yes</td><td>Manual</td></tr>
             </tbody>
           </table>
         </div>
@@ -534,7 +532,7 @@
         <details><summary>Is CardOS OP TCG free?</summary><p>Core features are free: unlimited card logging (including manual entry), the graded vault (any grading company), current estimated value, basic P&amp;L, price alerts, and CSV import. Pro from $3.99/month (7-day free trial), $19.99/6 months, $29.99/year, $69.99 lifetime. Pro adds advanced P&amp;L drill-down, chart history, and CSV export. Card data is never gated. Only analysis depth is Pro.</p></details>
         <details><summary>Does CardOS track sealed One Piece TCG products?</summary><p>Yes. Booster boxes, starter decks, and case lots, with set MSRP next to current market price.</p></details>
         <details id="faq-riftbound"><summary>Does CardOS track Riftbound cards?</summary><p>Yes. Riftbound: League of Legends sits in the same portfolio as One Piece TCG: cost basis, realized P&amp;L, graded vault, and sealed product tracking. RIFTBOUND: LEAGUE OF LEGENDS manufactured by UVS Games under license from Riot Games. ™ &amp; © 2026 Riot Games, Inc.</p></details>
-        <details><summary>How often are prices updated?</summary><p>Prices are captured nightly. You can type your own price anytime. Estimates are tagged Est.</p></details>
+        <details><summary>How often are prices updated?</summary><p>Prices update daily. You can type your own price anytime. Estimates are tagged Est.</p></details>
         <details><summary>Can I see prices in my currency?</summary><p>Yes. Prices and portfolio totals in USD, EUR, or GBP.</p></details>
       </div>
     </section>
