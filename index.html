@@ -285,8 +285,8 @@
     .cells > * { background: var(--surface); padding: 24px; }
     /* header */
     header { position: sticky; top: 0; z-index: 10; background: rgba(5,7,13,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--hairline-n); }
-    header .wrap { display: flex; align-items: center; gap: 16px; height: 60px; }
-    .brand { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font: 500 13px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    header .wrap { display: flex; align-items: center; gap: 16px; min-height: 60px; padding-block: 8px; }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; color: var(--text); text-decoration: none; font: 500 13px/1.2 var(--mono); letter-spacing: .02em; }
     .brand img { width: 28px; height: 28px; border-radius: 6px; }
     .rail { display: none; margin: 0 auto; list-style: none; border: 1px solid var(--hairline); border-radius: 999px; padding: 3px; gap: 2px; }
     .rail a { display: block; padding: 4px 10px; border-radius: 999px; font: 500 11px var(--mono); color: var(--muted); text-decoration: none; }
@@ -377,7 +377,7 @@
   <noscript><style>.stage { background: var(--glow), url(/poster.webp) right center / cover no-repeat, var(--void); }</style></noscript>
   <header>
     <div class="wrap">
-      <a class="brand" href="#top"><img src="/icon-144.webp" width="28" height="28" alt="" />CardOS OP TCG</a>
+      <a class="brand" href="#top"><img src="/icon-144.webp" width="28" height="28" alt="" /><span>CardOS TCG: Portfolio Tracker</span></a>
       <nav aria-label="Sections"><ol class="rail">
         <li><a href="#top">01</a></li><li><a href="#readout">02</a></li><li><a href="#graders">03</a></li><li><a href="#ledger">04</a></li>
         <li><a href="#features">05</a></li><li><a href="#compare">06</a></li><li><a href="#reviews">07</a></li><li><a href="#faq">08</a></li>
