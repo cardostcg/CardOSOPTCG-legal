@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+function post(m){ if(window.ReactNativeWebView){window.ReactNativeWebView.postMessage(JSON.stringify(m));} }
+function onApi(){ post({type:'stage', stage:'api'}); }
+function onInt(){ post({type:'stage', stage:'interactive'}); }
+function onTok(t){ post({type:'token', token:t}); }
+function onErr(e){ post({type:'error', error:String(e)}); }
+function onUns(){ post({type:'error', error:'unsupported'}); }
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer onload="onApi()"></script>
+<style>html,body{margin:0;padding:0;background:#0A0E1A;display:flex;align-items:center;justify-content:center;height:100%;}</style>
+</head><body>
+<div class="cf-turnstile"
+  data-sitekey="0x4AAAAAADy5Y3DYkJXS8Dxy"
+  data-callback="onTok"
+  data-error-callback="onErr"
+  data-unsupported-callback="onUns"
+  data-before-interactive-callback="onInt"
+  data-theme="dark"></div>
+</body></html>
