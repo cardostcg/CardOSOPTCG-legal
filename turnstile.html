@@ -7,6 +7,10 @@ function onInt(){ post({type:'stage', stage:'interactive'}); }
 function onTok(t){ post({type:'token', token:t}); }
 function onErr(e){ post({type:'error', error:String(e)}); }
 function onUns(){ post({type:'error', error:'unsupported'}); }
+function onExp(){ post({type:'error', error:'expired'}); }
+function onTmo(){ post({type:'error', error:'chal_timeout'}); }
+window.onerror=function(){ post({type:'error', error:'js_error'}); };
+var rp=setInterval(function(){ if(document.querySelector('.cf-turnstile iframe')){ clearInterval(rp); post({type:'stage', stage:'rendered'}); } }, 500);
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer onload="onApi()"></script>
 <style>html,body{margin:0;padding:0;background:#0A0E1A;display:flex;align-items:center;justify-content:center;height:100%;}</style>
@@ -17,5 +21,7 @@ function onUns(){ post({type:'error', error:'unsupported'}); }
   data-error-callback="onErr"
   data-unsupported-callback="onUns"
   data-before-interactive-callback="onInt"
+  data-expired-callback="onExp"
+  data-timeout-callback="onTmo"
   data-theme="dark"></div>
 </body></html>
