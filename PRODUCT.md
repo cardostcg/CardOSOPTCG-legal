@@ -44,7 +44,7 @@ Stacked, not single-axis: 9-company graded vault (PSA, BGS, CGC, ACE, SGC, HGA, 
 ## Evidence on Hand
 
 - Live Android app on Google Play (`com.cardos.optcg`).
-- Catalog readout (as of Oct 27, 2026, test users excluded): 9,261 cards across 4 games — One Piece 5,637, Gundam 2,145, Riftbound 1,216, Palworld 263; 107 sets incl. promos and starter decks; 650K+ price points; 1,515 cards tracked by users; 316 users (81 accounts, 235 guests); 209 installs. Say "users", not "collectors", for the user count. Omit monthly actives and collection-value totals from public copy.
+- Catalog readout (as of Oct 27, 2026, test users excluded): 9,261 cards across 4 games — One Piece 5,637, Gundam 2,145, Riftbound 1,216, Palworld 263; 107 sets incl. promos and starter decks; ~668K price points; 1,515 cards tracked by users; 316 users (81 accounts, 235 guests); 209 installs. Public copy uses rounded under-claims: 9,250+ cards, 100+ sets, 650K+ price points, 1,500+ tracked, 300+ users, 200+ installs; per-game 5,600+ / 2,100+ / 1,200+ / 260+. Say "users", not "collectors", for the user count. Omit monthly actives and collection-value totals from public copy.
 - Live site at cardostcg.com with landing page, privacy policy, terms of service, delete-account flow, email-confirmed page.
 - AdMob publisher ID in app-ads.txt.
 - No testimonials, case studies, or press on file — future work must not fabricate these.

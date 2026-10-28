@@ -97,7 +97,7 @@ No purple. Gradients only: glow, gold text gradient, wavefield.
 |---|---|---|
 | 00 | Header | Logo · rail · MOTION chip · WEB APP link · gold "GET THE APP →". Sticky, void 85% + blur |
 | 01 | Hero | Eyebrow "TRACKS PROFIT, NOT JUST WORTH." · H1 "Every card logged. Every dollar tracked." · lede · 2 CTAs · official store badges. No rating line |
-| 02 | Readout | Live catalog readout: real dated numbers only (as-of line required) + game split bar with per-game legend and live/soon status |
+| 02 | Readout | Live catalog readout: real dated numbers only (rounded under-claims with `+`, as-of line required) + game split bar with per-game legend and live/soon status |
 | 03 | Graders | Text wordmarks from `lib/constants.ts` GRADERS + "Any slab, manual entry". Trademark line |
 | 04 | The Ledger | Text only until a reconciled demo screenshot exists. Spreadsheet 4 cells |
 | 05 | Capabilities | 8 cells, indexed labels |
