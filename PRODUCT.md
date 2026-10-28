@@ -4,11 +4,11 @@
 
 ## Platform
 
-android
+android, ios, web
 
 ## Users
 
-One Piece TCG collectors who want to know what their collection is actually worth — cost basis, current market value, and profit/loss — across raw and graded cards.
+One Piece, Riftbound, and Palworld TCG collectors who want to know what their collection is actually worth — cost basis, current market value, and profit/loss — across raw and graded cards. Gundam tracking is coming soon.
 
 ## Product Purpose
 
@@ -24,7 +24,7 @@ Stacked, not single-axis: 9-company graded vault (PSA, BGS, CGC, ACE, SGC, HGA, 
 - FIFO cost-basis profit/loss tracking per card.
 - Any card, any set.
 - Free core, forever — no paywall on the basics.
-- Android only; iOS coming soon.
+- Android, iOS, and web app at app.cardostcg.com.
 - Static site at cardostcg.com serves as landing page, legal docs, and account management.
 
 ## Brand Commitments
@@ -44,6 +44,7 @@ Stacked, not single-axis: 9-company graded vault (PSA, BGS, CGC, ACE, SGC, HGA, 
 ## Evidence on Hand
 
 - Live Android app on Google Play (`com.cardos.optcg`).
+- Catalog readout (as of Oct 27, 2026, test users excluded): 9,261 cards across 4 games — One Piece 5,637, Gundam 2,145, Riftbound 1,216, Palworld 263; 107 sets incl. promos and starter decks; 650K+ price points; 1,515 cards tracked by users; 316 users (81 accounts, 235 guests); 209 installs. Say "users", not "collectors", for the user count. Omit monthly actives and collection-value totals from public copy.
 - Live site at cardostcg.com with landing page, privacy policy, terms of service, delete-account flow, email-confirmed page.
 - AdMob publisher ID in app-ads.txt.
 - No testimonials, case studies, or press on file — future work must not fabricate these.
