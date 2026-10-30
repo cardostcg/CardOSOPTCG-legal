@@ -1,7 +1,8 @@
 <!DOCTYPE html><html><head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
-function post(m){ if(window.ReactNativeWebView){window.ReactNativeWebView.postMessage(JSON.stringify(m));} }
+var done=false;
+function post(m){ if(m.type!=='stage'){done=true;} if(window.ReactNativeWebView){window.ReactNativeWebView.postMessage(JSON.stringify(m));} }
 function onApi(){ post({type:'stage', stage:'api'}); }
 function onInt(){ post({type:'stage', stage:'interactive'}); }
 function onTok(t){ post({type:'token', token:t}); }
@@ -10,6 +11,11 @@ function onUns(){ post({type:'error', error:'unsupported'}); }
 function onExp(){ post({type:'error', error:'expired'}); }
 function onTmo(){ post({type:'error', error:'chal_timeout'}); }
 window.onerror=function(){ post({type:'error', error:'js_error'}); };
+// Diagnostic: if nothing settled by 6s, report what the page can see as one
+// short code: visibility, turnstile global, response input, iframe count,
+// cookies, getResponse, layout width.
+setTimeout(function(){ if(done) return; var t=typeof turnstile!=='undefined', g=0; try{ g=t&&turnstile.getResponse()?1:0; }catch(e){}
+  post({type:'error', error:'dg'+String(document.visibilityState||'x').charAt(0)+(t?1:0)+(document.querySelector('[name="cf-turnstile-response"]')?1:0)+Math.min(9,document.getElementsByTagName('iframe').length)+(navigator.cookieEnabled?1:0)+g+(window.innerWidth>0?1:0)}); }, 6000);
 var rp=setInterval(function(){ if(document.querySelector('.cf-turnstile iframe')){ clearInterval(rp); post({type:'stage', stage:'rendered'}); } }, 500);
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer onload="onApi()"></script>
