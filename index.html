@@ -272,7 +272,7 @@
       --sans: "DM Sans", system-ui, sans-serif; --mono: "DM Mono", ui-monospace, monospace;
       /* Binder materials only (Sanzo Wada, 1933). Never CTA, gain, or focus. */
       --wada-yellow-orange: #F99D1B; --wada-cream-yellow: #FDBF68; --wada-sulpher: #F5ECC2; --wada-ivory-buff: #EBD3A2;
-      --wada-tyrian: #12354E; --wada-madder-violet: #4E1D4C; --wada-sepia: #644B1E; --wada-black: #111314; --wada-benzol: #00978D;
+      --wada-tyrian: #12354E; --wada-madder-violet: #4E1D4C; --wada-poel-blue: #064F6E; --wada-sepia: #644B1E; --wada-black: #111314; --wada-benzol: #00978D;
       --bn-glow: radial-gradient(46% 62% at 50% 46%, rgba(239,159,39,.16), transparent 72%);
       --bn-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.5 -.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
@@ -401,7 +401,7 @@
     details p { color: var(--muted); padding-bottom: 20px; }
     /* chase binder */
     .bn { --o: 0; --bw: 280px; --bh: 360px; --cw: 196px; --x0: 150px; --tagh: 26px; --rise-max: 34px; --open: -66deg; --rot: 2deg;
-      --cover: var(--wada-black);
+      --cover: var(--wada-black); --ink: var(--wada-yellow-orange);
       --avail: calc(min(100vw, 1240px) - 2 * clamp(20px, 5vw, 56px) - 32px);
       --step: clamp(36px, (var(--avail) - var(--x0) - var(--cw)) / 2, var(--cw) - 8px);
       --rise: clamp(0px, (var(--cw) - 8px - var(--step)) * 2, var(--rise-max));
@@ -412,6 +412,7 @@
     .bn.open { --o: 1; }
     .bn[data-cover="op"] { --cover: var(--wada-tyrian); }
     .bn[data-cover="rb"] { --cover: var(--wada-madder-violet); }
+    .bn[data-cover="pw"] { --cover: var(--wada-poel-blue); --ink: var(--wada-cream-yellow); }
     .bn .ov { top: 16px; }
     .bn-ov-l { left: 16px; } .bn-ov-r { right: 16px; }
     .bn-hov { display: none; }
@@ -427,7 +428,7 @@
     .bn-page::after { content: ""; position: absolute; right: 2px; top: calc((var(--bh) - var(--ch)) / 2 - 10px); width: calc(var(--cw) + 8px); height: calc(var(--ch) + 8px); border: 1px solid var(--wada-ivory-buff); border-radius: 6px; box-shadow: calc(-1 * var(--cw) - 14px) 0 0 -1px var(--wada-sulpher), calc(-1 * var(--cw) - 14px) 0 0 0 var(--wada-ivory-buff); }
     .bn-tab { position: absolute; right: -5px; top: 44px; width: 10px; height: 34px; border-radius: 0 3px 3px 0; background: var(--wada-benzol); transition: opacity 280ms; }
     .bn-set { display: none; list-style: none; }
-    .bn[data-cover="onyx"] .bn-set[data-set="onyx"], .bn[data-cover="op"] .bn-set[data-set="op"], .bn[data-cover="rb"] .bn-set[data-set="rb"] { display: block; }
+    .bn[data-cover="onyx"] .bn-set[data-set="onyx"], .bn[data-cover="op"] .bn-set[data-set="op"], .bn[data-cover="rb"] .bn-set[data-set="rb"], .bn[data-cover="pw"] .bn-set[data-set="pw"] { display: block; }
     .bn-card { position: absolute; left: 0; top: calc((var(--bh) - var(--ch)) / 2); width: var(--cw); z-index: 2; filter: drop-shadow(0 10px 14px rgba(0,0,0,.45));
       transform: translate(calc(var(--cx) + var(--o) * (var(--x0) + var(--i) * var(--step) - var(--cx))), calc(var(--o) * var(--i) * var(--rise) * -1)) rotate(calc(var(--o) * (var(--i) + 1) * var(--rot)));
       transition: transform 360ms cubic-bezier(.2,.8,.2,1); }
@@ -448,10 +449,10 @@
     .bn[data-cover="onyx"] .bn-cover::after { opacity: .4; }
     .bn-frost { position: absolute; left: calc(var(--cx) - 10px); top: calc((var(--bh) - var(--ch)) / 2 + 4px); width: calc(var(--cw) - 8px); aspect-ratio: 400 / 558; transition: opacity 300ms; }
     .bn-frost img { position: absolute; inset: 0; width: 100%; height: 100%; filter: blur(14px); opacity: 0; transition: opacity 280ms; }
-    .bn[data-cover="onyx"] .bn-frost img[data-set="onyx"], .bn[data-cover="op"] .bn-frost img[data-set="op"], .bn[data-cover="rb"] .bn-frost img[data-set="rb"] { opacity: .55; }
+    .bn[data-cover="onyx"] .bn-frost img[data-set="onyx"], .bn[data-cover="op"] .bn-frost img[data-set="op"], .bn[data-cover="rb"] .bn-frost img[data-set="rb"], .bn[data-cover="pw"] .bn-frost img[data-set="pw"] { opacity: .55; }
     .bn.open .bn-frost { opacity: 0; }
     .bn-ink { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 2; display: block; }
-    .bn-title { display: block; font: 600 15px/1.2 var(--sans); letter-spacing: .02em; }
+    .bn-title { display: block; font: 600 15px/1.2 var(--sans); letter-spacing: .02em; color: var(--ink); transition: color 280ms; }
     .bn-sub { display: block; margin-top: 4px; font: 500 10px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .18em; color: var(--wada-cream-yellow); }
     .bn-rules { display: block; height: 5px; margin-top: 14px; border-block: 1px solid; opacity: .3; }
     .bn-sw { position: relative; display: flex; justify-content: center; gap: 12px; margin-top: 32px; }
@@ -459,6 +460,7 @@
     .bn-dot::before { content: ""; position: absolute; inset: -6px; }
     .bn-dot[data-cover="op"] { background: var(--wada-tyrian); }
     .bn-dot[data-cover="rb"] { background: var(--wada-madder-violet); }
+    .bn-dot[data-cover="pw"] { background: var(--wada-poel-blue); }
     .bn-dot[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--abyss), 0 0 0 5px var(--wada-yellow-orange); }
     .bn-asof { margin: 24px auto 0; }
     .bn .btn { margin-top: 24px; }
@@ -468,7 +470,9 @@
     .bn.still .bn-stage::before { display: none; }
     .bn.still .bn-card { --o: 1; opacity: 0; transition: opacity 280ms; }
     .bn.still.open .bn-card { opacity: 1; }
-    .bn.still.open .bn-back, .bn.still.open .bn-page, .bn.still.open .bn-tab, .bn.still.open .bn-spine, .bn.still.open .bn-cover { opacity: 0; }
+    .bn.still .bn-cover > *, .bn.still .bn-cover::before { transition: opacity 280ms; }
+    .bn.still.open .bn-back, .bn.still.open .bn-page, .bn.still.open .bn-tab, .bn.still.open .bn-spine, .bn.still.open .bn-cover > *, .bn.still.open .bn-cover::before, .bn.still.open .bn-cover::after { opacity: 0; }
+    .bn.still.open .bn-cover { background-color: transparent; box-shadow: none; }
     @media (max-width: 599px) {
       .bn { --bw: 220px; --bh: 283px; --cw: 120px; --x0: 88px; --tagh: 38px; --rise-max: 44px; --open: -72deg; --avail: calc(100vw - 2 * clamp(20px, 5vw, 56px) - 16px); padding-top: 136px; }
       .bn-tag { flex-direction: column; }
@@ -595,6 +599,11 @@
               <li class="bn-card" style="--i:1"><span class="bn-sleeve"><img src="/binder/ven-189.webp" width="400" height="558" loading="lazy" decoding="async" alt="Akali, Rogue Assassin, signature. Riftbound VEN-189" /></span><span class="bn-tag"><span>VEN-189</span><span class="bn-sep"> · </span><span>Est. $3,229.71</span></span></li>
               <li class="bn-card" style="--i:2"><span class="bn-sleeve"><img src="/binder/sfd-227.webp" width="400" height="558" loading="lazy" decoding="async" alt="Ahri, Inquisitive, signature. Riftbound SFD-227" /></span><span class="bn-tag"><span>SFD-227</span><span class="bn-sep"> · </span><span>Est. $3,390.69</span></span></li>
             </ul>
+            <ul class="bn-set" data-set="pw" aria-label="Palworld chase cards">
+              <li class="bn-card" style="--i:0"><span class="bn-sleeve"><img src="/binder/ebp01-001.webp" width="400" height="558" loading="lazy" decoding="async" alt="Jormuntide Ignis, Savage Lava Dragon. Palworld EBP01-001" /></span><span class="bn-tag"><span>EBP01-001</span><span class="bn-sep"> · </span><span>Est. $393.96</span></span></li>
+              <li class="bn-card" style="--i:1"><span class="bn-sleeve"><img src="/binder/ebp01-049.webp" width="400" height="558" loading="lazy" decoding="async" alt="Lyleen, Blessing of the Goddess. Palworld EBP01-049" /></span><span class="bn-tag"><span>EBP01-049</span><span class="bn-sep"> · </span><span>Est. $447.46</span></span></li>
+              <li class="bn-card" style="--i:2"><span class="bn-sleeve"><img src="/binder/ebp01-025.webp" width="400" height="558" loading="lazy" decoding="async" alt="Chillet, Dragon Whisperer. Palworld EBP01-025" /></span><span class="bn-tag"><span>EBP01-025</span><span class="bn-sep"> · </span><span>Est. $646.40</span></span></li>
+            </ul>
             </div>
             <span class="bn-spine" aria-hidden="true"></span>
             <button class="bn-cover" type="button" aria-expanded="false" aria-controls="bn-cards" aria-label="Mixed chase binder">
@@ -602,6 +611,7 @@
                 <img data-set="onyx" src="/binder/eb04-061.webp" width="400" height="558" loading="lazy" decoding="async" alt="" />
                 <img data-set="op" src="/binder/eb04-061.webp" width="400" height="558" loading="lazy" decoding="async" alt="" />
                 <img data-set="rb" src="/binder/sfd-227.webp" width="400" height="558" loading="lazy" decoding="async" alt="" />
+                <img data-set="pw" src="/binder/ebp01-025.webp" width="400" height="558" loading="lazy" decoding="async" alt="" />
               </span>
               <span class="bn-ink" aria-hidden="true"><span class="bn-title">CHASE // MIXED</span><span class="bn-sub">Vault · 03 cards</span><span class="bn-rules"></span></span>
             </button>
@@ -610,6 +620,7 @@
             <button class="bn-dot" type="button" data-cover="onyx" aria-pressed="true" aria-label="Show mixed binder"></button>
             <button class="bn-dot" type="button" data-cover="op" aria-pressed="false" aria-label="Show One Piece binder"></button>
             <button class="bn-dot" type="button" data-cover="rb" aria-pressed="false" aria-label="Show Riftbound binder"></button>
+            <button class="bn-dot" type="button" data-cover="pw" aria-pressed="false" aria-label="Show Palworld binder"></button>
           </div>
           <p class="small bn-asof">Est. as of 11/11/2026</p>
           <a class="btn btn-s" data-cta="binder_track" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Track your chase cards →</a>
@@ -792,7 +803,7 @@
     if (!bn) return;
     var stage = bn.querySelector('.bn-stage'), cover = bn.querySelector('.bn-cover'), title = bn.querySelector('.bn-title');
     var dots = bn.querySelectorAll('.bn-dot'), motion = document.getElementById('motion');
-    var NAMES = { onyx: ['MIXED', 'Mixed'], op: ['OP', 'One Piece'], rb: ['RB', 'Riftbound'] };
+    var NAMES = { onyx: ['MIXED', 'Mixed'], op: ['OP', 'One Piece'], rb: ['RB', 'Riftbound'], pw: ['PW', 'Palworld'] };
     var open = false, lastPT = '', closedAt = 0, timer = 0, rm = matchMedia('(prefers-reduced-motion: reduce)');
     function still() {
       var off = false; try { off = localStorage.getItem('cardos_motion') === 'off'; } catch (e) {}
