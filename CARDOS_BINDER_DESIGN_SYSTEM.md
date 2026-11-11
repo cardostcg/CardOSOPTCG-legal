@@ -1,5 +1,5 @@
 # CARDOS_BINDER_DESIGN_SYSTEM.md · Landing Supplement ("The Binder")
-> Status: BUILT P45.16 (11/11/2026). Not shipped. Needs a real-browser check on desktop and phone before merge.
+> Status: SHIPPED P45.16 to cardostcg.com (11/11/2026, merge a0ba944). Real-phone check passed.
 > Scope: one interactive section on the apex landing (cardostcg.com). Extends the Ledger system. Does not touch theme.ts or the app.
 > Companion to CARDOS_LEDGER_DESIGN_SYSTEM.md and CARDOS_VOICE.md. Ledger rules win on any conflict not named here.
 
@@ -106,9 +106,8 @@ One section, placed after the graded vault section of the Ledger page. Dossier l
 - Real-browser check, desktop + phone, before push.
 
 ## Open Items
-- Real-browser check on desktop and a real phone. Only headless Chromium has been run.
 - OP card art carries the SAMPLE watermark from the catalog images. Swap if clean art is sourced.
 - Whether the set rotates monthly with the Monthly Recaps. Today a rotation is a hand edit of `index.html` and `/binder/`.
 - IP call (Art): approved for card art inside the binder UI.
 
-_Last confirmed: built P45.16 (11/11/2026). Not shipped._
+_Last confirmed: shipped P45.16 (11/11/2026)._
