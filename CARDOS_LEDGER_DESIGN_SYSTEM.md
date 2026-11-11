@@ -63,7 +63,7 @@ No purple. Gradients only: glow, gold text gradient, wavefield.
 
 ## Components
 - **Corner brackets:** 12px L-marks, gold-700, inset 16px from edges, layered above the canvas. On hero stage, dossier panels, footer.
-- **Section rail:** fixed top-center pill, DM Mono, links 01-08 to anchors. Active = gold-500 fill, void text. IntersectionObserver. Hidden under 900px.
+- **Section rail:** fixed top-center pill, DM Mono, links 01-09 to anchors. Active = gold-500 fill, void text. IntersectionObserver. Hidden under 900px.
 - **Chips:** 1px hairline, void bg, mono 11px uppercase, optional kbd hint.
 - **CTA primary:** gold-500 fill, void text, mono uppercase, `→`. Hover gold-300.
 - **CTA secondary:** 1px gold hairline, gold-100 text.
@@ -99,11 +99,12 @@ No purple. Gradients only: glow, gold text gradient, wavefield.
 | 01 | Hero | Eyebrow "TRACKS PROFIT, NOT JUST WORTH." · H1 "Every card logged. Every dollar tracked." · lede · 2 CTAs · official store badges. No rating line |
 | 02 | Readout | Live catalog readout: real dated numbers only (as-of line required) + game split bar with per-game legend and live/soon status |
 | 03 | Graders | Text wordmarks from `lib/constants.ts` GRADERS + "Any slab, manual entry". Trademark line |
-| 04 | The Ledger | Text only until a reconciled demo screenshot exists. Spreadsheet 4 cells |
-| 05 | Capabilities | 8 cells, indexed labels |
-| 06 | Vs spreadsheet | Mono header, gold Yes, gold Pro chip, faint Manual/No. Explore as mono ticker line |
-| 07 | From the stores | Verbatim quotes, store chip, no aggregate rating |
-| 08 | Queries (FAQ) | details/summary, must match FAQPage JSON-LD exactly |
+| 04 | Chase binder | Interactive binder, see CARDOS_BINDER_DESIGN_SYSTEM.md. Real catalog cards, dated Est. prices |
+| 05 | The Ledger | Text only until a reconciled demo screenshot exists. Spreadsheet 4 cells |
+| 06 | Capabilities | 8 cells, indexed labels |
+| 07 | Vs spreadsheet | Mono header, gold Yes, gold Pro chip, faint Manual/No. Explore as mono ticker line |
+| 08 | From the stores | Verbatim quotes, store chip, no aggregate rating |
+| 09 | Queries (FAQ) | details/summary, must match FAQPage JSON-LD exactly |
 | Footer | | Brackets, links unchanged, both disclaimers verbatim |
 
 ---

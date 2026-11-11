@@ -270,6 +270,11 @@
       --teal: #5DCAA5; --os-blue: #378ADD;
       --gold-dim: rgba(239,159,39,.35); --gold-hatch: rgba(247,198,106,.30);
       --sans: "DM Sans", system-ui, sans-serif; --mono: "DM Mono", ui-monospace, monospace;
+      /* Binder materials only (Sanzo Wada, 1933). Never CTA, gain, or focus. */
+      --wada-yellow-orange: #F99D1B; --wada-cream-yellow: #FDBF68; --wada-sulpher: #F5ECC2; --wada-ivory-buff: #EBD3A2;
+      --wada-tyrian: #12354E; --wada-madder-violet: #4E1D4C; --wada-sepia: #644B1E; --wada-black: #111314; --wada-benzol: #00978D;
+      --bn-glow: radial-gradient(46% 62% at 50% 46%, rgba(239,159,39,.16), transparent 72%);
+      --bn-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.5 -.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -394,6 +399,81 @@
     summary::after { content: "+"; position: absolute; right: 4px; top: 18px; color: var(--gold-500); font-size: 20px; transition: transform .2s; }
     details[open] summary::after { transform: rotate(45deg); }
     details p { color: var(--muted); padding-bottom: 20px; }
+    /* chase binder */
+    .bn { --o: 0; --bw: 280px; --bh: 360px; --cw: 196px; --x0: 150px; --tagh: 26px; --rise-max: 34px; --open: -66deg; --rot: 2deg;
+      --cover: var(--wada-black);
+      --avail: calc(min(100vw, 1240px) - 2 * clamp(20px, 5vw, 56px) - 32px);
+      --step: clamp(36px, (var(--avail) - var(--x0) - var(--cw)) / 2, var(--cw) - 8px);
+      --rise: clamp(0px, (var(--cw) - 8px - var(--step)) * 2, var(--rise-max));
+      --shift: calc((var(--bw) - var(--x0) - 2 * var(--step) - var(--cw)) / 2);
+      --cx: calc(var(--bw) - var(--cw) - 12px);
+      --ch: calc((var(--cw) - 8px) * 1.395 + 8px + var(--tagh));
+      position: relative; margin-top: 32px; padding-block: 104px 40px; background: var(--bn-glow); text-align: center; }
+    .bn.open { --o: 1; }
+    .bn[data-cover="op"] { --cover: var(--wada-tyrian); }
+    .bn[data-cover="rb"] { --cover: var(--wada-madder-violet); }
+    .bn .ov { top: 16px; }
+    .bn-ov-l { left: 16px; } .bn-ov-r { right: 16px; }
+    .bn-hov { display: none; }
+    @media (hover: hover) { .bn-hov { display: inline; } .bn-tap { display: none; } }
+    .bn-stage { position: relative; width: var(--bw); height: var(--bh); margin: 0 auto; perspective: 1200px; perspective-origin: 50% 70%; cursor: pointer; -webkit-tap-highlight-color: transparent;
+      transform: translateX(calc(var(--o) * var(--shift))); transition: transform 360ms cubic-bezier(.2,.8,.2,1); }
+    .bn-stage::before { content: ""; position: absolute; top: -24px; bottom: -12px; left: 0; width: calc(var(--x0) + 2 * var(--step) + var(--cw) + 16px); pointer-events: none; }
+    .bn.open .bn-stage::before { pointer-events: auto; }
+    .bn-back, .bn-spine { background-color: var(--cover); background-color: color-mix(in srgb, var(--cover) 80%, black); transition: background-color 280ms, opacity 280ms; }
+    .bn-back { position: absolute; inset: 0; border-radius: 4px 10px 10px 4px; box-shadow: 0 28px 48px -20px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.05); }
+    .bn-page { position: absolute; inset: 6px 6px 6px 14px; border-radius: 6px; background: var(--wada-sulpher); overflow: hidden; transition: opacity 280ms; }
+    .bn-page::before { content: ""; position: absolute; inset: 0; background: var(--wada-sepia); -webkit-mask-image: var(--bn-noise); mask-image: var(--bn-noise); opacity: .12; }
+    .bn-page::after { content: ""; position: absolute; right: 2px; top: calc((var(--bh) - var(--ch)) / 2 - 10px); width: calc(var(--cw) + 8px); height: calc(var(--ch) + 8px); border: 1px solid var(--wada-ivory-buff); border-radius: 6px; box-shadow: calc(-1 * var(--cw) - 14px) 0 0 -1px var(--wada-sulpher), calc(-1 * var(--cw) - 14px) 0 0 0 var(--wada-ivory-buff); }
+    .bn-tab { position: absolute; right: -5px; top: 44px; width: 10px; height: 34px; border-radius: 0 3px 3px 0; background: var(--wada-benzol); transition: opacity 280ms; }
+    .bn-set { display: none; list-style: none; }
+    .bn[data-cover="onyx"] .bn-set[data-set="onyx"], .bn[data-cover="op"] .bn-set[data-set="op"], .bn[data-cover="rb"] .bn-set[data-set="rb"] { display: block; }
+    .bn-card { position: absolute; left: 0; top: calc((var(--bh) - var(--ch)) / 2); width: var(--cw); z-index: 2; filter: drop-shadow(0 10px 14px rgba(0,0,0,.45));
+      transform: translate(calc(var(--cx) + var(--o) * (var(--x0) + var(--i) * var(--step) - var(--cx))), calc(var(--o) * var(--i) * var(--rise) * -1)) rotate(calc(var(--o) * (var(--i) + 1) * var(--rot)));
+      transition: transform 360ms cubic-bezier(.2,.8,.2,1); }
+    .bn.open .bn-card { transition: transform 420ms cubic-bezier(.2,.8,.2,1) calc(100ms + var(--i) * 60ms); }
+    .bn-sleeve { display: block; position: relative; padding: 3px; border: 1px solid var(--wada-ivory-buff); border-bottom: 0; border-radius: 8px 8px 0 0; background: rgba(255,255,255,.14); }
+    .bn-sleeve::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, rgba(255,255,255,.06), transparent 45%); pointer-events: none; }
+    .bn-sleeve img { display: block; width: 100%; height: auto; aspect-ratio: 400 / 558; border-radius: 4.6% / 3.3%; background: var(--surface); }
+    .bn-tag { display: flex; align-items: center; justify-content: center; height: var(--tagh); white-space: nowrap; font: 400 11px/1.3 var(--mono); color: var(--wada-black); background: var(--wada-sulpher); border: 1px solid var(--wada-ivory-buff); border-radius: 0 0 8px 8px; }
+    .bn-sep { white-space: pre; }
+    .bn-spine { position: absolute; inset: 0 auto 0 0; width: 14px; z-index: 4; border-radius: 4px 0 0 4px; box-shadow: inset -1px 0 0 rgba(0,0,0,.45);
+      background-image: radial-gradient(circle at 50% 16%, var(--wada-cream-yellow) 1.5px, transparent 2px), radial-gradient(circle at 50% 50%, var(--wada-cream-yellow) 1.5px, transparent 2px), radial-gradient(circle at 50% 84%, var(--wada-cream-yellow) 1.5px, transparent 2px); }
+    .bn-cover { position: absolute; inset: 0 0 0 14px; z-index: 3; display: block; border: 0; padding: 0; font: inherit; text-align: left; color: var(--wada-yellow-orange); cursor: pointer; overflow: hidden;
+      border-radius: 2px 10px 10px 2px; background-color: var(--cover); box-shadow: inset 0 0 0 1px rgba(255,255,255,.07), 10px 0 24px -14px rgba(0,0,0,.7);
+      transform-origin: 0 50%; transform: rotateY(calc(var(--o) * var(--open))); transition: transform 360ms cubic-bezier(.2,.8,.2,1), background-color 280ms, opacity 280ms; }
+    .bn.open .bn-cover { transition: transform 520ms cubic-bezier(.2,.8,.2,1), background-color 280ms, opacity 280ms; }
+    .bn-cover::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(115deg, rgba(255,255,255,.11), transparent 42%, rgba(0,0,0,.2)); }
+    .bn-cover::after { content: ""; position: absolute; inset: 0; background: var(--wada-sepia); -webkit-mask-image: var(--bn-noise); mask-image: var(--bn-noise); opacity: 0; transition: opacity 280ms; }
+    .bn[data-cover="onyx"] .bn-cover::after { opacity: .4; }
+    .bn-frost { position: absolute; left: calc(var(--cx) - 10px); top: calc((var(--bh) - var(--ch)) / 2 + 4px); width: calc(var(--cw) - 8px); aspect-ratio: 400 / 558; transition: opacity 300ms; }
+    .bn-frost img { position: absolute; inset: 0; width: 100%; height: 100%; filter: blur(14px); opacity: 0; transition: opacity 280ms; }
+    .bn[data-cover="onyx"] .bn-frost img[data-set="onyx"], .bn[data-cover="op"] .bn-frost img[data-set="op"], .bn[data-cover="rb"] .bn-frost img[data-set="rb"] { opacity: .55; }
+    .bn.open .bn-frost { opacity: 0; }
+    .bn-ink { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 2; display: block; }
+    .bn-title { display: block; font: 600 15px/1.2 var(--sans); letter-spacing: .02em; }
+    .bn-sub { display: block; margin-top: 4px; font: 500 10px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .18em; color: var(--wada-cream-yellow); }
+    .bn-rules { display: block; height: 5px; margin-top: 14px; border-block: 1px solid; opacity: .3; }
+    .bn-sw { position: relative; display: flex; justify-content: center; gap: 12px; margin-top: 32px; }
+    .bn-dot { position: relative; width: 20px; height: 20px; padding: 0; border-radius: 50%; border: 1px solid var(--wada-yellow-orange); background: var(--wada-black); cursor: pointer; }
+    .bn-dot::before { content: ""; position: absolute; inset: -6px; }
+    .bn-dot[data-cover="op"] { background: var(--wada-tyrian); }
+    .bn-dot[data-cover="rb"] { background: var(--wada-madder-violet); }
+    .bn-dot[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--abyss), 0 0 0 5px var(--wada-yellow-orange); }
+    .bn-asof { margin: 24px auto 0; }
+    .bn .btn { margin-top: 24px; }
+    /* motion off or reduced motion: no rotate, no fan. Open crossfades to a flat spread. */
+    .bn.still { --shift: 0px; --rot: 0deg; --step: clamp(36px, (var(--avail) - var(--cw)) / 2, var(--cw) + 8px); --x0: calc(var(--bw) / 2 - var(--step) - var(--cw) / 2); }
+    .bn.still .bn-stage, .bn.still .bn-cover { transform: none; transition: opacity 280ms, background-color 280ms; }
+    .bn.still .bn-stage::before { display: none; }
+    .bn.still .bn-card { --o: 1; opacity: 0; transition: opacity 280ms; }
+    .bn.still.open .bn-card { opacity: 1; }
+    .bn.still.open .bn-back, .bn.still.open .bn-page, .bn.still.open .bn-tab, .bn.still.open .bn-spine, .bn.still.open .bn-cover { opacity: 0; }
+    @media (max-width: 599px) {
+      .bn { --bw: 220px; --bh: 283px; --cw: 120px; --x0: 88px; --tagh: 38px; --rise-max: 44px; --open: -72deg; --avail: calc(100vw - 2 * clamp(20px, 5vw, 56px) - 16px); padding-top: 136px; }
+      .bn-tag { flex-direction: column; }
+      .bn-sep { display: none; }
+    }
     footer { background: var(--void); padding-block: 64px; font-size: 13px; color: var(--muted); line-height: 1.8; }
     footer .wrap { padding-block: 32px; }
     footer a { color: var(--muted); }
@@ -403,13 +483,13 @@
   </style>
 </head>
 <body>
-  <noscript><style>.stage { background: var(--glow), url(/poster.webp) right center / cover no-repeat, var(--void); }</style></noscript>
+  <noscript><style>.stage { background: var(--glow), url(/poster.webp) right center / cover no-repeat, var(--void); } .bn { --o: 1; } .bn-sw, .bn .ov { display: none; } .bn-frost { opacity: 0; }</style></noscript>
   <header>
     <div class="wrap">
       <a class="brand" href="#top"><img src="/icon-144.webp" width="28" height="28" alt="" /><span>CardOS TCG: Portfolio Tracker</span></a>
       <nav aria-label="Sections"><ol class="rail">
-        <li><a href="#top">01</a></li><li><a href="#readout">02</a></li><li><a href="#graders">03</a></li><li><a href="#ledger">04</a></li>
-        <li><a href="#features">05</a></li><li><a href="#compare">06</a></li><li><a href="#reviews">07</a></li><li><a href="#faq">08</a></li>
+        <li><a href="#top">01</a></li><li><a href="#readout">02</a></li><li><a href="#graders">03</a></li><li><a href="#binder">04</a></li><li><a href="#ledger">05</a></li>
+        <li><a href="#features">06</a></li><li><a href="#compare">07</a></li><li><a href="#reviews">08</a></li><li><a href="#faq">09</a></li>
       </ol></nav>
       <div class="hdr-r">
         <button class="chip" id="motion" type="button" aria-pressed="true">Motion on</button>
@@ -487,9 +567,59 @@
       </div>
     </section>
 
+    <section id="binder" aria-labelledby="binder-h">
+      <div class="wrap">
+        <span class="label">SEC_04 // Chase binder</span>
+        <h2 id="binder-h">Your chase cards, filed like assets.</h2>
+        <p class="muted">Open it. Every sleeve carries a set code and an Est. price. No price on file shows a dash, never $0.00.</p>
+        <div class="bn brk" id="bn" data-cover="onyx">
+          <span class="ov bn-ov-l" aria-hidden="true">Chase binder // Est.</span>
+          <span class="ov bn-ov-r" aria-hidden="true"><span class="bn-hov">[hover]</span><span class="bn-tap">[tap]</span> open</span>
+          <div class="bn-stage">
+            <span class="bn-back" aria-hidden="true"></span>
+            <span class="bn-page" aria-hidden="true"></span>
+            <span class="bn-tab" aria-hidden="true"></span>
+            <div id="bn-cards">
+            <ul class="bn-set" data-set="onyx" aria-label="Mixed chase cards">
+              <li class="bn-card" style="--i:0"><span class="bn-sleeve"><img src="/binder/ebp01-025.webp" width="400" height="558" loading="lazy" decoding="async" alt="Chillet, Dragon Whisperer. Palworld EBP01-025" /></span><span class="bn-tag"><span>EBP01-025</span><span class="bn-sep"> · </span><span>Est. $646.40</span></span></li>
+              <li class="bn-card" style="--i:1"><span class="bn-sleeve"><img src="/binder/ogn-303.webp" width="400" height="558" loading="lazy" decoding="async" alt="Ahri, Nine-Tailed Fox, signature. Riftbound OGN-303" /></span><span class="bn-tag"><span>OGN-303</span><span class="bn-sep"> · </span><span>Est. $3,711.35</span></span></li>
+              <li class="bn-card" style="--i:2"><span class="bn-sleeve"><img src="/binder/eb04-061.webp" width="400" height="558" loading="lazy" decoding="async" alt="Monkey.D.Luffy SP. One Piece EB04-061" /></span><span class="bn-tag"><span>EB04-061</span><span class="bn-sep"> · </span><span>Est. $24,995.95</span></span></li>
+            </ul>
+            <ul class="bn-set" data-set="op" aria-label="One Piece chase cards">
+              <li class="bn-card" style="--i:0"><span class="bn-sleeve"><img src="/binder/st01-012.webp" width="400" height="558" loading="lazy" decoding="async" alt="Monkey.D.Luffy, gold-stamped signature. One Piece ST01-012" /></span><span class="bn-tag"><span>ST01-012</span><span class="bn-sep"> · </span><span>Est. $3,282.21</span></span></li>
+              <li class="bn-card" style="--i:1"><span class="bn-sleeve"><img src="/binder/op05-119.webp" width="400" height="558" loading="lazy" decoding="async" alt="Monkey.D.Luffy SP Gold. One Piece OP05-119" /></span><span class="bn-tag"><span>OP05-119</span><span class="bn-sep"> · </span><span>Est. $13,000.00</span></span></li>
+              <li class="bn-card" style="--i:2"><span class="bn-sleeve"><img src="/binder/eb04-061.webp" width="400" height="558" loading="lazy" decoding="async" alt="Monkey.D.Luffy SP. One Piece EB04-061" /></span><span class="bn-tag"><span>EB04-061</span><span class="bn-sep"> · </span><span>Est. $24,995.95</span></span></li>
+            </ul>
+            <ul class="bn-set" data-set="rb" aria-label="Riftbound chase cards">
+              <li class="bn-card" style="--i:0"><span class="bn-sleeve"><img src="/binder/ogn-299.webp" width="400" height="558" loading="lazy" decoding="async" alt="Kai'Sa, Daughter of the Void, signature. Riftbound OGN-299" /></span><span class="bn-tag"><span>OGN-299</span><span class="bn-sep"> · </span><span>Est. $3,114.31</span></span></li>
+              <li class="bn-card" style="--i:1"><span class="bn-sleeve"><img src="/binder/ven-189.webp" width="400" height="558" loading="lazy" decoding="async" alt="Akali, Rogue Assassin, signature. Riftbound VEN-189" /></span><span class="bn-tag"><span>VEN-189</span><span class="bn-sep"> · </span><span>Est. $3,229.71</span></span></li>
+              <li class="bn-card" style="--i:2"><span class="bn-sleeve"><img src="/binder/sfd-227.webp" width="400" height="558" loading="lazy" decoding="async" alt="Ahri, Inquisitive, signature. Riftbound SFD-227" /></span><span class="bn-tag"><span>SFD-227</span><span class="bn-sep"> · </span><span>Est. $3,390.69</span></span></li>
+            </ul>
+            </div>
+            <span class="bn-spine" aria-hidden="true"></span>
+            <button class="bn-cover" type="button" aria-expanded="false" aria-controls="bn-cards" aria-label="Mixed chase binder">
+              <span class="bn-frost" aria-hidden="true">
+                <img data-set="onyx" src="/binder/eb04-061.webp" width="400" height="558" loading="lazy" decoding="async" alt="" />
+                <img data-set="op" src="/binder/eb04-061.webp" width="400" height="558" loading="lazy" decoding="async" alt="" />
+                <img data-set="rb" src="/binder/sfd-227.webp" width="400" height="558" loading="lazy" decoding="async" alt="" />
+              </span>
+              <span class="bn-ink" aria-hidden="true"><span class="bn-title">CHASE // MIXED</span><span class="bn-sub">Vault · 03 cards</span><span class="bn-rules"></span></span>
+            </button>
+          </div>
+          <div class="bn-sw" role="group" aria-label="Binder cover">
+            <button class="bn-dot" type="button" data-cover="onyx" aria-pressed="true" aria-label="Show mixed binder"></button>
+            <button class="bn-dot" type="button" data-cover="op" aria-pressed="false" aria-label="Show One Piece binder"></button>
+            <button class="bn-dot" type="button" data-cover="rb" aria-pressed="false" aria-label="Show Riftbound binder"></button>
+          </div>
+          <p class="small bn-asof">Est. as of 11/11/2026</p>
+          <a class="btn btn-s" data-cta="binder_track" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Track your chase cards →</a>
+        </div>
+      </div>
+    </section>
+
     <section id="ledger" aria-labelledby="ledger-h">
       <div class="wrap">
-        <span class="label">SEC_04 // The ledger</span>
+        <span class="label">SEC_05 // The ledger</span>
         <h2 id="ledger-h">Paid stays. Est. sits. Sold updates the lot.</h2>
         <div class="panel brk">
           <ul class="spec">
@@ -511,7 +641,7 @@
 
     <section id="features" aria-labelledby="tools-heading">
       <div class="wrap">
-        <span class="label">SEC_05 // Capabilities</span>
+        <span class="label">SEC_06 // Capabilities</span>
         <h2 id="tools-heading">Everything you need to track your One Piece, Riftbound, and Palworld collection</h2>
         <div class="cells feat">
           <div><h3>01 · Realized P&amp;L</h3><p>Each card keeps its cost in FIFO lots, so a sale shows the actual gain or loss.</p></div>
@@ -528,7 +658,7 @@
 
     <section id="compare" aria-labelledby="compare-heading">
       <div class="wrap">
-        <span class="label">SEC_06 // Vs spreadsheet</span>
+        <span class="label">SEC_07 // Vs spreadsheet</span>
         <h2 id="compare-heading">CardOS TCG: Portfolio Tracker vs a spreadsheet</h2>
         <div class="tbl">
           <table>
@@ -552,7 +682,7 @@
 
     <section id="reviews" aria-labelledby="reviews-h">
       <div class="wrap">
-        <span class="label">SEC_07 // From the stores</span>
+        <span class="label">SEC_08 // From the stores</span>
         <h2 id="reviews-h">From the stores</h2>
         <div class="quotes">
           <blockquote><p>&ldquo;Amazing for helping me organize my collection&hellip; sleek and easy to use.&rdquo;</p><cite>App Store</cite></blockquote>
@@ -570,7 +700,7 @@
 
     <section id="faq" aria-labelledby="faq-heading">
       <div class="wrap">
-        <span class="label">SEC_08 // Queries</span>
+        <span class="label">SEC_09 // Queries</span>
         <h2 id="faq-heading">Common questions</h2>
         <details><summary>What is the best app to track One Piece TCG profit?</summary><p>CardOS TCG: Portfolio Tracker tracks One Piece, Riftbound, and Palworld cards with cost basis and profit, not just a collection total. Log any card by hand. Free core features on Android, iOS, and the web app at <a href="https://app.cardostcg.com">app.cardostcg.com</a>. CardOS TCG: Portfolio Tracker includes CardOS OP TCG, CardOS RB TCG, and CardOS PW TCG (Palworld). CardOS GD TCG (Gundam) is coming soon.</p></details>
         <details><summary>How do I track graded One Piece TCG cards from PSA, BGS, and CGC?</summary><p>Log slabs in the graded vault. Any grading company, including PSA, BGS, and CGC. Raw cards too. If a card is missing from the catalog, type it in. Unlimited logging, free.</p></details>
@@ -654,6 +784,51 @@
         });
       }, { threshold: .4 });
       io2.observe(document.getElementById('readout'));
+    }
+  })();
+  // chase binder: hover or tap opens, Esc closes, covers swap only while closed
+  (function () {
+    var bn = document.getElementById('bn');
+    if (!bn) return;
+    var stage = bn.querySelector('.bn-stage'), cover = bn.querySelector('.bn-cover'), title = bn.querySelector('.bn-title');
+    var dots = bn.querySelectorAll('.bn-dot'), motion = document.getElementById('motion');
+    var NAMES = { onyx: ['MIXED', 'Mixed'], op: ['OP', 'One Piece'], rb: ['RB', 'Riftbound'] };
+    var open = false, lastPT = '', closedAt = 0, timer = 0, rm = matchMedia('(prefers-reduced-motion: reduce)');
+    function still() {
+      var off = false; try { off = localStorage.getItem('cardos_motion') === 'off'; } catch (e) {}
+      bn.classList.toggle('still', rm.matches || off);
+    }
+    function set(v) {
+      if (v === open) return;
+      open = v; if (!v) closedAt = Date.now();
+      bn.classList.toggle('open', v); cover.setAttribute('aria-expanded', String(v));
+    }
+    function swap(k) {
+      dots.forEach(function (d) { d.setAttribute('aria-pressed', String(d.getAttribute('data-cover') === k)); });
+      set(false); clearTimeout(timer);
+      timer = setTimeout(function () {
+        bn.setAttribute('data-cover', k);
+        title.textContent = 'CHASE // ' + NAMES[k][0];
+        cover.setAttribute('aria-label', NAMES[k][1] + ' chase binder');
+      }, Math.max(0, closedAt + 360 - Date.now()));
+    }
+    still();
+    if (rm.addEventListener) rm.addEventListener('change', still);
+    if (motion) motion.addEventListener('click', function () { setTimeout(still, 0); });
+    stage.addEventListener('pointerdown', function (e) { lastPT = e.pointerType; });
+    stage.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') set(true); });
+    stage.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') set(false); });
+    stage.addEventListener('click', function (e) { if (e.detail && lastPT === 'mouse') return; set(!open); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    dots.forEach(function (d) { d.addEventListener('click', function () { swap(d.getAttribute('data-cover')); }); });
+    // fetch the hidden covers' art before the first swap
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return;
+        io.disconnect();
+        bn.querySelectorAll('img').forEach(function (im) { im.loading = 'eager'; });
+      }, { rootMargin: '400px' });
+      io.observe(bn);
     }
   })();
   // wavefield: Canvas 2D, decoration only
