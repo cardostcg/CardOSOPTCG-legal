@@ -106,6 +106,13 @@
     .steps .hl { font: 600 clamp(1.25rem, 2vw, 1.5rem)/1.2 var(--sans); letter-spacing: -.01em; margin-bottom: 8px; }
     .spec { list-style: none; font: 400 13px/1.7 var(--mono); color: var(--muted); margin-top: 16px; }
     .spec li::before { content: "· "; color: var(--gold-500); }
+    /* shots */
+    #shots { padding-block: clamp(40px, 6vw, 72px); }
+    .shots { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; max-width: 640px; }
+    @media (min-width: 600px) { .shots { grid-template-columns: repeat(2, 1fr); } }
+    .shots figure { max-width: 300px; }
+    .shots img { display: block; width: 100%; height: auto; border: 1px solid var(--hairline); border-radius: 12px; }
+    .shots figcaption { font: 400 13px/1.6 var(--mono); color: var(--muted); margin-top: 10px; }
     /* proof */
     .stats { grid-template-columns: repeat(2, 1fr); }
     .stats .big { font: 500 clamp(2rem, 4vw, 3rem)/1 var(--mono); color: var(--gold-100); }
@@ -165,6 +172,18 @@
         <div class="stores">
           <a data-store="ios" data-cta="ads_hero_app_store" href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener"><img src="/badge-app-store.svg" alt="Download on the App Store" width="120" height="40" /></a>
           <a data-store="play" data-cta="ads_hero_play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg" target="_blank" rel="noopener"><img src="/badge-google-play.png" alt="Get it on Google Play" width="134" height="40" /></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01b OP-18 app screenshots (Art, Nov 20) -->
+    <section id="shots" aria-labelledby="shots-h">
+      <div class="wrap">
+        <span class="label">Live now</span>
+        <h2 id="shots-h">OP-18 in the app</h2>
+        <div class="shots">
+          <figure><img src="/op18-explore-cards.webp" width="600" height="717" loading="lazy" decoding="async" alt="CardOS Explore screen with the Scan button, a Trending row ranked by 7-day gain, and OP-18 listed as new to the catalog" /><figcaption>Explore: trending by 7-day gain, OP-18 new to catalog.</figcaption></figure>
+          <figure><img src="/op18-explore-sets.webp" width="600" height="1162" loading="lazy" decoding="async" alt="CardOS Sets view of OP-18 The Dominance of God, a grid of cards with the Karoo leader priced at $69.00" /><figcaption>Sets: the full OP-18 set, card by card.</figcaption></figure>
         </div>
       </div>
     </section>
