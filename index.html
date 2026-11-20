@@ -260,7 +260,7 @@
       --gold-500: #EF9F27; --gold-700: #B86F0E; --gold-900: #3D2304;
       --glow: radial-gradient(60% 70% at 70% 45%, rgba(239,159,39,.18), transparent 70%);
       --text: rgba(255,247,230,.94); --muted: rgba(255,247,230,.62); --faint: rgba(255,247,230,.52);
-      --teal: #5DCAA5; --os-blue: #378ADD;
+      --vermilion: #D9381E; --link: #E24A2C; --link-hover: #E85C3A; --indigo: #264D73; --os-blue: #378ADD;
       --gold-dim: rgba(239,159,39,.35); --gold-hatch: rgba(247,198,106,.30);
       --sans: "DM Sans", system-ui, sans-serif; --mono: "DM Mono", ui-monospace, monospace;
       /* Binder materials only (Sanzo Wada, 1933). Never CTA, gain, or focus. */
@@ -495,6 +495,8 @@
     summary { transition: color .15s; }
     summary:hover { color: var(--gold-100); }
     @media (max-width: 599px) { .ctas .btn { flex: 1 1 100%; } }
+    main a:not([class]) { color: var(--link); text-underline-offset: 3px; }
+    main a:not([class]):hover { color: var(--link-hover); }
     @media (prefers-reduced-motion: reduce) { .btn, .stores a { transition: none; } .btn:active, .stores a:hover { transform: none; } }
   </style>
 </head>
