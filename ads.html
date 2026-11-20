@@ -104,13 +104,12 @@
     .tiles > div:hover { background: var(--surface-2); }
     .games { font: 500 13px/1.7 var(--mono); color: var(--muted); border: 1px solid var(--hairline-n); border-top: 0; padding: 14px 24px; border-radius: 0 0 4px 4px; }
     .games b { font-weight: 500; color: var(--gold-100); }
-    /* proof */
-    .proof { display: grid; gap: 24px; grid-template-columns: 1fr; }
-    @media (min-width: 800px) { .proof { grid-template-columns: repeat(3, 1fr); } }
-    .shot { margin: 0; }
-    .shot-frame { aspect-ratio: 9 / 19.5; max-height: 560px; width: 100%; border: 1px dashed var(--gold-700); border-radius: 18px; background: var(--surface); display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font: 500 11px/1.6 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
-    .shot-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
-    .shot figcaption { margin-top: 14px; font-size: 15px; color: var(--muted); }
+    /* steps */
+    .steps { grid-template-columns: 1fr; counter-reset: step; }
+    @media (min-width: 800px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .steps > li { list-style: none; padding: clamp(24px, 3vw, 40px); }
+    .steps .n { display: block; font: 500 clamp(2.5rem, 5vw, 3.5rem)/1 var(--mono); color: var(--gold-500); margin-bottom: 20px; }
+    .steps .hl { font: 600 clamp(1.25rem, 2vw, 1.5rem)/1.2 var(--sans); letter-spacing: -.01em; margin-bottom: 8px; }
     /* who */
     .tablist { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
     .tab { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .12em; border: 1px solid var(--hairline); background: var(--void); color: var(--muted); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
@@ -205,16 +204,16 @@
       </div>
     </section>
 
-    <!-- 04 Proof strip. PLACEHOLDERS: swap each .shot-frame text for <img src="/ads/shot-1.webp" alt="..."> with a real app screenshot before running ads. -->
-    <section id="proof" aria-labelledby="proof-h">
+    <!-- 04 How it works -->
+    <section id="how" aria-labelledby="how-h">
       <div class="wrap">
-        <span class="label">From the app</span>
-        <h2 id="proof-h">Real screens. Real numbers.</h2>
-        <div class="proof">
-          <figure class="shot"><div class="shot-frame">Screenshot 1<br />Scan result</div><figcaption>Caption 1: a sleeved OP-18 card, scanned and named.</figcaption></figure>
-          <figure class="shot"><div class="shot-frame">Screenshot 2<br />Portfolio P&amp;L</div><figcaption>Caption 2: what you paid next to what it's worth.</figcaption></figure>
-          <figure class="shot"><div class="shot-frame">Screenshot 3<br />Price alert</div><figcaption>Caption 3: a watched card that moved this week.</figcaption></figure>
-        </div>
+        <span class="label">How it works</span>
+        <h2 id="how-h">Pack to profit in three steps</h2>
+        <ol class="cells steps">
+          <li><span class="n" aria-hidden="true">01</span><p class="hl">Scan it.</p><p>Sleeved or not. The scanner names the parallel, not just the base print. Unlimited and free.</p></li>
+          <li><span class="n" aria-hidden="true">02</span><p class="hl">Log what you paid.</p><p>Each card keeps its cost in FIFO lots. Slabs go in the graded vault.</p></li>
+          <li><span class="n" aria-hidden="true">03</span><p class="hl">Know if you're up.</p><p>Market estimates, tagged Est., updated daily. Sell a card and see the actual gain or loss.</p></li>
+        </ol>
       </div>
     </section>
 
