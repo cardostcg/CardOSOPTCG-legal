@@ -147,6 +147,23 @@
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
     .fine { margin-top: 8px; }
+    /* polish (Nov 20): touch targets, states, rhythm, phone layout */
+    img { max-width: 100%; }
+    h1, h2 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+    .brand span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .btn { min-height: 44px; justify-content: center; transition: background-color .15s, border-color .15s, transform .15s; }
+    .btn:active { transform: translateY(1px); }
+    .btn-s:hover { border-color: var(--gold-500); }
+    header .btn { min-height: 36px; }
+    .stores { align-items: center; }
+    .stores a { display: inline-block; border-radius: 8px; transition: transform .15s; }
+    .stores a:hover { transform: translateY(-2px); }
+    section + section { border-top: 1px solid var(--hairline-n); }
+    summary { transition: color .15s; }
+    summary:hover { color: var(--gold-100); }
+    @media (max-width: 599px) { .ctas .btn { flex: 1 1 100%; } }
+    @media (prefers-reduced-motion: reduce) { .btn, .stores a { transition: none; } .btn:active, .stores a:hover { transform: none; } }
   </style>
 </head>
 <body>
