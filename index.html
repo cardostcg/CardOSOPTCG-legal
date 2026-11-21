@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>CardOS TCG: Portfolio Tracker | One Piece, Riftbound &amp; Palworld</title>
-  <meta name="description" content="CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. 31,008 cards, 170 sets, 1.4M+ price points. Cost basis, realized P&amp;L, sealed pricing, and a graded vault for any grading company. Gundam coming soon." />
+  <title>CardOS TCG: Portfolio Tracker | One Piece, Magic, Gundam &amp; more</title>
+  <meta name="description" content="CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. 31,008 cards, 170 sets, 1.4M+ price points. Cost basis, realized P&amp;L, sealed pricing, and a graded vault for any grading company." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://cardostcg.com/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="CardOS TCG: Portfolio Tracker | One Piece, Riftbound &amp; Palworld" />
-  <meta property="og:description" content="CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. 31,008 cards, 170 sets, 1.4M+ price points. Cost basis, realized P&amp;L, sealed pricing, and a graded vault for any grading company. Gundam coming soon." />
+  <meta property="og:title" content="CardOS TCG: Portfolio Tracker | One Piece, Magic, Gundam &amp; more" />
+  <meta property="og:description" content="CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. 31,008 cards, 170 sets, 1.4M+ price points. Cost basis, realized P&amp;L, sealed pricing, and a graded vault for any grading company." />
   <meta property="og:url" content="https://cardostcg.com/" />
   <meta property="og:site_name" content="CardOS TCG: Portfolio Tracker" />
   <meta property="og:image" content="https://cardostcg.com/og-share.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CardOS TCG: Portfolio Tracker | One Piece, Riftbound &amp; Palworld" />
-  <meta name="twitter:description" content="CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. 31,008 cards, 170 sets, 1.4M+ price points. Cost basis, realized P&amp;L, sealed pricing, and a graded vault for any grading company. Gundam coming soon." />
+  <meta name="twitter:title" content="CardOS TCG: Portfolio Tracker | One Piece, Magic, Gundam &amp; more" />
+  <meta name="twitter:description" content="CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. 31,008 cards, 170 sets, 1.4M+ price points. Cost basis, realized P&amp;L, sealed pricing, and a graded vault for any grading company." />
   <meta name="twitter:image" content="https://cardostcg.com/og-share.png" />
   <meta name="keywords" content="One Piece TCG tracker, OP TCG portfolio, graded card tracker, PSA BGS CGC tracker, One Piece card value, TCG P&L, One Piece TCG app, Riftbound tracker, Riftbound TCG portfolio, Riftbound card value, Palworld tracker, Palworld card value, Gundam TCG tracker" />
   <meta name="author" content="CardOS TCG: Portfolio Tracker" />
@@ -64,7 +64,7 @@
         "@id": "https://cardostcg.com/#site",
         "name": "CardOS TCG: Portfolio Tracker",
         "url": "https://cardostcg.com/",
-        "description": "CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. 31,008 cards, 170 sets, 1.4M+ price points. Cost basis, realized P&L, sealed pricing, and a graded vault for any grading company. Gundam coming soon.",
+        "description": "CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. 31,008 cards, 170 sets, 1.4M+ price points. Cost basis, realized P&L, sealed pricing, and a graded vault for any grading company.",
         "publisher": { "@id": "https://cardostcg.com/#org" }
       },
       {
@@ -72,7 +72,7 @@
         "@id": "https://cardostcg.com/#app",
         "name": "CardOS TCG: Portfolio Tracker",
         "alternateName": ["CardOS TCG: Portfolio Tracker"],
-        "description": "CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. Tracks realized profit and cost basis, not just collection worth. 31,008 cards, 170 sets, 1.4M+ price points. Log any card by hand. Graded slabs from any grading company. Free core features. Gundam coming soon.",
+        "description": "CardOS TCG: Portfolio Tracker is the One Piece, Magic, Gundam, Riftbound, and Palworld portfolio tracker for iOS, Android, and web. Tracks realized profit and cost basis, not just collection worth. 31,008 cards, 170 sets, 1.4M+ price points. Log any card by hand. Graded slabs from any grading company. Free core features.",
         "applicationCategory": "FinanceApplication",
         "applicationSubCategory": "Portfolio Tracker",
         "operatingSystem": "iOS, Android, and web",
@@ -332,6 +332,13 @@
     @media (min-width: 900px) { .readout { grid-template-columns: repeat(4, 1fr); } }
     .big { font: 500 clamp(1.25rem, 2.4vw, 1.75rem)/1.2 var(--mono); color: var(--gold-100); }
     .small { font: 500 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--faint); margin-top: 8px; }
+    /* game logos */
+    .games { grid-template-columns: repeat(3, 1fr); margin-top: 16px; }
+    @media (min-width: 900px) { .games { grid-template-columns: repeat(6, 1fr); } }
+    .games li { list-style: none; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 10px; }
+    .games img { display: block; height: 36px; width: auto; max-width: 100%; object-fit: contain; }
+    .games .st { font: 500 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+    .games .st.live { color: var(--gold-300); }
     /* catalog split bar */
     .split { margin-top: 16px; }
     .split-bar { display: flex; height: 14px; border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; background: var(--surface); }
@@ -552,6 +559,14 @@
           <div><div class="big">1.4M+</div><div class="small">Price points · updated daily</div></div>
           <div><div class="big" data-n="5">5</div><div class="small">Games · Digimon next</div></div>
         </div>
+        <ul class="cells games" aria-label="Games in the catalog">
+          <li><img src="/games/magic.png" width="1050" height="353" loading="lazy" decoding="async" alt="Magic: The Gathering logo" /><span class="st live">Live</span></li>
+          <li><img src="/games/one-piece.png" width="561" height="145" loading="lazy" decoding="async" alt="One Piece Card Game logo" /><span class="st live">Live</span></li>
+          <li><img src="/games/gundam.png" width="640" height="289" loading="lazy" decoding="async" alt="Gundam Card Game logo" /><span class="st live">Live</span></li>
+          <li><img src="/games/riftbound.png" width="720" height="316" loading="lazy" decoding="async" alt="Riftbound: League of Legends logo" /><span class="st live">Live</span></li>
+          <li><img src="/games/palworld.png" width="472" height="168" loading="lazy" decoding="async" alt="Palworld logo" /><span class="st live">Live</span></li>
+          <li><img src="/games/digimon.png" width="348" height="96" loading="lazy" decoding="async" alt="Digimon Card Game logo" /><span class="st">Prices soon</span></li>
+        </ul>
         <div class="split">
           <div class="split-bar" role="img" aria-label="Catalog split: Magic 20,738 cards, One Piece 5,842, Gundam 2,198, Riftbound 1,774, Palworld 456.">
             <span class="seg seg-mtg" title="Magic: 20,738 cards (67%)"></span>
@@ -568,7 +583,7 @@
             <li><i class="d d-pw"></i>Palworld<b>456</b><span class="st live">Live</span></li>
           </ul>
         </div>
-        <p class="tm">Catalog readout as of Nov 20, 2026. Test users excluded. Every price tagged Est.</p>
+        <p class="tm">Catalog readout as of Nov 20, 2026. Test users excluded. Every price tagged Est. Game names and logos are trademarks of their respective owners. No affiliation or endorsement implied.</p>
       </div>
     </section>
 
