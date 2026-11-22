@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- DRAFT 2026-11-21. Not linked, not in sitemap. Numbers from proof-sheet.md. -->
+  <title>How CardOS Prices Cards | CardOS TCG</title>
+  <meta name="description" content="Where CardOS TCG prices come from, how often they update, what Est. means, and why some cards show N/A. One Piece, Magic, Gundam, Riftbound, Palworld and Digimon." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://cardostcg.com/how-cardos-prices-cards" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="How CardOS Prices Cards | CardOS TCG" />
+  <meta property="og:description" content="Where CardOS TCG prices come from, how often they update, what Est. means, and why some cards show N/A. One Piece, Magic, Gundam, Riftbound, Palworld and Digimon." />
+  <meta property="og:url" content="https://cardostcg.com/how-cardos-prices-cards" />
+  <meta property="og:site_name" content="CardOS TCG: Portfolio Tracker" />
+  <meta property="og:image" content="https://cardostcg.com/og-share.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="apple-itunes-app" content="app-id=6792994816" />
+  <meta name="theme-color" content="#0A0E1A" />
+  <link rel="icon" href="/icon-144.webp" type="image/webp" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/dm-sans-latin-600-normal.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/dm-mono-latin-500-normal.woff2" crossorigin />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://cardostcg.com/how-cardos-prices-cards#page",
+      "url": "https://cardostcg.com/how-cardos-prices-cards",
+      "name": "How CardOS Prices Cards | CardOS TCG",
+      "isPartOf": {
+        "@id": "https://cardostcg.com/#site"
+      },
+      "inLanguage": "en",
+      "dateModified": "2026-11-21"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://cardostcg.com/how-cardos-prices-cards#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where do CardOS card prices come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CardOS reads market prices from TCGplayer each night for One Piece, Magic: The Gathering, Gundam, Riftbound and Palworld. One Piece also gets nightly Cardmarket (EU) prices. Digimon cards are listed, and prices are coming soon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often do CardOS prices update?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every night. Each game has its own scheduled capture, and a daily health check confirms that each price source ran."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does Est. mean in CardOS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Est. is an estimate from the latest market price for that printing. It is not a sale price and not an offer. What you paid stays next to it, so the two are never mixed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does a card show N/A?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "N/A means CardOS has no fresh price for that card. That happens with brand new sets, cards that rarely list, games still waiting on prices, or a price that failed a safety check. CardOS never fills in a guessed number."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <style>
+    @font-face { font-family: "DM Sans"; font-weight: 400; font-display: swap; src: url(/fonts/dm-sans-latin-400-normal.woff2) format("woff2"); }
+    @font-face { font-family: "DM Sans"; font-weight: 500; font-display: swap; src: url(/fonts/dm-sans-latin-500-normal.woff2) format("woff2"); }
+    @font-face { font-family: "DM Sans"; font-weight: 600; font-display: swap; src: url(/fonts/dm-sans-latin-600-normal.woff2) format("woff2"); }
+    @font-face { font-family: "DM Mono"; font-weight: 400; font-display: swap; src: url(/fonts/dm-mono-latin-400-normal.woff2) format("woff2"); }
+    @font-face { font-family: "DM Mono"; font-weight: 500; font-display: swap; src: url(/fonts/dm-mono-latin-500-normal.woff2) format("woff2"); }
+    :root {
+      --void: #05070D; --abyss: #0A0E1A; --surface: #0F1422; --surface-2: #151B2C;
+      --hairline: rgba(239,159,39,.12); --hairline-n: rgba(255,255,255,.07);
+      --gold-100: #FFE7B8; --gold-300: #F7C66A; --gold-500: #EF9F27; --gold-700: #B86F0E;
+      --glow: radial-gradient(60% 70% at 70% 45%, rgba(239,159,39,.18), transparent 70%);
+      --text: rgba(255,247,230,.94); --muted: rgba(255,247,230,.62); --faint: rgba(255,247,230,.52);
+      --teal: #5DCAA5; --os-blue: #378ADD;
+      --sans: "DM Sans", system-ui, sans-serif; --mono: "DM Mono", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { background: var(--abyss); color: var(--text); font: 400 17px/1.6 var(--sans); font-variant-numeric: tabular-nums; overflow-x: hidden; }
+    a { color: var(--gold-100); }
+    :focus-visible { outline: 2px solid var(--os-blue); outline-offset: 3px; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 56px); }
+    section { padding-block: clamp(64px, 10vw, 128px); scroll-margin-top: 72px; }
+    .label { font: 500 12px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .18em; color: var(--gold-300); display: block; margin-bottom: 16px; }
+    .dot::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-500); margin-right: 10px; vertical-align: 2px; }
+    h2 { font: 500 clamp(1.5rem, 3.2vw, 2.25rem)/1.15 var(--mono); letter-spacing: -.01em; margin-bottom: 32px; max-width: 28ch; }
+    h3 { font: 500 12px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .18em; color: var(--gold-300); margin-bottom: 8px; }
+    p { max-width: 62ch; }
+    .muted { color: var(--muted); }
+    .brk { position: relative; }
+    .brk::before, .brk::after { content: ""; position: absolute; width: 12px; height: 12px; border: 0 solid var(--gold-700); pointer-events: none; z-index: 2; }
+    .brk::before { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+    .brk::after { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+    .cells { display: grid; gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; }
+    .cells > * { background: var(--surface); padding: 24px; }
+    .cells p { color: var(--muted); font-size: 16px; }
+    /* header */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(5,7,13,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--hairline-n); }
+    header .wrap { display: flex; align-items: center; gap: 16px; min-height: 60px; padding-block: 8px; }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; color: var(--text); text-decoration: none; font: 500 13px/1.2 var(--mono); letter-spacing: .02em; }
+    .brand img { width: 28px; height: 28px; border-radius: 6px; }
+    .hdr-r { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; font: 500 13px var(--mono); text-transform: uppercase; letter-spacing: .1em; border-radius: 999px; padding: 14px 24px; text-decoration: none; }
+    .btn-p { background: var(--gold-500); color: var(--void); }
+    .btn-p:hover { background: var(--gold-300); }
+    .btn-s { border: 1px solid rgba(239,159,39,.4); color: var(--gold-100); }
+    .btn-s:hover { background: var(--surface-2); }
+    header .btn { padding: 8px 14px; font-size: 11px; }
+    @media (max-width: 599px) { .hide-sm { display: none; } }
+    /* hero */
+    .stage { position: relative; min-height: 80svh; display: flex; align-items: center; background: var(--glow), var(--void); overflow: hidden; }
+    .stage::before { top: 16px; left: 16px; } .stage::after { bottom: 16px; right: 16px; }
+    .stage .wrap { position: relative; z-index: 1; width: 100%; padding-block: 96px 120px; }
+    h1 { font: 600 clamp(2.75rem, 7.5vw, 5.5rem)/1.0 var(--sans); letter-spacing: -.035em; margin-bottom: 24px; max-width: 14ch; }
+    h1 span { display: block; background: linear-gradient(90deg, var(--gold-100), var(--gold-500)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lede { font-size: clamp(17px, 2vw, 20px); margin-bottom: 12px; }
+    .tagline { font: 500 13px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .16em; color: var(--gold-300); margin: 24px 0 32px; }
+    .stores { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .stores img { display: block; height: 40px; width: auto; }
+    .ov { position: absolute; z-index: 1; font: 500 11px/1.7 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+    .ov-tl { top: 20px; left: clamp(20px, 5vw, 56px); }
+    /* tiles */
+    .tiles { grid-template-columns: 1fr; }
+    @media (min-width: 700px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .tiles { grid-template-columns: repeat(4, 1fr); } }
+    .tiles > div { transition: background .2s; }
+    .tiles > div:hover { background: var(--surface-2); }
+    .games { font: 500 13px/1.7 var(--mono); color: var(--muted); border: 1px solid var(--hairline-n); border-top: 0; padding: 14px 24px; border-radius: 0 0 4px 4px; }
+    .games b { font-weight: 500; color: var(--gold-100); }
+    /* steps */
+    .steps { grid-template-columns: 1fr; counter-reset: step; }
+    @media (min-width: 800px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .steps > li { list-style: none; padding: clamp(24px, 3vw, 40px); }
+    .steps .n { display: block; font: 500 clamp(2.5rem, 5vw, 3.5rem)/1 var(--mono); color: var(--gold-500); margin-bottom: 20px; }
+    .steps .hl { font: 600 clamp(1.25rem, 2vw, 1.5rem)/1.2 var(--sans); letter-spacing: -.01em; margin-bottom: 8px; }
+    /* pricing */
+    .plans { grid-template-columns: 1fr; }
+    @media (min-width: 700px) { .plans { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .plans { grid-template-columns: repeat(4, 1fr); } }
+    .price { font: 500 clamp(1.5rem, 2.6vw, 2rem)/1.2 var(--mono); color: var(--gold-100); margin: 8px 0 4px; }
+    .per { font: 500 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 16px; }
+    .plans .spec { margin-top: 0; }
+    .note { font-size: 13px; color: var(--faint); margin-top: 16px; }
+    /* faq */
+    details { border-bottom: 1px solid var(--hairline-n); }
+    details:first-of-type { border-top: 1px solid var(--hairline-n); }
+    summary { list-style: none; cursor: pointer; padding: 20px 40px 20px 0; position: relative; font: 500 16px/1.4 var(--mono); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; right: 4px; top: 18px; color: var(--gold-500); font-size: 20px; transition: transform .2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { color: var(--muted); padding-bottom: 20px; }
+    /* closing */
+    .close { text-align: center; background: var(--glow), var(--void); }
+    .close h2 { margin-inline: auto; }
+    .close .stores { justify-content: center; margin-top: 24px; }
+    footer { background: var(--void); padding-block: 64px; font-size: 13px; color: var(--muted); line-height: 1.8; }
+    footer .wrap { padding-block: 32px; }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+    .fine { margin-top: 8px; }
+      /* scanner page */
+    .hero-grid { display: grid; gap: 48px; align-items: center; }
+    @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.2fr 1fr; } }
+    .vf { position: relative; width: min(100%, 300px); aspect-ratio: 63 / 88; margin-inline: auto; border-radius: 12px; background: linear-gradient(160deg, var(--surface-2), var(--surface)); border: 1px solid var(--hairline); overflow: hidden; }
+    .vf::before, .vf::after { content: ""; position: absolute; inset: 14px; border-radius: 8px; pointer-events: none; }
+    .vf::before { border: 1px dashed rgba(255,247,230,.14); }
+    .vf::after { background:
+      linear-gradient(var(--gold-500), var(--gold-500)) top left / 22px 2px no-repeat, linear-gradient(var(--gold-500), var(--gold-500)) top left / 2px 22px no-repeat,
+      linear-gradient(var(--gold-500), var(--gold-500)) top right / 22px 2px no-repeat, linear-gradient(var(--gold-500), var(--gold-500)) top right / 2px 22px no-repeat,
+      linear-gradient(var(--gold-500), var(--gold-500)) bottom left / 22px 2px no-repeat, linear-gradient(var(--gold-500), var(--gold-500)) bottom left / 2px 22px no-repeat,
+      linear-gradient(var(--gold-500), var(--gold-500)) bottom right / 22px 2px no-repeat, linear-gradient(var(--gold-500), var(--gold-500)) bottom right / 2px 22px no-repeat; }
+    .vf .line { position: absolute; left: 14px; right: 14px; top: 20%; height: 2px; background: linear-gradient(90deg, transparent, var(--gold-300), transparent); box-shadow: 0 0 18px rgba(239,159,39,.6); animation: sweep 2.8s ease-in-out infinite alternate; }
+    @keyframes sweep { to { top: 78%; } }
+    @media (prefers-reduced-motion: reduce) { .vf .line { animation: none; top: 50%; } }
+    .vf .tags { position: absolute; left: 0; right: 0; bottom: 28px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding-inline: 24px; }
+    .vf .tags span { font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-100); background: rgba(5,7,13,.8); border: 1px solid var(--hairline); border-radius: 999px; padding: 6px 10px; }
+    .vf .cap { position: absolute; top: 28px; left: 0; right: 0; text-align: center; font: 500 10px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+    @media (max-width: 899px) { .vf { width: min(70%, 240px); } }
+    .free p + p { margin-top: 12px; }
+    .free .spec { margin-top: 24px; }
+    table.cov { width:100%; border-collapse:collapse; font:400 15px/1.5 var(--sans); margin-top:16px; }
+    table.cov th, table.cov td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--hairline-n); }
+    table.cov th { font:500 12px/1.4 var(--mono); text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+    table.cov td.num { font-family:var(--mono); text-align:right; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="/" data-cta="prices_brand"><img src="/icon-144.webp" width="28" height="28" alt="" /><span>CardOS TCG: Portfolio Tracker</span></a>
+      <div class="hdr-r"><a class="btn btn-p" href="#get" data-cta="prices_header_get">Get the app</a></div>
+    </div>
+  </header>
+  <main>
+    <section class="stage brk" id="top" aria-labelledby="h1">
+      <span class="ov ov-tl" aria-hidden="true">Price engine // How it works</span>
+      <div class="wrap">
+        <span class="label dot">CardOS TCG · Prices</span>
+        <h1 id="h1">How CardOS prices cards.</h1>
+        <p class="lede">Know what you paid. Know what sold.</p>
+        <p class="lede muted">CardOS keeps what you paid next to a nightly market estimate, tagged Est. When there is no fresh price, it shows N/A instead of a guess.</p>
+      </div>
+    </section>
+
+    <section id="sources" aria-labelledby="sources-h">
+      <div class="wrap">
+        <span class="label">Sources</span>
+        <h2 id="sources-h">Where prices come from</h2>
+        <p>Market prices come from TCGplayer for One Piece, Magic: The Gathering, Gundam, Riftbound and Palworld. One Piece also gets Cardmarket (EU) prices. Digimon cards are in the catalog, and their prices are coming soon.</p>
+      </div>
+    </section>
+
+    <section id="cadence" aria-labelledby="cadence-h">
+      <div class="wrap">
+        <span class="label">Cadence</span>
+        <h2 id="cadence-h">How often prices update</h2>
+        <ol class="cells steps">
+          <li><span class="n" aria-hidden="true">01</span><p class="hl">Captured nightly.</p><p>Each game has its own scheduled price capture every night.</p></li>
+          <li><span class="n" aria-hidden="true">02</span><p class="hl">Checked before use.</p><p>A price that jumps past 5x or drops below a fifth of its recent median is held back. So is a high price that has not moved in days, since that is usually a listing ask, not a sale.</p></li>
+          <li><span class="n" aria-hidden="true">03</span><p class="hl">Health checked daily.</p><p>A daily check confirms that every price source ran and wrote a normal number of rows.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="est" aria-labelledby="est-h">
+      <div class="wrap">
+        <span class="label">Est.</span>
+        <h2 id="est-h">What Est. means</h2>
+        <p>Est. is an estimate from the latest market price for that exact printing, parallels priced on their own. It is not a sale price or an offer. What you paid is stored as you entered it and is never filled in for you.</p>
+      </div>
+    </section>
+
+    <section id="na" aria-labelledby="na-h">
+      <div class="wrap">
+        <span class="label">N/A</span>
+        <h2 id="na-h">Why some cards show N/A</h2>
+        <ul>
+          <li>The set is brand new and the market has not priced most cards yet.</li>
+          <li>The card rarely lists, so there is no recent price.</li>
+          <li>The game is listed but still waiting on prices, like Digimon today.</li>
+          <li>The night&#x27;s price failed a safety check and was held back.</li>
+        </ul>
+        <p class="muted">In every case CardOS shows N/A. It never shows a made-up number.</p>
+      </div>
+    </section>
+
+    <section id="coverage" aria-labelledby="coverage-h">
+      <div class="wrap">
+        <span class="label">Coverage</span>
+        <h2 id="coverage-h">Games and sets covered</h2>
+        <table class="cov">
+          <thead><tr><th>Game</th><th>Sets</th><th>Cards</th><th>Prices</th></tr></thead>
+          <tbody>
+            <tr><td>One Piece</td><td class="num">67</td><td class="num">5,842</td><td>TCGplayer, Cardmarket (EU)</td></tr>
+            <tr><td>Magic: The Gathering</td><td class="num">57</td><td class="num">20,738</td><td>TCGplayer</td></tr>
+            <tr><td>Digimon</td><td class="num">99</td><td class="num">9,379</td><td>Prices soon</td></tr>
+            <tr><td>Gundam</td><td class="num">27</td><td class="num">2,198</td><td>TCGplayer</td></tr>
+            <tr><td>Riftbound</td><td class="num">12</td><td class="num">1,774</td><td>TCGplayer</td></tr>
+            <tr><td>Palworld</td><td class="num">7</td><td class="num">456</td><td>TCGplayer</td></tr>
+          </tbody>
+        </table>
+        <p class="muted">Catalog counts as of November 21, 2026.</p>
+      </div>
+    </section>
+
+    <section id="features" aria-labelledby="features-h">
+      <div class="wrap">
+        <span class="label">In the app</span>
+        <h2 id="features-h">What you can track</h2>
+        <ul>
+          <li>Cost lots in first in, first out (FIFO) order, so each sale matches what you paid.</li>
+          <li>A graded vault for slabs.</li>
+          <li>7 and 30 day Est. history free. Pro adds 90 days.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-h">
+      <div class="wrap">
+        <span class="label">FAQ</span>
+        <h2 id="faq-h">CardOS pricing FAQ</h2>
+        <details><summary>Where do CardOS card prices come from?</summary><p>CardOS reads market prices from TCGplayer each night for One Piece, Magic: The Gathering, Gundam, Riftbound and Palworld. One Piece also gets nightly Cardmarket (EU) prices. Digimon cards are listed, and prices are coming soon.</p></details>
+        <details><summary>How often do CardOS prices update?</summary><p>Every night. Each game has its own scheduled capture, and a daily health check confirms that each price source ran.</p></details>
+        <details><summary>What does Est. mean in CardOS?</summary><p>Est. is an estimate from the latest market price for that printing. It is not a sale price and not an offer. What you paid stays next to it, so the two are never mixed.</p></details>
+        <details><summary>Why does a card show N/A?</summary><p>N/A means CardOS has no fresh price for that card. That happens with brand new sets, cards that rarely list, games still waiting on prices, or a price that failed a safety check. CardOS never fills in a guessed number.</p></details>
+      </div>
+    </section>
+
+    <section class="close brk" id="get" aria-labelledby="get-h">
+      <div class="wrap">
+        <span class="label">Get the app</span>
+        <h2 id="get-h">Track your cards with CardOS.</h2>
+        <p class="muted" style="margin-inline:auto">CardOS TCG: Portfolio Tracker, live on iOS and Android.</p>
+        <div class="stores">
+          <a data-store="ios" data-cta="prices_close_app_store" href="https://apps.apple.com/app/id6792994816" target="_blank" rel="noopener"><img src="/badge-app-store.svg" alt="Download on the App Store" width="120" height="40" /></a>
+          <a data-store="play" data-cta="prices_close_play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg" target="_blank" rel="noopener"><img src="/badge-google-play.png" alt="Get it on Google Play" width="134" height="40" /></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="brk">
+    <div class="wrap">
+      <a href="https://cardostcg.com/">Home</a>
+      &nbsp;·&nbsp;
+      <a href="https://cardostcg.com/privacy-policy.html">Privacy</a>
+      &nbsp;·&nbsp;
+      <a href="https://cardostcg.com/terms-of-service.html">Terms</a>
+      <p class="fine">CardOS TCG is a fan-made collection tracker. Not affiliated with, endorsed, or sponsored by Bandai, Bandai Namco, Shueisha, Toei Animation, Sunrise, Eiichiro Oda, Riot Games, Wizards of the Coast, or Pocketpair. All card images and names are property of their respective owners.</p>
+      <p class="fine">© 2026 CardOS TCG: Portfolio Tracker</p>
+    </div>
+  </footer>
+  <script src="/ph-boot.js"></script>
+  <script src="/ph.js"></script>
+</body>
+</html>
