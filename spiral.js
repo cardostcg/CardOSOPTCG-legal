@@ -19,7 +19,8 @@
       legal: 'CardOS TCG is a fan-made collection tracker. Not affiliated with, endorsed, or sponsored by Bandai, Shueisha, Toei Animation, Eiichiro Oda, Riot Games, UVS Games, Bushiroad, or Pocketpair.'
     }
   };
-  var MAT = { op: '#F99D1B', rb: '#4E1D4C', pw: '#FDBF68' };
+  var MAT = { op: '#F99D1B', rb: '#4E1D4C', pw: '#064F6E' };
+  var FRONT = Math.PI * 0.5;
   var EST = 'Estimates are tagged Est.';
 
   var stage = document.getElementById('top');
@@ -112,30 +113,72 @@
     kick();
   }
 
+  var aimed = false;
   function layout() {
     var w = view.clientWidth || 320;
     var h = view.clientHeight || 320;
     var short = Math.min(window.innerWidth || w, window.innerHeight || h);
-    var box = Math.min(w, h);
-    var far = Math.min(short * 0.1, box * 0.16);
-    var near = Math.min(short * 0.36, box * 0.4);
+    var cw = parseFloat(getComputedStyle(root).getPropertyValue('--cw')) || 120;
+    var ch = cw * 88 / 63;
+    var zNear = 260;
+    var scaleNear = 1200 / (1200 - zNear);
+    var margin = 18;
+    var maxRx = w / 2 - margin - (cw / 2) * scaleNear;
+    var maxRy = (h / 2 - margin - (ch / 2) * scaleNear) / 0.62;
+    var near0 = Math.min(short * 0.55, maxRx, maxRy);
+    if (!(near0 > 48)) near0 = 48;
     var n = cards.length;
     var turns = 2.2 * (n / 20);
     var mobile = window.innerWidth < 700;
     var desktop = window.innerWidth >= 1100;
-    cards.forEach(function (c, i) {
-      var depthT = n === 1 ? 1 : i / (n - 1);
-      c.depthT = depthT;
-      c.ang = (i / n) * turns * Math.PI * 2;
-      var radius = far + (near - far) * depthT;
-      var z = -1800 + depthT * 2060;
-      var x = Math.cos(c.ang) * radius;
-      var y = Math.sin(c.ang) * radius * 0.62;
-      var roll = (6 + unit(i) * 8) * (unit(i + 4) > 0.5 ? 1 : -1);
-      var pitch = (4 + unit(i + 2) * 5) * (unit(i + 6) > 0.5 ? 1 : -1);
-      c.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateZ(' + roll.toFixed(2) + 'deg) rotateX(' + pitch.toFixed(2) + 'deg)';
-      c.el.classList.toggle('is-far', desktop && !lite && !reduced && depthT < 0.4);
-    });
+    function place(near) {
+      var far = Math.min(short * 0.12, near * 0.16);
+      cards.forEach(function (c, i) {
+        var depthT = n === 1 ? 1 : i / (n - 1);
+        c.depthT = depthT;
+        c.ang = (i / n) * turns * Math.PI * 2;
+        var radius = far + (near - far) * Math.pow(depthT, 2.15);
+        var z = -1800 + depthT * 2060;
+        var x = Math.cos(c.ang) * radius;
+        var y = Math.sin(c.ang) * radius * 0.62;
+        var roll = (6 + unit(i) * 8) * (unit(i + 4) > 0.5 ? 1 : -1);
+        var pitch = (4 + unit(i + 2) * 5) * (unit(i + 6) > 0.5 ? 1 : -1);
+        c.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateZ(' + roll.toFixed(2) + 'deg) rotateX(' + pitch.toFixed(2) + 'deg)';
+        c.el.classList.toggle('is-far', desktop && !lite && !reduced && depthT < 0.55);
+      });
+      if (!aimed && n) {
+        aimed = true;
+        angle = (FRONT - cards[n - 1].ang) * 180 / Math.PI;
+        spin.style.transform = 'rotateZ(' + angle.toFixed(3) + 'deg)';
+      }
+    }
+    function hitsType() {
+      var iw = window.innerWidth;
+      var ih = window.innerHeight;
+      var zones = ['#h1', '#top .lede', '#log-cta', '#top .label'].map(function (sel) {
+        var el = document.querySelector(sel);
+        return el ? el.getBoundingClientRect() : null;
+      });
+      for (var i = 0; i < cards.length; i++) {
+        var b = cards[i].el.getBoundingClientRect();
+        if (b.width < 2) continue;
+        if (b.left < 8 || b.right > iw - 8 || b.top < 60 || b.bottom > ih - 8) return true;
+        for (var k = 0; k < zones.length; k++) {
+          var z = zones[k];
+          if (!z) continue;
+          var pad = window.innerWidth < 700 ? 18 : 10;
+          if (b.left < z.right + pad && b.right > z.left - pad && b.top < z.bottom + pad && b.bottom > z.top - pad) return true;
+        }
+      }
+      return false;
+    }
+    var near = near0;
+    place(near);
+    for (var guard = 0; guard < 8 && hitsType(); guard++) {
+      near *= 0.82;
+      if (near < 36) break;
+      place(near);
+    }
     var chaseKeep = cards.map(function (c, i) { return c.chase ? i : -1; }).filter(function (i) { return i >= 0; });
     chaseKeep.sort(function (a, b) { return cards[b].depthT - cards[a].depthT; });
     var chaseMax = mobile ? 2 : 3;
@@ -147,8 +190,7 @@
 
   function facingScore(c) {
     var world = c.ang + angle * Math.PI / 180;
-    var front = -0.35;
-    return c.depthT * 900 + Math.cos(world - front) * 420;
+    return c.depthT * 1100 + Math.cos(world - FRONT) * 380;
   }
 
   function stack() {
@@ -395,9 +437,8 @@
     });
     document.documentElement.classList.add('spiral-ready');
     layout();
-    active = cards.length - 1;
     paintCaption();
-    if (logCta) logCta.href = hrefFor(cards[active], 'hero');
+    if (logCta && cards[active]) logCta.href = hrefFor(cards[active], 'hero');
     syncMotion();
     watchHero();
   }

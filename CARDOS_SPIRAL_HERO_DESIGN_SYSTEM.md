@@ -18,7 +18,7 @@ Magic and Gundam stay off the spiral. There is still no device pass that shows a
 
 Image use cuts the count further. The only card art already published on this page is the chase binder: One Piece 3, Riftbound 4, Palworld 3. Terms for any other marketing art are not confirmed, so those games do not gain cards, and the hand list is these ten. A later device pass for Magic or Gundam still needs cleared art before that game joins.
 
-Chase rims sit on the three nearest Riftbound cards (two on mobile). One Piece orange `#F99D1B` and PSA gold `#EF9F27` sit too close, so One Piece cards have no rim. Palworld cream has no rim. The 2px Abyss gap is on the Riftbound rim only, where violet and gold separate.
+Chase rims sit on the three nearest Riftbound cards (two on mobile). One Piece orange `#F99D1B` and PSA gold `#EF9F27` sit too close, so One Piece cards have no rim. Palworld cream `#FDBF68` merged with that orange on Abyss, so the Palworld mat is now Poel Blue `#064F6E`, the cover color already used on the Palworld binder. The 2px Abyss gap stays on the Riftbound rim, where violet and gold separate.
 
 ### Gate 5, lifted for this hook
 
@@ -98,7 +98,7 @@ Ship test, locked:
 |---|---|
 | One Piece | `#F99D1B` |
 | Riftbound | `#4E1D4C` plus `#FDBF68` hairline |
-| Palworld | `#FDBF68` |
+| Palworld | `#064F6E` (cream `#FDBF68` merged with One Piece orange, so the mat changed) |
 | Magic, if it later passes | `#378ADD` |
 | Gundam, if it later passes | `#00978D` |
 
@@ -114,7 +114,7 @@ Teal `#5DCAA5` is gains only. Chase rims are PSA Gold `#EF9F27`, at most 3 on de
 
 Abyss `#0A0E1A`. A warm-white flare at the vanishing point with a gold falloff. OS Blue stays the focus ring. The core is decorative. No type and no button on it.
 
-One funnel, one rotating group. CSS 3D, perspective 1200px. About 2.2 turns. Far radius about 12 percent of the shorter viewport side, near radius about 55 percent. Depth from about -1800px to about +260px. Each card faces the helix with a seeded tilt, 6 to 14 degrees of roll and 4 to 9 degrees of pitch. Same layout per load and per device class.
+One funnel, one rotating group. CSS 3D, perspective 1200px. About 2.2 turns. Far radius about 12 percent of the shorter viewport side, near radius about 55 percent, then reduced until every card stays inside the viewport and clear of the H1, the lede, and the CTA. Depth from about -1800px to about +260px, with the radius rising steeply so one card is large, a few are medium, and the rest sit small at the flare. Each card faces the helix with a seeded tilt, 6 to 14 degrees of roll and 4 to 9 degrees of pitch. Same layout per load and per device class. The left scrim keeps the type readable over the brightest card.
 
 Slot order is curated. No two cards of the same game adjacent. No two similar mats adjacent. Chase cards are spread across depth. No collisions. The minimum gap between near cards is 8 percent of card width, checked at 360, 768, 1440, and 1920.
 
