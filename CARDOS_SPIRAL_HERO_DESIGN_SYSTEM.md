@@ -1,6 +1,6 @@
 # CARDOS_SPIRAL_HERO_DESIGN_SYSTEM.md · P45.23
 
-> Status: LOCKED, with two open gates. No hero code until both are closed.
+> Status: LOCKED. Gates lifted 22 Nov 2026. The spiral is the landing hook. `?hero=wave` returns the wavefield.
 > Scope: landing page hook on cardostcg.com. Desktop and mobile web. Not the app.
 > Supplements CARDOS_BINDER_DESIGN_SYSTEM.md and CARDOS_LEDGER_DESIGN_SYSTEM.md.
 > Precedence on this page: the live `index.html`, then Binder where Binder names an exception, then Ledger.
@@ -8,7 +8,27 @@
 
 Reviewed 22 Nov 2026 (America/Chicago). Decisions below are locked as proposed in that review, except where this file says otherwise.
 
-## Open gates (block code)
+## Gates, lifted
+
+Art lifted the code block on 22 Nov 2026 and asked for the hook. The findings below stay in force. They no longer hold the code.
+
+### Gate 2, closed by dropping the games
+
+Magic and Gundam stay off the spiral. There is still no device pass that shows a price, a search hit, and an add on the current store builds. Digimon and Pokemon stay out. The passing games are One Piece, Riftbound, and Palworld.
+
+Image use cuts the count further. The only card art already published on this page is the chase binder: One Piece 3, Riftbound 4, Palworld 3. Terms for any other marketing art are not confirmed, so those games do not gain cards, and the hand list is these ten. A later device pass for Magic or Gundam still needs cleared art before that game joins.
+
+Chase rims sit on the three nearest Riftbound cards (two on mobile). One Piece orange `#F99D1B` and PSA gold `#EF9F27` sit too close, so One Piece cards have no rim. Palworld cream has no rim. The 2px Abyss gap is on the Riftbound rim only, where violet and gold separate.
+
+### Gate 5, lifted for this hook
+
+The CTA stays `Log your first card →`. It goes to `https://app.cardostcg.com/` with `utm_source`, `utm_medium`, `card_id`, `game`, and `source` (`hero` or `detail`). The web app still asks for an account before Add to Vault. The label matches the CTA this page already used. Attribution for the card is on the query string and on `cta_click`.
+
+### Gate 8, answered, kill switch on
+
+Weekly landing traffic cannot support 2,000 `hero_view` events per arm. The spiral ships as the page, not as a 50/50 split. `?hero=wave` returns the current wavefield for the whole visit. Revert after the spiral window if the CTA rate per visitor is below the wavefield window, or if nobody who clicked reaches `first_card_added` or `account_created`. A zero on both windows turns the spiral off. Do not ship on CTA clicks alone.
+
+## Open gates (record)
 
 ### Gate 2. Magic and Gundam stay off the hero
 
@@ -26,7 +46,7 @@ Until that device pass exists, Magic and Gundam are out. Digimon stays out (pric
 
 Passing games for v1: One Piece, Riftbound, Palworld.
 
-Count rule: 4 cards per passing game, then the cards of a failed game are spread across the passing games. An uneven remainder goes to the larger catalogs first. Today that is 20 cards: One Piece 7, Riftbound 7, Palworld 6. A game that later passes the device check takes 4 cards back.
+Count rule: 4 cards per passing game, then the cards of a failed game are spread across the passing games. An uneven remainder goes to the larger catalogs first. That target is 20 cards: One Piece 7, Riftbound 7, Palworld 6. The shipped hand list is the 10 cards already on the page, because further art is not cleared. A game that later passes the device check takes 4 cards back, once its art is cleared.
 
 ### Gate 5. The web log path is not confirmed
 
@@ -71,7 +91,7 @@ Ship test, locked:
 ## Locked decisions
 
 1. Bend is out of v1. Cards are flat and tilted. CSS 3D does not bend a plane.
-2. Games and counts: Gate 2. One Piece 7, Riftbound 7, Palworld 6, until Magic or Gundam passes a store-build check.
+2. Games and counts: Gate 2. Magic and Gundam stay off. The live hand list is One Piece 3, Riftbound 4, Palworld 3. The 20-card mix waits on cleared art.
 3. Mats, for the first browser pass. Distinguish One Piece orange `#F99D1B`, Palworld cream `#FDBF68`, and the gold chase rim `#EF9F27` on Abyss `#0A0E1A`, with a 2px Abyss gap. If they merge, change the Palworld mat or drop the rim on One Piece. Riftbound is Madder Violet `#4E1D4C` at 10px with a 1px Cream Yellow inner hairline.
 
 | Game | Mat |
@@ -85,7 +105,7 @@ Ship test, locked:
 Teal `#5DCAA5` is gains only. Chase rims are PSA Gold `#EF9F27`, at most 3 on desktop and 2 on mobile. OS Blue as a Magic mat is a named exception to the focus-ring rule.
 
 4. Line under the H1 is the live lede: "The One Piece, Magic, Gundam, Riftbound, and Palworld TCG portfolio tracker." The One Piece-only tagline is out. While Magic and Gundam are off the spiral, the lede stays the live sentence. The spiral does not rewrite the page's game list.
-5. CTA: `Log your first card →` to the web app, with `card_id`, `game`, and `source` on the query string. Same label on the hero and in the detail. Blocked by Gate 5.
+5. CTA: `Log your first card →` to the web app, with `card_id`, `game`, and `source` on the query string. Same label on the hero and in the detail. Gate 5 is lifted. The destination still requires an account.
 6. Curation: a hand list in the repo. The weekly job refreshes price only. It writes derived numbers: percent move, a coarse series, and `as_of`. It does not write raw daily rows. The word Spine and price-source names stay out of file names and field names. The service key stays in CI secrets. The browser reads the static JSON and the static images. No catalog call from the page.
 7. Tile B is the 30-day move. Gain in teal, loss in vermilion `#D9381E`, flat in faint gray. A missing number is an em dash in the tile. Never `$0.00`. The tile stays. Prices older than 10 days show the date. Older than 21 days, the detail drops both numbers and keeps art, name, set, and the CTA. Every price is tagged Est.
 8. Ship test: Gate 8.
@@ -160,7 +180,7 @@ Per card, derived fields only:
 
 No `|| 0` and no `?? 0` on price or percent. Null price renders an em dash.
 
-Images are self-hosted. Spiral images are 320px wide WebP. A 640px image loads only when the card opens. The nearest few load with the page. The rest wait until idle. Report the transferred weight with the build. Budget: mobile LCP under 2.5s on a mid-range phone over 4G. The LCP element is the poster, not the live scene. Mobile first paint under 450KB. Desktop under 700KB.
+Images are self-hosted. Spiral images are 320px wide WebP. The open state uses the existing 400px binder file, because that is the master on hand. The nearest three load with the page. The rest wait until idle. Weight, this build: 315,898 bytes for all ten thumbs, 88,658 bytes for the nearest three. Budget: mobile LCP under 2.5s on a mid-range phone over 4G. The LCP element is the type, not the live scene. Mobile first paint under 450KB. Desktop under 700KB.
 
 ## Profiles
 
@@ -216,4 +236,4 @@ Card bend, WebGL, Three.js. Live prices, auth, and personalization on the landin
 
 A mid-range Android phone in Chrome, and iPhone Safari. Desktop Chrome, Safari, and Firefox at 1440 and 1920. Reduced motion is a still spiral. A screen reader pass on the dialog and the card list. A null price renders an em dash with no layout shift. `as_of` at 12 days shows the date. `as_of` at 25 days drops the numbers. JS off shows the static row. LCP under 2.5s on throttled 4G, and the image weight is reported. Affiliation lines are the reviewed publisher text. The three events fire once and carry the right `card_id`.
 
-_Locked 22 Nov 2026. Gates 2 and 5 still open._
+_Locked 22 Nov 2026. Gates lifted the same night. Hand list is the ten binder cards. Kill switch is `?hero=wave`._
