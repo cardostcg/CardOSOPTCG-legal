@@ -548,7 +548,6 @@
 
     .spiral-view { position: absolute; inset: 0; perspective: 1200px; perspective-origin: var(--cx) var(--cy); touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }
     .spiral.is-grabbing .spiral-view, .spiral.is-grabbing .sp-btn { cursor: grabbing; }
-    .spiral:not(.is-sized) .spiral-view { visibility: hidden; }
     .spiral-haze, .spiral-flare { position: absolute; left: var(--cx); top: var(--cy); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
     .spiral-haze { width: calc(var(--R) * 3); height: calc(var(--R) * 3); background: radial-gradient(circle, rgba(239,159,39,.10) 0%, rgba(239,159,39,.04) 34%, transparent 66%); }
     .spiral-flare { width: calc(var(--R) * 1.5); height: calc(var(--R) * 1.5); background: radial-gradient(circle, rgba(255,246,226,.92) 0%, rgba(255,214,150,.46) 6%, rgba(239,159,39,.26) 18%, rgba(239,159,39,.07) 42%, transparent 66%); animation: sp-pulse 3s ease-in-out infinite alternate; }
@@ -978,7 +977,7 @@
 
   <script src="/ph-boot.js"></script>
   <script src="/ph.js"></script>
-  <script src="/spiral.js"></script>
+  <script src="/spiral.js?v=p45-24"></script>
   <script>
   (function () {
     document.addEventListener('click', function (e) {
