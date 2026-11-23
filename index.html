@@ -507,7 +507,7 @@
     main a:not([class]):hover { color: var(--link-hover); }
     @media (prefers-reduced-motion: reduce) { .btn, .stores a { transition: none; } .btn:active, .stores a:hover { transform: none; } }
 
-    /* spiral hero */
+    /* spiral hero, P45.24. The wavefield lives in #readout; ?hero=wave puts it back in the hero. */
     html[data-hero="wave"] .spiral,
     html[data-hero="wave"] .sp-dialog { display: none; }
     html[data-hero="spiral"] .ov-br { display: none; }
@@ -515,93 +515,155 @@
     html[data-hero="spiral"] #readout > .wrap { position: relative; z-index: 1; }
     html[data-hero="spiral"] #readout .cells > * { background: rgba(15, 20, 34, .78); }
     html[data-hero="spiral"] .stage { align-items: center; min-height: calc(100svh - 60px); background: #0A0E1A; }
-    html[data-hero="spiral"] .stage .wrap { width: min(680px, 52vw); margin-right: auto; margin-left: 0; padding-top: 8px; padding-bottom: 16px; }
-    html[data-hero="spiral"] h1 { font-size: clamp(2.45rem, 4.5vw, 4.35rem); margin-bottom: 14px; }
+    html[data-hero="spiral"] .stage .wrap { position: relative; z-index: 2; width: min(640px, 48vw); margin-right: auto; margin-left: 0; padding-top: 8px; padding-bottom: 16px; }
+    html[data-hero="spiral"] h1 { font-size: clamp(2.45rem, 4.3vw, 4.2rem); margin-bottom: 14px; }
     html[data-hero="spiral"] .lede { margin-bottom: 16px; font-size: 16px; }
     html[data-hero="spiral"] .ctas { margin-bottom: 12px; }
     @media (max-width: 899px) {
-      html[data-hero="spiral"] .stage { align-items: flex-end; }
-      html[data-hero="spiral"] .stage .wrap { width: 100%; padding-top: 28vh; padding-bottom: 12px; }
-      html[data-hero="spiral"] h1 { font-size: clamp(2.15rem, 9vw, 2.7rem); }
+      html[data-hero="spiral"] .stage { align-items: flex-start; }
+      html[data-hero="spiral"] .stage .wrap { width: 100%; display: flex; flex-direction: column; padding-top: clamp(30vh, min(calc(100svh - 360px), calc(100vw + 24px)), 56vh); padding-bottom: 20px; }
+      html[data-hero="spiral"] .stage .wrap > .label { order: 1; }
+      html[data-hero="spiral"] .stage .wrap > h1 { order: 2; font-size: clamp(2.15rem, 9vw, 2.7rem); }
+      html[data-hero="spiral"] .stage .wrap > .ctas { order: 3; margin-bottom: 18px; }
+      html[data-hero="spiral"] .stage .wrap > .lede { order: 4; }
+      html[data-hero="spiral"] .stage .wrap > .stores { order: 5; }
+      html[data-hero="spiral"] .ov-bl { display: none; }
+      html[data-hero="spiral"] .stage .wrap { pointer-events: none; }
+      html[data-hero="spiral"] .stage .wrap > * { pointer-events: auto; }
     }
-    .spiral::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1000; background: linear-gradient(90deg, #0A0E1A 0%, rgba(10,14,26,.96) 34%, rgba(10,14,26,.72) 46%, transparent 62%); }
+    @media (max-width: 599px) {
+      html[data-hero="spiral"] .ctas .btn-s { flex: 1 1 calc(50% - 6px); padding-left: 10px; padding-right: 10px; }
+    }
+
+    .spiral { position: absolute; inset: 0; z-index: 0; --cx: 70%; --cy: 50%; --R: 320px; --cw: 140px; --scrim: 50%; }
+    .spiral::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1000;
+      background: linear-gradient(90deg, rgba(10,14,26,.96) 0, rgba(10,14,26,.86) calc(var(--scrim) - 140px), rgba(10,14,26,0) var(--scrim)); }
     @media (max-width: 899px) {
-      .spiral::after { background: linear-gradient(180deg, transparent 0 36%, rgba(10,14,26,.72) 52%, #0A0E1A 70%); }
+      .spiral::after { background: linear-gradient(180deg, rgba(10,14,26,0) 0, rgba(10,14,26,0) var(--scrim), rgba(10,14,26,.9) calc(var(--scrim) + 48px), #0A0E1A calc(var(--scrim) + 120px)); }
     }
-    .spiral { position: absolute; inset: 0; z-index: 0; }
     .spiral-fallback { position: absolute; left: 50%; top: 18%; display: flex; gap: 12px; transform: translateX(-30%); list-style: none; }
     html.spiral-ready .spiral-fallback,
     html[data-hero="wave"] .spiral-fallback { display: none; }
     .spiral-fallback img { width: 92px; height: auto; border-radius: 6px; background: #151B2C; }
-    .spiral-view { position: absolute; inset: 8% 4% 10% 42%; perspective: 1200px; perspective-origin: 46% 48%; touch-action: pan-y; }
-    @media (max-width: 899px) { .spiral-view { inset: 48px 8px 56% 8px; } }
-    .spiral-flare { position: absolute; left: 46%; top: 48%; width: 380px; height: 380px; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(255,246,226,.95) 0%, rgba(255,214,150,.5) 10%, rgba(239,159,39,.32) 26%, rgba(239,159,39,.06) 48%, transparent 68%); }
-    .spiral-view .spiral-flare { left: 46%; top: 48%; }
+
+    .spiral-view { position: absolute; inset: 0; perspective: 1200px; perspective-origin: var(--cx) var(--cy); touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }
+    .spiral.is-grabbing .spiral-view, .spiral.is-grabbing .sp-btn { cursor: grabbing; }
+    .spiral:not(.is-sized) .spiral-view { visibility: hidden; }
+    .spiral-haze, .spiral-flare { position: absolute; left: var(--cx); top: var(--cy); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
+    .spiral-haze { width: calc(var(--R) * 3); height: calc(var(--R) * 3); background: radial-gradient(circle, rgba(239,159,39,.10) 0%, rgba(239,159,39,.04) 34%, transparent 66%); }
+    .spiral-flare { width: calc(var(--R) * 1.5); height: calc(var(--R) * 1.5); background: radial-gradient(circle, rgba(255,246,226,.92) 0%, rgba(255,214,150,.46) 6%, rgba(239,159,39,.26) 18%, rgba(239,159,39,.07) 42%, transparent 66%); animation: sp-pulse 3s ease-in-out infinite alternate; }
+    .spiral-flare::before { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #FFF6E2; box-shadow: 0 0 10px 3px rgba(255,246,226,.95), 0 0 34px 12px rgba(255,214,150,.5), 0 0 90px 30px rgba(239,159,39,.22); }
+    @keyframes sp-pulse { from { opacity: .85; } to { opacity: 1; } }
     .spiral-dim { position: absolute; inset: 0; background: rgba(10,14,26,.62); opacity: 0; pointer-events: none; transition: opacity 500ms; }
     .stage.is-detail .spiral-dim { opacity: 1; }
-    .spiral-spin { position: absolute; left: 46%; top: 48%; width: 0; height: 0; transform-style: preserve-3d; list-style: none; }
-    .spiral { --cw: 96px; }
-    @media (min-width: 700px) { .spiral { --cw: 122px; } }
-    @media (min-width: 1100px) { .spiral { --cw: 146px; } }
-    .sp-card { position: absolute; left: 0; top: 0; width: var(--cw); height: calc(var(--cw) * 88 / 63); margin-left: calc(var(--cw) / -2); margin-top: calc(var(--cw) * 88 / 63 / -2); padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; transform-style: preserve-3d; -webkit-tap-highlight-color: transparent; }
-    .sp-face { display: block; width: 100%; height: 100%; padding: 8px; border-radius: 3.5%; background: var(--mat, #F99D1B); box-sizing: border-box; position: relative; animation: sp-drift 9s ease-in-out infinite alternate; }
-    .sp-card[data-mat="rb"] .sp-face { padding: 10px; box-shadow: inset 0 0 0 1px #FDBF68; }
-    .sp-card.chase .sp-face { box-shadow: 0 0 0 2px #0A0E1A, 0 0 0 5px #EF9F27; }
-    .sp-card.chase[data-mat="rb"] .sp-face { box-shadow: inset 0 0 0 1px #FDBF68, 0 0 0 2px #0A0E1A, 0 0 0 5px #EF9F27; }
+
+    .spiral-spin { position: absolute; left: var(--cx); top: var(--cy); width: 0; height: 0; transform-style: preserve-3d; }
+    .sp-card { position: absolute; left: 0; top: 0; width: var(--cw); height: calc(var(--cw) * 88 / 63); margin-left: calc(var(--cw) / -2); margin-top: calc(var(--cw) * 88 / 63 / -2); transform-style: preserve-3d;
+      transform: translate3d(var(--x, 0), var(--y, 0), var(--z, 0)); transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .sp-card.is-untappable { pointer-events: none; }
+    .sp-card.is-out { visibility: hidden; }
+    .sp-btn { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; transform-style: preserve-3d; -webkit-tap-highlight-color: transparent; }
+    .sp-btn:focus-visible { outline: none; }
+    .sp-tilt { display: block; width: 100%; height: 100%; transform-style: preserve-3d; }
+    .sp-face { display: block; width: 100%; height: 100%; padding: 6%; border-radius: 4.5%; background: var(--mat, #F99D1B); box-sizing: border-box; position: relative;
+      box-shadow: 0 18px 40px rgba(0,0,0,.45); transition: box-shadow 360ms; animation: sp-drift 9s ease-in-out infinite alternate; }
+    .sp-card[data-mat="rb"] .sp-face { padding: 7%; box-shadow: inset 0 0 0 1px #FDBF68, 0 18px 40px rgba(0,0,0,.45); }
+    .sp-card[data-mat="pw"] .sp-face { box-shadow: 0 0 0 1px var(--faint), 0 18px 40px rgba(0,0,0,.45); }
+    .sp-card.chase .sp-face { box-shadow: 0 0 0 2px #0A0E1A, 0 0 0 4px #EF9F27, 0 18px 40px rgba(0,0,0,.45); }
+    .sp-card.chase[data-mat="rb"] .sp-face { box-shadow: inset 0 0 0 1px #FDBF68, 0 0 0 2px #0A0E1A, 0 0 0 4px #EF9F27, 0 18px 40px rgba(0,0,0,.45); }
+    .sp-btn:focus-visible .sp-face { box-shadow: 0 0 0 3px #0A0E1A, 0 0 0 5px #378ADD, 0 0 0 6px #FFFFFF; }
     .sp-face img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 3%; background: #0A0E1A; pointer-events: none; }
-    .sp-card.is-far .sp-face img { filter: blur(1.4px); }
-    .spiral.is-paused .sp-face,
-    .spiral.is-lite .sp-face { animation: none; }
-    .spiral.is-lite .sp-card.is-far .sp-face img { filter: none; }
-    @keyframes sp-drift { 50% { transform: translate3d(var(--dx, 2px), var(--dy, 2px), 0); } }
-    @media (hover: hover) and (min-width: 1100px) {
-      .sp-card.chase .sp-face::after { content: ""; position: absolute; inset: 8px; border-radius: inherit; background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.22) 50%, transparent 62%); opacity: 0; transition: opacity 400ms; pointer-events: none; }
-      .spiral:not(.is-paused) .sp-card.chase:hover .sp-face::after { opacity: 1; }
+    @keyframes sp-drift { from { translate: 0 0; } to { translate: var(--dx, 2px) var(--dy, 2px); } }
+    @media (hover: hover) and (pointer: fine) {
+      .spiral:not(.is-still) .sp-card:hover,
+      .spiral:not(.is-still) .sp-card:focus-within { transform: translate3d(var(--x, 0), var(--y, 0), calc(var(--z, 0px) + var(--lift, 0px))); }
+      .sp-card:hover .sp-face img { filter: none !important; }
+      .sp-card:hover .sp-face { opacity: 1 !important; }
     }
+    @media (hover: hover) and (min-width: 1100px) {
+      .sp-card.chase .sp-face::after { content: ""; position: absolute; inset: 7%; border-radius: 3%; background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.22) 50%, transparent 62%); opacity: 0; transition: opacity 400ms; pointer-events: none; }
+      .spiral:not(.is-still) .sp-card.chase:hover .sp-face::after { opacity: 1; }
+    }
+    .spiral.is-still .sp-face, .spiral.is-lite .sp-face, .spiral.is-still .spiral-flare { animation: none; }
+    .spiral.is-lite .sp-face { box-shadow: none; }
+
     .spiral-cap { position: absolute; z-index: 1001; left: clamp(20px, 5vw, 56px); top: 72px; margin: 0; font: 500 11px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-300); max-width: min(46ch, 70vw); }
-    .spiral-hint { position: absolute; z-index: 1001; right: clamp(20px, 5vw, 56px); bottom: 96px; margin: 0; font: 500 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
-    @media (max-width: 899px) { .spiral-hint { display: none; } .spiral-cap { top: 64px; } }
+    .spiral-hint { position: absolute; z-index: 1001; right: clamp(20px, 3vw, 40px); bottom: 24px; margin: 0; font: 500 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+    @media (max-width: 899px) {
+      .spiral-hint { display: none; }
+      .spiral-cap { top: 56px; left: 20px; right: 20px; max-width: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    }
     .stage.spiral-failed { background: var(--glow), url(/poster.webp) right center / cover no-repeat, var(--void); }
     .stage.spiral-failed .spiral-view,
     .stage.spiral-failed .spiral-flare,
+    .stage.spiral-failed .spiral-haze,
     .stage.spiral-failed .spiral-fallback { display: none; }
     @media (prefers-reduced-motion: reduce) {
-      .sp-face { animation: none; }
-      .sp-card.is-far .sp-face img { filter: none; }
-      .spiral-dim { transition: none; }
+      .sp-face, .spiral-flare { animation: none; }
+      .sp-card, .spiral-dim { transition: none; }
     }
-    .sp-dialog { border: 1px solid rgba(239,159,39,.22); background: #0F1422; color: var(--text); padding: 0; width: min(920px, calc(100vw - 48px)); max-height: min(86vh, 760px); margin: auto; border-radius: 10px; box-shadow: 0 24px 80px rgba(0,0,0,.55); overflow: auto; }
-    .sp-dialog::backdrop { background: rgba(5,7,13,.78); }
-    .sp-dialog[open] { display: grid; grid-template-columns: minmax(180px, 300px) minmax(0, 1fr); gap: 28px; padding: 28px 32px; align-items: center; }
-    .sp-shot { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; }
-    .sp-shot img { width: 100%; height: auto; max-height: min(68vh, 520px); object-fit: contain; border-radius: 4.6% / 3.3%; background: #0A0E1A; }
-    .sp-dialog h2 { font: 600 clamp(1.6rem, 3vw, 2.4rem)/1.1 var(--sans); letter-spacing: -.03em; margin: 0 0 8px; max-width: 16ch; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .sp-kicker { margin-bottom: 10px; }
-    .sp-sub { color: var(--muted); margin: 0 0 18px; }
-    .sp-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-    .sp-tiles > div { background: #0A0E1A; border: 1px solid rgba(239,159,39,.16); border-radius: 6px; padding: 12px 14px; }
-    .sp-num { display: block; margin-top: 6px; font: 500 22px/1.2 var(--mono); color: var(--gold-100); }
+
+    /* detail: the card flies left, the panel reads right. Mobile: card on top, sheet below. */
+    .sp-dialog { position: fixed; inset: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--text); overflow: hidden; }
+    .sp-dialog::backdrop { background: rgba(10,14,26,.86); animation: sp-fade 400ms ease-out; }
+    .sp-dialog.is-closing::backdrop { animation: sp-fade-out 500ms ease-in forwards; }
+    .sp-dialog.is-closing .sp-sheet, .sp-dialog.is-closing .sp-close, .sp-dialog.is-closing .sp-pager { animation: sp-fade-out 300ms ease-in forwards; }
+    @keyframes sp-fade { from { opacity: 0; } }
+    @keyframes sp-fade-out { to { opacity: 0; } }
+    .sp-dialog[open] { display: block; }
+    .sp-detail { height: 100%; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 4vw, 72px); align-items: center; padding: 72px clamp(24px, 5vw, 72px) 96px; box-sizing: border-box; }
+    .sp-shot { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; height: 100%; }
+    .sp-mat { display: block; width: min(100%, calc(min(72vh, 680px) * 63 / 88)); aspect-ratio: 63 / 88; padding: 2.4%; box-sizing: border-box; border-radius: 4.6% / 3.3%; background: var(--mat, #F99D1B); box-shadow: 0 40px 100px rgba(0,0,0,.6), 0 0 120px rgba(239,159,39,.12); }
+    .sp-mat[data-mat="rb"] { box-shadow: inset 0 0 0 1px #FDBF68, 0 40px 100px rgba(0,0,0,.6); }
+    .sp-mat[data-mat="pw"] { box-shadow: 0 0 0 1px var(--faint), 0 40px 100px rgba(0,0,0,.6); }
+    .sp-mat img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 3.4% / 2.5%; background: #0A0E1A; }
+    .sp-ghost { position: fixed; z-index: 5; margin: 0; pointer-events: none; transform-origin: 50% 50%; will-change: transform; }
+    .sp-sheet { max-width: 460px; min-width: 0; }
+    .sp-handle { display: none; }
+    .sp-kicker { margin-bottom: 14px; }
+    .sp-dialog h2 { font: 600 clamp(2rem, 3.6vw, 3.4rem)/1.02 var(--sans); letter-spacing: -.035em; margin: 0 0 10px; max-width: 14ch; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .sp-sub { color: var(--muted); margin: 0 0 22px; }
+    .sp-tiles { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-bottom: 16px; }
+    .sp-tile { min-width: 0; background: rgba(15,20,34,.9); border: 1px solid rgba(239,159,39,.18); border-radius: 8px; padding: 14px 16px; min-height: 96px; box-sizing: border-box; }
+    .sp-tile .small { font: 500 11px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .sp-num { display: block; margin-top: 8px; font: 500 clamp(18px, 1.9vw, 24px)/1.15 var(--mono); color: var(--gold-100); white-space: nowrap; }
     .sp-num.is-up { color: #5DCAA5; }
     .sp-num.is-down { color: #D9381E; }
     .sp-num.is-flat { color: var(--faint); }
-    .sp-asof { display: block; margin-top: 6px; color: var(--faint); font: 500 11px/1.3 var(--mono); letter-spacing: .06em; }
-    #sp-spark { display: block; width: 120px; height: 32px; margin-top: 8px; color: var(--gold-300); }
-    .sp-meta { color: var(--muted); font: 400 13px/1.5 var(--mono); margin-bottom: 18px; }
-    .sp-legal { margin-top: 14px; color: var(--faint); font-size: 12px; line-height: 1.5; }
-    .sp-nav { position: absolute; top: 50%; width: 44px; height: 44px; margin-top: -22px; border-radius: 50%; border: 1px solid rgba(239,159,39,.4); background: #0A0E1A; color: var(--gold-100); cursor: pointer; font: 500 18px var(--mono); z-index: 2; }
-    .sp-prev { left: 12px; }
-    .sp-next { right: 12px; }
-    .sp-close { position: absolute; top: 12px; right: 12px; min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(239,159,39,.35); background: #0A0E1A; color: var(--gold-100); font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+    .sp-asof { display: block; margin-top: 6px; color: var(--gold-300); font: 500 11px/1.3 var(--mono); letter-spacing: .06em; }
+    #sp-spark { display: block; width: 100%; max-width: 140px; height: 28px; margin-top: 6px; color: var(--gold-300); }
+    .sp-meta { color: var(--muted); font: 400 13px/1.5 var(--mono); margin-bottom: 20px; }
+    .sp-act { margin-bottom: 4px; }
+    .sp-legal { margin-top: 16px; color: var(--faint); font-size: 12px; line-height: 1.5; }
+    .sp-close { position: absolute; z-index: 6; top: 16px; right: clamp(16px, 3vw, 32px); width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 50%; border: 1px solid rgba(239,159,39,.35); background: rgba(10,14,26,.8); color: var(--gold-100); cursor: pointer; }
+    .sp-pager { position: absolute; z-index: 6; right: clamp(16px, 3vw, 32px); bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .sp-nav { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 50%; border: 1px solid rgba(239,159,39,.4); background: rgba(10,14,26,.8); color: var(--gold-100); cursor: pointer; font: 500 18px var(--mono); }
+    .sp-nav:hover, .sp-close:hover { border-color: var(--gold-300); }
+    .sp-count { font: 500 12px var(--mono); letter-spacing: .14em; color: var(--muted); min-width: 64px; text-align: center; }
     @media (max-width: 699px) {
-      .sp-dialog { width: 100%; max-height: 92vh; margin: auto 0 0; border-radius: 16px 16px 0 0; }
-      .sp-dialog[open] { grid-template-columns: 1fr; gap: 12px; padding: 48px 16px 24px; max-height: 92vh; overflow: auto; }
-      .sp-shot img { height: 46vh; }
-      .sp-nav { top: auto; bottom: 16px; }
+      .sp-detail { display: block; padding: 0; max-width: none; }
+      .sp-shot { height: 46svh; padding: 60px 16px 14px; box-sizing: border-box; touch-action: pan-y; }
+      .sp-mat { width: auto; height: 100%; max-width: 100%; }
+      .sp-sheet { position: fixed; left: 0; right: 0; bottom: 0; height: 54svh; max-width: none; overflow-y: auto; overscroll-behavior: contain; background: #0F1422; border-top: 1px solid rgba(239,159,39,.22); border-radius: 18px 18px 0 0; padding: 0 18px; box-sizing: border-box; box-shadow: 0 -20px 60px rgba(0,0,0,.5); }
+      .sp-handle { display: block; width: 40px; height: 4px; margin: 10px auto 14px; border-radius: 2px; background: rgba(255,247,230,.28); }
+      .sp-dialog h2 { font-size: 1.9rem; }
+      .sp-tile { min-height: 84px; padding: 12px; }
+      .sp-num { font-size: 18px; }
+      .sp-tile .small { font-size: 10px; letter-spacing: .06em; }
+      .sp-act { position: sticky; bottom: 0; z-index: 1; margin: 0 -18px; padding: 12px 18px max(12px, env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(15,20,34,0), #0F1422 28%); }
+      .sp-act .btn { display: flex; width: 100%; justify-content: center; box-sizing: border-box; }
+      .sp-legal { padding-bottom: 8px; }
+      .sp-close { top: 12px; right: 12px; }
+      .sp-pager { top: 12px; bottom: auto; left: 12px; right: auto; gap: 6px; }
+      .sp-count { min-width: 52px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-dialog::backdrop, .sp-dialog.is-closing::backdrop { animation-duration: 200ms; }
     }
   </style>
 </head>
 <body>
-  <noscript><style>.stage { background: var(--glow), url(/poster.webp) right center / cover no-repeat, var(--void); } .bn { --o: 1; } .bn-sw, .bn .ov { display: none; } .bn-frost { opacity: 0; }</style></noscript>
+  <noscript><style>.stage { background: var(--glow), url(/poster.webp) right center / cover no-repeat, var(--void); } .spiral-fallback { top: auto; left: auto; right: 4%; bottom: 40px; transform: none; } @media (max-width: 899px) { .spiral-fallback { right: auto; left: 20px; bottom: auto; top: 48px; } .spiral-fallback img { width: 56px; } .stage .wrap { padding-top: 112px; } } .bn { --o: 1; } .bn-sw, .bn .ov { display: none; } .bn-frost { opacity: 0; }</style></noscript>
   <header>
     <div class="wrap">
       <a class="brand" href="#top"><img src="/icon-144.webp" width="28" height="28" alt="" /><span>CardOS TCG: Portfolio Tracker</span></a>
@@ -628,12 +690,13 @@
           <li><img src="/hero/op05-119.webp" width="320" height="446" alt="One Piece, Monkey.D.Luffy, OP05-119" /></li>
         </ul>
         <div class="spiral-view" id="spiral-view">
+          <div class="spiral-haze" aria-hidden="true"></div>
           <div class="spiral-flare" aria-hidden="true"></div>
           <div class="spiral-spin" id="spiral-spin" role="list" aria-label="Cards"></div>
         </div>
         <div class="spiral-dim" aria-hidden="true"></div>
-        <p class="spiral-cap" id="spiral-cap" aria-live="polite"></p>
-        <p class="spiral-hint" id="spiral-hint">Tap a card to see its price move.</p>
+        <p class="spiral-cap" id="spiral-cap" aria-hidden="true"></p>
+        <p class="spiral-hint" id="spiral-hint">Drag to spin. Tap a card to see its price move.</p>
       </div>
       <span class="ov ov-tl" aria-hidden="true">Price history // Est.</span>
       <ul class="ov ov-bl" aria-label="Price history spec">
@@ -658,23 +721,31 @@
     </section>
 
     <dialog class="sp-dialog" id="sp-dialog" aria-labelledby="sp-title">
-      <button class="sp-close" id="sp-close" type="button">Close</button>
-      <button class="sp-nav sp-prev" id="sp-prev" type="button" aria-label="Previous card">‹</button>
-      <button class="sp-nav sp-next" id="sp-next" type="button" aria-label="Next card">›</button>
-      <div class="sp-shot"><img id="sp-art" alt="" width="400" height="558" /></div>
-      <div class="sp-copy">
-        <p class="label sp-kicker" id="sp-eyebrow"></p>
-        <h2 id="sp-title"></h2>
-        <p class="sp-sub" id="sp-sub"></p>
-        <div class="sp-tiles" id="sp-tiles">
-          <div><span class="small">Est. price</span><strong class="sp-num" id="sp-price">—</strong><span class="sp-asof" id="sp-asof" hidden></span></div>
-          <div><span class="small">30-day move</span><strong class="sp-num" id="sp-move">—</strong><svg id="sp-spark" viewBox="0 0 120 32" aria-hidden="true" hidden></svg></div>
+      <button class="sp-close" id="sp-close" type="button" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="sp-detail">
+        <div class="sp-shot" id="sp-shot"><span class="sp-mat" id="sp-mat"><img id="sp-art" alt="" width="400" height="558" /></span></div>
+        <div class="sp-sheet" id="sp-sheet">
+          <span class="sp-handle" aria-hidden="true"></span>
+          <div class="sp-copy" id="sp-copy">
+            <p class="label sp-kicker" id="sp-eyebrow"></p>
+            <h2 id="sp-title"></h2>
+            <p class="sp-sub" id="sp-sub"></p>
+            <div class="sp-tiles" id="sp-tiles">
+              <div class="sp-tile"><span class="small">Est. price</span><strong class="sp-num" id="sp-price">—</strong><span class="sp-asof" id="sp-asof" hidden></span></div>
+              <div class="sp-tile"><span class="small">Est. 30 day move</span><strong class="sp-num" id="sp-move">—</strong><svg id="sp-spark" viewBox="0 0 120 32" preserveAspectRatio="none" aria-hidden="true" hidden></svg></div>
+            </div>
+            <p class="sp-meta" id="sp-meta"></p>
+            <div class="sp-act"><a class="btn btn-p" id="sp-cta" data-cta="log_first_card" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser&source=detail">Log your first card →</a></div>
+            <p class="sp-legal" id="sp-legal"></p>
+          </div>
         </div>
-        <p class="sp-meta" id="sp-meta"></p>
-        <a class="btn btn-p" id="sp-cta" data-cta="log_first_card" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser&source=detail">Log your first card →</a>
-        <p class="sp-legal" id="sp-legal"></p>
-        <p class="vh" id="sp-live" aria-live="polite"></p>
       </div>
+      <div class="sp-pager">
+        <button class="sp-nav sp-prev" id="sp-prev" type="button" aria-label="Previous card">‹</button>
+        <span class="sp-count" id="sp-count" aria-hidden="true"></span>
+        <button class="sp-nav sp-next" id="sp-next" type="button" aria-label="Next card">›</button>
+      </div>
+      <p class="vh" id="sp-live" aria-live="polite"></p>
     </dialog>
 
     <section id="readout" aria-labelledby="readout-h">
