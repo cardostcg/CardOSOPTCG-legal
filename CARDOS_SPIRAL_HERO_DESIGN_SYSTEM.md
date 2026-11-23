@@ -1,6 +1,6 @@
 # CARDOS_SPIRAL_HERO_DESIGN_SYSTEM.md · P45.23
 
-> Status: LOCKED. Gates lifted 22 Nov 2026. The spiral is the landing hook. `?hero=wave` returns the wavefield.
+> Status: LOCKED. Gates lifted 22 Nov 2026. The spiral is the landing hook. The wavefield sits in the readout, one section down. `?hero=wave` puts the wavefield back in the hero.
 > Scope: landing page hook on cardostcg.com. Desktop and mobile web. Not the app.
 > Supplements CARDOS_BINDER_DESIGN_SYSTEM.md and CARDOS_LEDGER_DESIGN_SYSTEM.md.
 > Precedence on this page: the live `index.html`, then Binder where Binder names an exception, then Ledger.
