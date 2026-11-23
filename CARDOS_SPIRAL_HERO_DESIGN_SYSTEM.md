@@ -236,4 +236,52 @@ Card bend, WebGL, Three.js. Live prices, auth, and personalization on the landin
 
 A mid-range Android phone in Chrome, and iPhone Safari. Desktop Chrome, Safari, and Firefox at 1440 and 1920. Reduced motion is a still spiral. A screen reader pass on the dialog and the card list. A null price renders an em dash with no layout shift. `as_of` at 12 days shows the date. `as_of` at 25 days drops the numbers. JS off shows the static row. LCP under 2.5s on throttled 4G, and the image weight is reported. Affiliation lines are the reviewed publisher text. The three events fire once and carry the right `card_id`.
 
+## P45.24 polish, 23 Nov 2026
+
+This section supersedes the Scene, Motion and input, and Detail sections above where they differ. Everything else stays locked.
+
+### Rulings recorded
+
+- D12. One Piece card art is allowed in the hero and the chase binder. It is a named exception to the AGENTS.md rule on One Piece imagery in brand graphics. Card art and any render of the spiral never become the og:image, an icon, or store graphics.
+- D14. This repo is the landing site.
+- The wavefield stays in #readout. `?hero=wave` stays as the kill switch.
+- "Free unlimited scanner" in the lede is approved live copy.
+
+### Motion model
+
+- Four layers per card: slot (static translate3d), counter-spin (animated), tilt (seeded roll 4 to 14 degrees, pitch 3 to 9 degrees, static), face (mat, art, drift).
+- The group and every counter-spin run one Web Animations rotate each, 90 seconds per turn, on the same clock. A card's on-screen tilt is only its seeded roll. Verified: 0 degrees of error from the seeded roll over 36 orbit phases at 360, 768, 1440 and 1920, and through drag, fling and settle.
+- Idle runs no JS per frame. requestAnimationFrame runs only during a drag, a fling, a settle, a key step, a pause ramp, and the 2 second fps sample after load. The caption checks the front slot every 450ms while the orbit runs.
+- Pause and resume ramp playbackRate: to 0 over 400ms, back to 1 over 600ms.
+
+### Layout
+
+- Slots are designed in units of the vortex radius R, then zoomed until the circle every card sweeps, with its hover lift and a 24px margin (14px on mobile), clears the eyebrow, H1, lede, CTAs, store badges, caption, hint and overlay labels. The type is clear at every orbit phase, not only at rest.
+- Card width on screen runs from 0.08R (far) to 0.44R (near) on a cubic ramp: one large card, a few medium, the rest small at the core. Radius runs 0.13R to 0.60R. The angular step is searched per card count for the widest spacing; for 10 cards it lands near the golden angle.
+- Depth is static per slot: opacity 0.45 to 1, brightness 0.6 to 1, and blur of 1.6 to 2.8px on screen for the far third, desktop only.
+- Desktop: the vortex sits centred between the type column and the right edge. Mobile and tablet (under 900px): the vortex fills the band between the caption and the eyebrow.
+- Mobile order: caption, spiral band, eyebrow, H1, primary CTA, then the secondary CTAs, lede and store badges. At 360x740 the primary CTA bottom is at 666px.
+
+### Scene
+
+- Core: a 10px hot point `#FFF6E2` in a bloom 1.5R across that falls off through gold `#EF9F27`, with a 6 second breathing pulse (opacity 0.85 to 1). A faint warm haze 3R across sits behind the cards.
+- The left scrim (vertical on mobile) ends where the type ends, so the vortex is never dimmed.
+- Palworld gets a 1px outer hairline in `--faint` (about 5.3:1 on Abyss) so the Poel Blue mat (about 2.2:1) holds its edge on dim far cards.
+- Slot order stays the hand list order. A rule that One Piece is never next to Palworld cannot be met with this list: six One Piece and Palworld cards would need five Riftbound separators, and the list has four. The Poel Blue mat already separates them.
+
+### Interaction
+
+- Front slot: lower left of the core on desktop, bottom on mobile. The caption follows the card there, with a 200ms crossfade. The H1 never changes.
+- Hovering a card pauses the orbit and lifts that card about 7.5 percent toward the viewer. Hovering empty stage space does not pause.
+- Horizontal drag turns the funnel 1:1 (a full-width drag is about half a turn). Release flings with friction, then the nearest card settles into the front slot over 700ms. Touch: pan-y, the first 8px decide, edge drags within 24px are ignored.
+- Left and Right step one card into the front slot over 700ms when a card has focus. Focus follows.
+- Motion chip off or reduced motion: still spiral, no drift or pulse or lift, drag follows the finger with no fling, keys step instantly, open and close crossfade in 200ms.
+
+### Detail
+
+- Desktop: the card flies from its slot to the left at up to 72vh tall, in its game mat. Panel on the right: eyebrow, name, rarity and printing, Tile A "Est. price", Tile B "Est. 30 day move", meta, CTA, legal. Close top right. Prev, "N / 10", next bottom right. The spiral stays visible behind a 0.86 Abyss backdrop.
+- Mobile: card on top in 46svh, bottom sheet over the lower 54svh with a handle. Swipe down closes. A horizontal swipe on the card switches. The CTA sticks above the safe area. Prev and next sit top left.
+- Moves carry a sign and an arrow: gain `▲ +4.2%` in teal, loss `▼ −3.1%` in vermilion, flat in faint gray. Null is "—" with no layout shift.
+- Open 650ms, close 500ms back into the slot the card left, switch 500ms with a 200ms text crossfade.
+
 _Locked 22 Nov 2026. Gates lifted the same night. Hand list is the ten binder cards. Kill switch is `?hero=wave`._
