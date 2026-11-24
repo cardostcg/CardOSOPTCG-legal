@@ -675,7 +675,7 @@
       </ol></nav>
       <div class="hdr-r">
         <button class="chip" id="motion" type="button" aria-pressed="true">Motion on</button>
-        <a class="chip hide-sm" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser" data-cta="web_app_header">Web app</a>
+        <a class="chip hide-sm" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser" data-cta="web_app">Web app</a>
         <a class="btn btn-p hide-sm" href="/get" data-cta="get_page_header">Get the app →</a>
       </div>
     </div>
@@ -713,7 +713,7 @@
         <div class="ctas" id="store-ctas">
           <a class="btn btn-p" id="log-cta" data-cta="log_first_card" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser&source=hero">Log your first card →</a>
           <a class="btn btn-s" data-cta="get_page_hero" href="/get">Get the app →</a>
-          <a class="btn btn-s" data-cta="open_web_app" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Open web app</a>
+          <a class="btn btn-s" id="web-app-cta" data-cta="web_app" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Open web app</a>
         </div>
         <div class="stores">
           <a id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener"><img src="/badge-google-play.png" alt="Get it on Google Play" width="134" height="40" /></a>
@@ -978,16 +978,34 @@
     </div>
   </footer>
 
-  <script src="/ph-boot.js"></script>
+  <script>window.CARDOS_PH_KEY='phc_ok7UJ8K4cEQ8waTFSWefLfvtSc8WThrTCn2cRaBBVCCa';window.CARDOS_PH_HOST='https://us.i.posthog.com';window.CARDOS_PH_PLATFORM='landing';</script>
   <script src="/ph.js"></script>
   <script src="/spiral.js?v=p45-24-na"></script>
   <script>
   (function () {
+    function trackLandingCta(cta) {
+      if (window.ph && typeof window.ph.track === 'function') window.ph.track('landing_cta_tapped', { cta: cta });
+    }
+    function landingCtaName(el) {
+      if (!el) return '';
+      if (el.id === 'play-cta') return 'play';
+      if (el.id === 'appstore-cta') return 'app_store';
+      if (el.id === 'web-app-cta' || (el.getAttribute('data-cta') === 'web_app' && el.hostname === 'app.cardostcg.com')) return 'web_app';
+      return '';
+    }
+    document.querySelectorAll('#web-app-cta, a[data-cta="web_app"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        var changed = false;
+        if (!u.searchParams.has('utm_source')) { u.searchParams.set('utm_source', 'web'); changed = true; }
+        if (!u.searchParams.has('utm_medium')) { u.searchParams.set('utm_medium', 'teaser'); changed = true; }
+        if (changed) a.href = u.toString();
+      } catch (err) {}
+    });
     document.addEventListener('click', function (e) {
-      var el = e.target.closest('[data-cta]');
-      if (!el) return;
-      var cta = el.getAttribute('data-cta');
-      if (cta && window.ph && typeof window.ph.track === 'function') window.ph.track('landing_cta_tapped', { cta: cta });
+      var el = e.target.closest('a');
+      var cta = landingCtaName(el);
+      if (cta) trackLandingCta(cta);
     });
     // section rail
     var links = document.querySelectorAll('.rail a');
