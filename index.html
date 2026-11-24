@@ -422,6 +422,7 @@
     @media (hover: hover) { .bn-hov { display: inline; } .bn-tap { display: none; } }
     .bn-stage { position: relative; width: var(--bw); height: var(--bh); margin: 0 auto; perspective: 1200px; perspective-origin: 50% 70%; cursor: pointer; -webkit-tap-highlight-color: transparent;
       transform: translateX(calc(var(--o) * var(--shift))); transition: transform 360ms cubic-bezier(.2,.8,.2,1); }
+    #binder { overflow-x: clip; } /* the open-spread hit area below reaches past the stage; clip it so phones keep their width */
     .bn-stage::before { content: ""; position: absolute; top: -24px; bottom: -12px; left: 0; width: calc(var(--x0) + 2 * var(--step) + var(--cw) + 16px); pointer-events: none; }
     .bn.open .bn-stage::before { pointer-events: auto; }
     .bn-back, .bn-spine { background-color: var(--cover); background-color: color-mix(in srgb, var(--cover) 80%, black); transition: background-color 280ms, opacity 280ms; }
@@ -511,7 +512,9 @@
     html[data-hero="wave"] .spiral,
     html[data-hero="wave"] .sp-dialog { display: none; }
     html[data-hero="spiral"] .ov-br { display: none; }
-    html[data-hero="spiral"] #readout { position: relative; overflow: hidden; background: var(--glow), var(--void); }
+    /* Readout sits between the Abyss hero and the Abyss page, so its Void base fades in and out of Abyss at both edges. */
+    html[data-hero="spiral"] #readout { position: relative; overflow: hidden; background: var(--glow), linear-gradient(180deg, var(--abyss) 0, var(--void) 180px, var(--void) calc(100% - 180px), var(--abyss) 100%); }
+    html[data-hero="spiral"] #wf { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 140px, #000 calc(100% - 140px), transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 140px, #000 calc(100% - 140px), transparent 100%); }
     html[data-hero="spiral"] #readout > .wrap { position: relative; z-index: 1; }
     html[data-hero="spiral"] #readout .cells > * { background: rgba(15, 20, 34, .78); }
     html[data-hero="spiral"] .stage { align-items: center; min-height: calc(100svh - 60px); background: #0A0E1A; }
