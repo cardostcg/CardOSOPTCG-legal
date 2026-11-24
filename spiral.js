@@ -89,11 +89,11 @@
   function easeOut(k) { return 1 - Math.pow(1 - k, 3); }
   function easeInOut(k) { return k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; }
   function money(v) {
-    if (!isNum(v) || v <= 0) return '—';
+    if (!isNum(v) || v <= 0) return 'N/A';
     return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
   function moveText(v) {
-    if (!isNum(v)) return '—';
+    if (!isNum(v)) return 'N/A';
     var abs = Math.abs(v).toFixed(1) + '%';
     if (v > 0) return '▲ +' + abs;
     if (v < 0) return '▼ −' + abs;
@@ -507,7 +507,7 @@
     var priceEl = document.getElementById('sp-price');
     var moveEl = document.getElementById('sp-move');
     var asofEl = document.getElementById('sp-asof');
-    priceEl.textContent = stale ? '—' : money(c.price);
+    priceEl.textContent = stale ? 'N/A' : money(c.price);
     priceEl.className = 'sp-num' + (!stale && isNum(c.price) && c.price > 0 ? '' : ' is-flat');
     var mv = stale ? null : c.move_30d;
     moveEl.textContent = moveText(mv);
