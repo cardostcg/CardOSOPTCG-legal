@@ -284,4 +284,30 @@ This section supersedes the Scene, Motion and input, and Detail sections above w
 - Moves carry a sign and an arrow: gain `▲ +4.2%` in teal, loss `▼ −3.1%` in vermilion, flat in faint gray. Null is "—" with no layout shift.
 - Open 650ms, close 500ms back into the slot the card left, switch 500ms with a 200ms text crossfade.
 
+## P45.25 live prices and polish, 25 Nov 2026
+
+This section supersedes the Data, Detail and CTA parts above where they differ.
+
+### Data
+
+- `hero/cards.json` is the hand list: membership, order, and a hand-edited `price_key` per card (`id`, `variant`, `source`). It holds no prices.
+- `hero/prices.json` is written by `scripts/hero-prices.mjs`, daily, from the view `hero.prices_v` read by the login role `hero_prices_ro`. Shape: `{ generated_at, cards: { card_id: { price, move_30d, series_30d, as_of, source } } }`. Null stays null.
+- The browser reads only these two static files and the images. No Supabase client, no anon key, no service key, anywhere on the page or in the job.
+- Keys are the print the app prices, never the base print. One Piece: `tcgplayer_en`, card_id is the catalog card_image_id (`EB04-061_p2`). Riftbound: `tcgplayer_rb`, variant `signature`. Palworld: `tcgplayer_pw`, variant `ssp`. Never a `*_low` source.
+- Job rules: latest non-quarantined, non-stale row is the price and `as_of`. `move_30d` only from a row 25 to 35 days older. `series_30d` is up to 5 weekly points. It fails, and writes nothing, on: a key with no rows, a key with only quarantined or stale rows, more than 1 percent off `card_catalog.market_price`, more than 10x or under 0.1x the last committed price (first run: the 11/11 hand values), a game with no priced card, or a key marked UNCONFIRMED.
+- Schedule: 08:23 UTC, after the One Piece, Riftbound and Palworld captures and the One Piece catalog write (06:00 to 07:15 UTC).
+
+### Page
+
+- Staleness is decided in the browser. Older than 10 days shows "Est. as of MM/DD/YYYY" under Tile A. Older than 21 days, or no `as_of`, drops price, move, line and pill. The meta line no longer carries a date.
+- Price pill under the caption for the front card: "Est. $3,711.35  ▲ 4.2%" in DM Mono. Same entry as the tiles. No valid move shows the price alone. Hidden with no price. Crossfades with the caption, static under reduced motion.
+- Under 900px the caption block (caption, pill, "Tap a card") sits at the bottom of the spiral band, 10px above the eyebrow. "Tap a card" leaves after the first interaction and never shows under reduced motion. Desktop keeps the caption top left.
+- Mobile spiral: sized by the band height. The near card may bleed up to 12 percent of its width past the side edges; the stage clips it. Far card width floor 0.10R under 900px, 0.08R on desktop; the angular step is searched again per floor. Phones at least 600px tall move the type block down 40px so the band keeps its height. At 360x740 the CTA bottom is at 706px.
+- Detail: the 30 day line spans the panel under the tiles with a dot on the last point and a "30D" label. Its row keeps its height when there is no series. Tile A reserves its date line. Mobile: prev, "N / 10", next centered under the card above the sheet; close top right; backdrop 0.96 over the top 80px.
+
+### CTA
+
+- The web app has no sign-up URL or mode. Sign-up is a toggle on the sign-in screen, and `?mode=signup` is ignored. The primary CTA is `Get started →` to `https://app.cardostcg.com/` with `utm_source`, `utm_medium`, `source`, `card_id` and `game`, on the hero and in the detail.
+- "Open web app" is gone from the hero. The header "Web app" chip stays and still sends `landing_cta_tapped` `web_app` on desktop. Phones have no web app CTA in the hero now.
+
 _Locked 22 Nov 2026. Gates lifted the same night. Hand list is the ten binder cards. Kill switch is `?hero=wave`._

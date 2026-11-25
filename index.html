@@ -524,7 +524,7 @@
     html[data-hero="spiral"] .ctas { margin-bottom: 12px; }
     @media (max-width: 899px) {
       html[data-hero="spiral"] .stage { align-items: flex-start; }
-      html[data-hero="spiral"] .stage .wrap { width: 100%; display: flex; flex-direction: column; padding-top: clamp(30vh, min(calc(100svh - 360px), calc(100vw + 24px)), 56vh); padding-bottom: 20px; }
+      html[data-hero="spiral"] .stage .wrap { width: 100%; display: flex; flex-direction: column; padding-top: clamp(30vh, min(calc(100svh - 360px), calc(100vw + 24px)), 60vh); padding-bottom: 20px; }
       html[data-hero="spiral"] .stage .wrap > .label { order: 1; }
       html[data-hero="spiral"] .stage .wrap > h1 { order: 2; font-size: clamp(2.15rem, 9vw, 2.7rem); }
       html[data-hero="spiral"] .stage .wrap > .ctas { order: 3; margin-bottom: 18px; }
@@ -536,6 +536,10 @@
     }
     @media (max-width: 599px) {
       html[data-hero="spiral"] .ctas .btn-s { flex: 1 1 calc(50% - 6px); padding-left: 10px; padding-right: 10px; }
+    }
+    /* P45.25: the caption block now sits at the bottom of the spiral band, so phones at least 600px tall move the type down 40px to give the band that room back. Short phones keep the P45.24 offset so the CTA does not drop further. */
+    @media (max-width: 599px) and (min-height: 600px) {
+      html[data-hero="spiral"] .stage .wrap { padding-top: clamp(30vh, min(calc(100svh - 320px), calc(100vw + 64px)), 60vh); }
     }
 
     .spiral { position: absolute; inset: 0; z-index: 0; --cx: 70%; --cy: 50%; --R: 320px; --cw: 140px; --scrim: 50%; }
@@ -589,12 +593,24 @@
     .spiral.is-still .sp-face, .spiral.is-lite .sp-face, .spiral.is-still .spiral-flare { animation: none; }
     .spiral.is-lite .sp-face { box-shadow: none; }
 
-    .spiral-cap { position: absolute; z-index: 1001; left: clamp(20px, 5vw, 56px); top: 72px; margin: 0; font: 500 11px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-300); max-width: min(46ch, 70vw); }
+    /* P45.25: caption, price pill and the mobile tap label share one block. Desktop: top left. Under 900px: bottom of the spiral band, set by spiral.js. */
+    .spiral-tag { position: absolute; z-index: 1001; left: clamp(20px, 5vw, 56px); top: 72px; max-width: min(46ch, 70vw); pointer-events: none; }
+    .spiral-cap { margin: 0; min-height: 1.4em; font: 500 11px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-300); }
+    .spiral-row { display: flex; align-items: center; gap: 12px; min-height: 24px; margin-top: 6px; }
+    .spiral-pill { display: inline-flex; align-items: center; gap: 10px; padding: 3px 10px; border: 1px solid rgba(239,159,39,.28); border-radius: 999px; background: rgba(10,14,26,.72); font: 500 12px/1.3 var(--mono); color: var(--gold-100); white-space: nowrap; box-sizing: border-box; }
+    .spiral-pill[hidden] { display: none; }
+    .spiral-pill .is-up { color: #5DCAA5; }
+    .spiral-pill .is-down { color: #D9381E; }
+    .spiral-tap { display: none; margin: 0 0 0 auto; font: 500 10px/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+    .spiral-tap[hidden] { display: none !important; }
     .spiral-hint { position: absolute; z-index: 1001; right: clamp(20px, 3vw, 40px); bottom: 24px; margin: 0; font: 500 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
     @media (max-width: 899px) {
       .spiral-hint { display: none; }
-      .spiral-cap { top: 56px; left: 20px; right: 20px; max-width: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .spiral-tag { top: 40%; left: 20px; right: 20px; max-width: none; }
+      .spiral-cap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .spiral-tap { display: block; }
     }
+    @media (prefers-reduced-motion: reduce) { .spiral-tap { display: none !important; } }
     .stage.spiral-failed { background: var(--glow), url(/poster.webp) right center / cover no-repeat, var(--void); }
     .stage.spiral-failed .spiral-view,
     .stage.spiral-failed .spiral-flare,
@@ -632,8 +648,15 @@
     .sp-num.is-up { color: #5DCAA5; }
     .sp-num.is-down { color: #D9381E; }
     .sp-num.is-flat { color: var(--faint); }
-    .sp-asof { display: block; margin-top: 6px; color: var(--gold-300); font: 500 11px/1.3 var(--mono); letter-spacing: .06em; }
-    #sp-spark { display: block; width: 100%; max-width: 140px; height: 28px; margin-top: 6px; color: var(--gold-300); }
+    .sp-asof { display: block; min-height: 1.3em; margin-top: 6px; color: var(--gold-300); font: 500 11px/1.3 var(--mono); letter-spacing: .06em; } /* reserved when empty: no shift between fresh and dated prices */
+    /* P45.25: the 30 day line spans the panel under the tiles. Its row keeps its height when there is no series, so switching cards does not shift the panel. */
+    .sp-trend { display: flex; align-items: center; gap: 12px; height: 40px; margin: -4px 0 14px; color: var(--gold-300); }
+    .sp-trend.is-empty { visibility: hidden; }
+    .sp-trend-lab { font: 500 11px/1 var(--mono); letter-spacing: .1em; color: var(--muted); }
+    .sp-trend-plot { position: relative; flex: 1 1 auto; min-width: 0; height: 100%; }
+    #sp-spark { display: block; width: 100%; height: 100%; overflow: visible; }
+    #sp-spark path { vector-effect: non-scaling-stroke; }
+    .sp-trend-dot { position: absolute; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--gold-100); box-shadow: 0 0 0 2px rgba(10,14,26,.9); }
     .sp-meta { color: var(--muted); font: 400 13px/1.5 var(--mono); margin-bottom: 20px; }
     .sp-act { margin-bottom: 4px; }
     .sp-legal { margin-top: 16px; color: var(--faint); font-size: 12px; line-height: 1.5; }
@@ -644,7 +667,7 @@
     .sp-count { font: 500 12px var(--mono); letter-spacing: .14em; color: var(--muted); min-width: 64px; text-align: center; }
     @media (max-width: 699px) {
       .sp-detail { display: block; padding: 0; max-width: none; }
-      .sp-shot { height: 46svh; padding: 60px 16px 14px; box-sizing: border-box; touch-action: pan-y; }
+      .sp-shot { height: 46svh; padding: 16px 16px 64px; box-sizing: border-box; touch-action: pan-y; }
       .sp-mat { width: auto; height: 100%; max-width: 100%; }
       .sp-sheet { position: fixed; left: 0; right: 0; bottom: 0; height: 54svh; max-width: none; overflow-y: auto; overscroll-behavior: contain; background: #0F1422; border-top: 1px solid rgba(239,159,39,.22); border-radius: 18px 18px 0 0; padding: 0 18px; box-sizing: border-box; box-shadow: 0 -20px 60px rgba(0,0,0,.5); }
       .sp-handle { display: block; width: 40px; height: 4px; margin: 10px auto 14px; border-radius: 2px; background: rgba(255,247,230,.28); }
@@ -652,12 +675,14 @@
       .sp-tile { min-height: 84px; padding: 12px; }
       .sp-num { font-size: 18px; }
       .sp-tile .small { font-size: 10px; letter-spacing: .06em; }
+      .sp-asof { min-height: 2.6em; }
       .sp-act { position: sticky; bottom: 0; z-index: 1; margin: 0 -18px; padding: 12px 18px max(12px, env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(15,20,34,0), #0F1422 28%); }
       .sp-act .btn { display: flex; width: 100%; justify-content: center; box-sizing: border-box; }
       .sp-legal { padding-bottom: 8px; }
       .sp-close { top: 12px; right: 12px; }
-      .sp-pager { top: 12px; bottom: auto; left: 12px; right: auto; gap: 6px; }
+      .sp-pager { top: calc(46svh - 56px); bottom: auto; left: 50%; right: auto; transform: translateX(-50%); gap: 6px; }
       .sp-count { min-width: 52px; }
+      .sp-dialog::backdrop { background: linear-gradient(180deg, rgba(10,14,26,.96) 0, rgba(10,14,26,.96) 80px, rgba(10,14,26,.86) 112px); }
     }
     @media (prefers-reduced-motion: reduce) {
       .sp-dialog::backdrop, .sp-dialog.is-closing::backdrop { animation-duration: 200ms; }
@@ -697,7 +722,10 @@
           <div class="spiral-spin" id="spiral-spin" role="list" aria-label="Cards"></div>
         </div>
         <div class="spiral-dim" aria-hidden="true"></div>
-        <p class="spiral-cap" id="spiral-cap" aria-hidden="true"></p>
+        <div class="spiral-tag" id="spiral-tag" aria-hidden="true">
+          <p class="spiral-cap" id="spiral-cap"></p>
+          <div class="spiral-row"><span class="spiral-pill" id="spiral-pill" hidden></span><span class="spiral-tap" id="spiral-tap" hidden>Tap a card</span></div>
+        </div>
         <p class="spiral-hint" id="spiral-hint">Drag to spin. Tap a card to see its price move.</p>
       </div>
       <span class="ov ov-tl" aria-hidden="true">Price history // Est.</span>
@@ -711,9 +739,8 @@
         <h1 id="h1">Every card logged. <span>Every dollar tracked.</span></h1>
         <p class="lede">The One Piece, Magic, Gundam, Riftbound, and Palworld TCG portfolio tracker.<span class="muted"> Free unlimited scanner, cost basis, realized P&amp;L, and a graded vault.</span><br /><span class="tm">CardOS TCG: Portfolio Tracker includes CardOS OP TCG, CardOS RB TCG, CardOS PW TCG (Palworld), CardOS GD TCG (Gundam), and Magic: The Gathering.</span></p>
         <div class="ctas" id="store-ctas">
-          <a class="btn btn-p" id="log-cta" data-cta="log_first_card" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser&source=hero">Log your first card →</a>
+          <a class="btn btn-p" id="log-cta" data-cta="log_first_card" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser&source=hero">Get started →</a>
           <a class="btn btn-s" data-cta="get_page_hero" href="/get">Get the app →</a>
-          <a class="btn btn-s" id="web-app-cta" data-cta="web_app" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser">Open web app</a>
         </div>
         <div class="stores">
           <a id="play-cta" data-store="play" data-cta="play" href="https://play.google.com/store/apps/details?id=com.cardos.optcg&utm_source=web&utm_medium=teaser&utm_campaign=p37" target="_blank" rel="noopener"><img src="/badge-google-play.png" alt="Get it on Google Play" width="134" height="40" /></a>
@@ -734,10 +761,11 @@
             <p class="sp-sub" id="sp-sub"></p>
             <div class="sp-tiles" id="sp-tiles">
               <div class="sp-tile"><span class="small">Est. price</span><strong class="sp-num" id="sp-price">N/A</strong><span class="sp-asof" id="sp-asof" hidden></span></div>
-              <div class="sp-tile"><span class="small">Est. 30 day move</span><strong class="sp-num" id="sp-move">N/A</strong><svg id="sp-spark" viewBox="0 0 120 32" preserveAspectRatio="none" aria-hidden="true" hidden></svg></div>
+              <div class="sp-tile"><span class="small">Est. 30 day move</span><strong class="sp-num" id="sp-move">N/A</strong></div>
             </div>
+            <div class="sp-trend" id="sp-trend" aria-hidden="true"><span class="sp-trend-lab">30D</span><span class="sp-trend-plot"><svg id="sp-spark" viewBox="0 0 300 40" preserveAspectRatio="none"></svg><span class="sp-trend-dot" id="sp-spark-dot"></span></span></div>
             <p class="sp-meta" id="sp-meta"></p>
-            <div class="sp-act"><a class="btn btn-p" id="sp-cta" data-cta="log_first_card" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser&source=detail">Log your first card →</a></div>
+            <div class="sp-act"><a class="btn btn-p" id="sp-cta" data-cta="log_first_card" href="https://app.cardostcg.com/?utm_source=web&utm_medium=teaser&source=detail">Get started →</a></div>
             <p class="sp-legal" id="sp-legal"></p>
           </div>
         </div>
@@ -980,7 +1008,7 @@
 
   <script>window.CARDOS_PH_KEY='phc_ok7UJ8K4cEQ8waTFSWefLfvtSc8WThrTCn2cRaBBVCCa';window.CARDOS_PH_HOST='https://us.i.posthog.com';window.CARDOS_PH_PLATFORM='landing';</script>
   <script src="/ph.js"></script>
-  <script src="/spiral.js?v=p45-24-na"></script>
+  <script src="/spiral.js?v=p45-25"></script>
   <script>
   (function () {
     function trackLandingCta(cta) {

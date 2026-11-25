@@ -1,6 +1,5 @@
 {
-  "as_of": "2026-11-11",
-  "note": "Hand list. Membership is the ten cards already published in the chase binder. The weekly job refreshes price, move, series, and as_of only. 320px spiral WebP total 315898 bytes. The three nearest thumbs are 88658 bytes. Detail opens the existing 400px binder file.",
+  "note": "Hand list. Membership and order are edited by hand. price_key is the exact print the app prices (catalog card_image_id is id for One Piece, id_variant for Riftbound and Palworld). Prices live in hero/prices.json, written daily by scripts/hero-prices.mjs. 320px spiral WebP total 315898 bytes. The three nearest thumbs are 88658 bytes. Detail opens the existing 400px binder file.",
   "cards": [
     {
       "card_id": "ST01-012",
@@ -13,11 +12,11 @@
       "printing": "Gold-stamped",
       "mat": "op",
       "chase": false,
-      "price": 3282.21,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "ST01-012_p3",
+        "variant": "base",
+        "source": "tcgplayer_en"
+      }
     },
     {
       "card_id": "OGN-299",
@@ -30,11 +29,11 @@
       "printing": null,
       "mat": "rb",
       "chase": true,
-      "price": 3114.31,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "OGN-299",
+        "variant": "signature",
+        "source": "tcgplayer_rb"
+      }
     },
     {
       "card_id": "EBP01-001",
@@ -47,11 +46,11 @@
       "printing": null,
       "mat": "pw",
       "chase": false,
-      "price": 393.96,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "PW-EBP01-001",
+        "variant": "ssp",
+        "source": "tcgplayer_pw"
+      }
     },
     {
       "card_id": "OP05-119",
@@ -64,11 +63,11 @@
       "printing": "Gold",
       "mat": "op",
       "chase": false,
-      "price": 13000,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "OP05-119_p8",
+        "variant": "base",
+        "source": "tcgplayer_en"
+      }
     },
     {
       "card_id": "VEN-189",
@@ -81,11 +80,11 @@
       "printing": null,
       "mat": "rb",
       "chase": true,
-      "price": 3229.71,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "VEN-189",
+        "variant": "signature",
+        "source": "tcgplayer_rb"
+      }
     },
     {
       "card_id": "EBP01-049",
@@ -98,11 +97,11 @@
       "printing": null,
       "mat": "pw",
       "chase": false,
-      "price": 447.46,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "PW-EBP01-049",
+        "variant": "ssp",
+        "source": "tcgplayer_pw"
+      }
     },
     {
       "card_id": "EB04-061",
@@ -115,11 +114,11 @@
       "printing": null,
       "mat": "op",
       "chase": false,
-      "price": 24995.95,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "EB04-061_p2",
+        "variant": "base",
+        "source": "tcgplayer_en"
+      }
     },
     {
       "card_id": "SFD-227",
@@ -132,11 +131,11 @@
       "printing": null,
       "mat": "rb",
       "chase": true,
-      "price": 3390.69,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "SFD-227",
+        "variant": "signature",
+        "source": "tcgplayer_rb"
+      }
     },
     {
       "card_id": "EBP01-025",
@@ -149,11 +148,11 @@
       "printing": null,
       "mat": "pw",
       "chase": false,
-      "price": 646.4,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "PW-EBP01-025",
+        "variant": "ssp",
+        "source": "tcgplayer_pw"
+      }
     },
     {
       "card_id": "OGN-303",
@@ -166,11 +165,11 @@
       "printing": null,
       "mat": "rb",
       "chase": false,
-      "price": 3711.35,
-      "move_7d": null,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11"
+      "price_key": {
+        "id": "OGN-303",
+        "variant": "signature",
+        "source": "tcgplayer_rb"
+      }
     }
   ]
 }

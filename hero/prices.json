@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-11-25T20:00:00Z",
+  "cards": {
+    "ST01-012": {
+      "price": 3282.21,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_en"
+    },
+    "OGN-299": {
+      "price": 3114.31,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_rb"
+    },
+    "EBP01-001": {
+      "price": 393.96,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_pw"
+    },
+    "OP05-119": {
+      "price": 13000,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_en"
+    },
+    "VEN-189": {
+      "price": 3229.71,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_rb"
+    },
+    "EBP01-049": {
+      "price": 447.46,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_pw"
+    },
+    "EB04-061": {
+      "price": 24995.95,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_en"
+    },
+    "SFD-227": {
+      "price": 3390.69,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_rb"
+    },
+    "EBP01-025": {
+      "price": 646.4,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_pw"
+    },
+    "OGN-303": {
+      "price": 3711.35,
+      "move_30d": null,
+      "series_30d": null,
+      "as_of": "2026-11-11",
+      "source": "tcgplayer_rb"
+    }
+  }
+}
