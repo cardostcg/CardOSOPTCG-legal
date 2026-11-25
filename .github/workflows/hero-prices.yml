@@ -1,0 +1,75 @@
+# Hero prices, daily. P45.25.
+# Reads hero.prices_v with the hero_prices_ro role and commits hero/prices.json when it changed.
+# Inert until the HERO_PRICES_DB_URL repo secret exists: the job logs a notice and stops.
+#
+# Schedule: 08:23 UTC. The app repo's pg_cron runs the captures this reads at
+# 06:00 (spine-capture-nightly, One Piece EN), 06:45 (op-catalog-prices-daily, One Piece
+# catalog price), 07:00 (spine-capture-rb-nightly) and 07:15 (spine-capture-pw-nightly),
+# then spine-health-sql-daily at 08:00. Sources: CardOSOPTCG INFRA_SNAPSHOT.md section 6 and
+# supabase/migrations 20261003000000, 20260917043803, 20261003065419, 20261009025113.
+# 08:23 leaves room after the last capture and sits off the top of the hour.
+name: Hero prices
+
+on:
+  schedule:
+    - cron: '23 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hero-prices
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check the secret is set
+        id: gate
+        env:
+          HERO_PRICES_DB_URL: ${{ secrets.HERO_PRICES_DB_URL }}
+        run: |
+          if [ -z "$HERO_PRICES_DB_URL" ]; then
+            echo "::notice::HERO_PRICES_DB_URL is not set. Nothing to do."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.ready == 'true'
+
+      - name: Fetch main for the first-run guard baseline
+        if: steps.gate.outputs.ready == 'true'
+        run: git fetch --no-tags --depth=1 origin main
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.ready == 'true'
+        with:
+          node-version: '20'
+
+      - name: Make sure psql is present
+        if: steps.gate.outputs.ready == 'true'
+        run: command -v psql >/dev/null || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
+
+      - name: Build hero/prices.json
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          HERO_PRICES_DB_URL: ${{ secrets.HERO_PRICES_DB_URL }}
+        run: node scripts/hero-prices.mjs
+
+      - name: Commit if changed
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          if git diff --quiet -- hero/prices.json; then
+            echo "hero/prices.json unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hero/prices.json
+          git commit -m "Hero prices: daily refresh $(date -u +%F)"
+          git push
