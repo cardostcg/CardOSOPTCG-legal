@@ -1,4 +1,4 @@
-/* Spiral hero. P45.23, polished in P45.24.
+/* Spiral hero. P45.23, polished in P45.24, live prices in P45.25.
    Kill switch: ?hero=wave restores the wavefield in the hero. Default is this scene.
 
    Motion model. The group spins about the view axis with one Web Animations rotate.
@@ -12,7 +12,12 @@
    Depth is static per slot, so dimming and blur are static too.
 
    Image weight: 10 x 320px WebP = 315,898 bytes. Nearest three = 88,658 bytes.
-   Detail art is the existing 400px file in /binder/, loaded on open. */
+   Detail art is the existing 400px file in /binder/, loaded on open.
+
+   Prices. /hero/cards.json is the hand list. /hero/prices.json is written daily by
+   scripts/hero-prices.mjs and merged here by card_id. Both are static files; the page
+   never calls the database. A missing file or card shows no number. Older than 10 days
+   shows the date. Older than 21 days drops price, move and line. */
 (function () {
   if (document.documentElement.getAttribute('data-hero') !== 'spiral') return;
 
@@ -44,6 +49,9 @@
   var spin = document.getElementById('spiral-spin');
   var view = document.getElementById('spiral-view');
   var cap = document.getElementById('spiral-cap');
+  var tag = document.getElementById('spiral-tag');
+  var pill = document.getElementById('spiral-pill');
+  var tap = document.getElementById('spiral-tap');
   var hint = document.getElementById('spiral-hint');
   var dialog = document.getElementById('sp-dialog');
   var motionBtn = document.getElementById('motion');
@@ -95,9 +103,28 @@
   function moveText(v) {
     if (!isNum(v)) return 'N/A';
     var abs = Math.abs(v).toFixed(1) + '%';
+    if (Math.abs(v) < 0.05) return '0.0%';
     if (v > 0) return '▲ +' + abs;
-    if (v < 0) return '▼ −' + abs;
-    return '0.0%';
+    return '▼ −' + abs;
+  }
+  function usDate(iso) {
+    var p = String(iso || '').split('-');
+    if (p.length < 3) return '';
+    return p[1] + '/' + p[2] + '/' + p[0];
+  }
+  /* The one place a card's shown numbers come from. Tile A, Tile B, the line, the pill
+     and the button label all read this, so they cannot disagree. */
+  function priceView(c) {
+    var age = ageDays(c.as_of);
+    var priced = isNum(c.price) && c.price > 0 && age != null && age <= 21;
+    var move = priced && isNum(c.move_30d) ? c.move_30d : null;
+    var series = priced && Array.isArray(c.series_30d) ? c.series_30d.filter(isNum) : [];
+    return {
+      price: priced ? c.price : null,
+      move: move,
+      series: series.length > 1 ? series : null,
+      date: priced && age > 10 ? 'Est. as of ' + usDate(c.as_of) : ''
+    };
   }
   function ageDays(iso) {
     var p = String(iso || '').split('-');
@@ -131,6 +158,7 @@
   function hideHint() {
     interacted = true;
     if (hint) hint.hidden = true;
+    if (tap) tap.hidden = true;
   }
 
   /* ---------- orbit clock ---------- */
@@ -215,30 +243,64 @@
     paintCaption();
     if (logCta && cards[active]) logCta.href = hrefFor(cards[active], 'hero');
   }
+  /* Pill: "Est. $3,711.35  ▲ 4.2%". No valid move shows the price alone. No price, or a
+     price older than 21 days, hides the pill. Never "▲ 0%", never N/A, never "$0.00". */
+  function pillParts(c) {
+    var v = priceView(c);
+    if (v.price == null) return null;
+    var parts = { price: 'Est. ' + money(v.price), move: '', cls: '' };
+    if (v.move != null && Math.abs(v.move) >= 0.05) {
+      parts.move = (v.move > 0 ? '▲ ' : '▼ ') + Math.abs(v.move).toFixed(1) + '%';
+      parts.cls = v.move > 0 ? 'is-up' : 'is-down';
+    }
+    return parts;
+  }
+  function paintPill(c) {
+    if (!pill) return;
+    var p = c ? pillParts(c) : null;
+    pill.textContent = '';
+    pill.hidden = !p;
+    if (!p) return;
+    var a = document.createElement('span');
+    a.textContent = p.price;
+    pill.appendChild(a);
+    if (p.move) {
+      var b = document.createElement('span');
+      b.className = p.cls;
+      b.textContent = p.move;
+      pill.appendChild(b);
+    }
+  }
   function paintCaption() {
     var i = open ? openAt : active;
     var c = cards[i];
     if (!c || !cap) return;
     var text = pad(i + 1) + '  ·  ' + gameOf(c).label + '  ·  ' + c.name + '  ·  ' + c.card_id;
-    if (cap.textContent === text) return;
-    if (still() || !cap.animate || !cap.textContent) { cap.textContent = text; return; }
-    var out = cap.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 100, fill: 'forwards' });
-    out.onfinish = function () {
+    if (cap.textContent === text && cap.getAttribute('data-card') === c.card_id) return;
+    cap.setAttribute('data-card', c.card_id);
+    var parts = [cap];
+    if (pill) parts.push(pill);
+    if (still() || !cap.animate || !cap.textContent) { cap.textContent = text; paintPill(c); return; }
+    var outs = parts.map(function (el) { return el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 100, fill: 'forwards' }); });
+    outs[0].onfinish = function () {
       cap.textContent = text;
-      out.cancel();
-      cap.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 100 });
+      paintPill(c);
+      outs.forEach(function (o) { o.cancel(); });
+      parts.forEach(function (el) { el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 100 }); });
     };
   }
 
   /* ---------- layout ---------- */
 
-  function design(n) {
+  /* floor is the far card width in R: 0.08 on desktop, 0.10 under 900px (P45.25).
+     The near card stays 0.44R. The angular step is searched again for each floor. */
+  function design(n, floor) {
     var best = null;
     for (var deg = 60; deg <= 170; deg++) {
       var pts = [];
       for (var i = 0; i < n; i++) {
         var t = n > 1 ? i / (n - 1) : 1;
-        var w = 0.08 + 0.36 * Math.pow(t, 3);
+        var w = floor + (0.44 - floor) * Math.pow(t, 3);
         var rho = 0.13 + 0.47 * t;
         var th = i * deg * Math.PI / 180;
         pts.push({ t: t, w: w, rho: rho, th: th, x: rho * Math.cos(th), y: rho * Math.sin(th) });
@@ -257,7 +319,7 @@
   }
 
   function rectsIn(sr) {
-    var sel = '#top .wrap > *, #spiral-cap, #spiral-hint, #top > .ov';
+    var sel = '#top .wrap > *, #spiral-tag, #spiral-hint, #top > .ov';
     return Array.prototype.map.call(document.querySelectorAll(sel), function (el) {
       var r = el.getBoundingClientRect();
       if (!r.width || !r.height) return null;
@@ -273,12 +335,24 @@
   function layout() {
     if (!cards.length) return;
     var n = cards.length;
-    if (!shape || shape.n !== n) { shape = design(n); shape.n = n; }
+    var mobile = window.innerWidth < 900;
+    var desktop = window.innerWidth >= 1100;
+    var floor = mobile ? 0.10 : 0.08;
+    if (!shape || shape.n !== n || shape.floor !== floor) { shape = design(n, floor); shape.n = n; shape.floor = floor; }
     var sr = stage.getBoundingClientRect();
     var W = sr.width;
     var H = sr.height;
-    var mobile = window.innerWidth < 900;
-    var desktop = window.innerWidth >= 1100;
+    var eyebrow = document.querySelector('#top .wrap > .label');
+    if (tag) {
+      if (mobile) {
+        /* Caption block sits at the bottom of the spiral band, just above the eyebrow. */
+        var er0 = eyebrow ? eyebrow.getBoundingClientRect() : null;
+        var tagTop = (er0 ? er0.top - sr.top : H * 0.5) - 10 - tag.offsetHeight;
+        tag.style.top = Math.round(tagTop) + 'px';
+      } else {
+        tag.style.top = '';
+      }
+    }
     var rects = rectsIn(sr);
     var cx;
     var cy;
@@ -292,21 +366,30 @@
       R = Math.min((W - T) / 2 - pad, H / 2 - 16);
       root.style.setProperty('--scrim', Math.round(T + pad) + 'px');
     } else {
-      var capQ = rects.filter(function (q) { return q.el === cap; })[0];
-      var eyebrow = document.querySelector('#top .wrap > .label');
+      /* Band: under the top overlay label, down to the caption block. Sized by the band
+         height. The near card may bleed up to 12 percent of its width past the side
+         edges; the stage clips it, and the type clearance below still applies. */
+      var tagQ = rects.filter(function (q) { return q.el === tag; })[0];
+      var ovQ = rects.filter(function (q) { return q.el.classList && q.el.classList.contains('ov-tl'); })[0];
       var er = eyebrow ? eyebrow.getBoundingClientRect() : null;
-      var top = (capQ ? capQ.b : 40) + 10;
-      var bot = er ? er.top - sr.top - 10 : H * 0.5;
+      var top = (ovQ ? ovQ.b : 0) + pad;
+      var bot = tagQ ? tagQ.t - pad : (er ? er.top - sr.top - 10 : H * 0.5);
       cx = W / 2;
       cy = (top + bot) / 2;
-      R = Math.min((bot - top) / 2, W / 2 - 10);
-      root.style.setProperty('--scrim', Math.round(bot) + 'px');
+      R = (bot - top) / 2;
+      root.style.setProperty('--scrim', Math.round(er ? er.top - sr.top - 10 : bot) + 'px');
     }
     if (!(R > 60)) R = 60;
     var pts = shape.pts;
     var reach = function (p) { return p.rho + p.w * HALF_DIAG * LIFT; };
     var maxReach = pts.reduce(function (m, p) { return Math.max(m, reach(p)); }, 0);
     var Reff = R / maxReach;
+    if (mobile) {
+      /* Side limit: cx + reach * Reff <= W + 0.12 * near card width. */
+      var nearW0 = pts[n - 1].w;
+      var side = Math.min(cx, W - cx);
+      Reff = Math.min(Reff, side / (maxReach - 0.12 * nearW0));
+    }
     function clear(Rv) {
       for (var k = 0; k < rects.length; k++) {
         var q = rects[k];
@@ -495,9 +578,7 @@
     if (!c) return;
     openAt = i;
     var g = gameOf(c);
-    var age = ageDays(c.as_of);
-    var stale = age != null && age > 21;
-    var showDate = age != null && age > 10 && !stale;
+    var v = priceView(c);
     document.getElementById('sp-eyebrow').textContent = g.label + '  ·  ' + c.set_code + '  ·  ' + c.number;
     document.getElementById('sp-title').textContent = c.name;
     var sub = [c.rarity, c.printing].filter(Boolean).join(' · ');
@@ -507,20 +588,16 @@
     var priceEl = document.getElementById('sp-price');
     var moveEl = document.getElementById('sp-move');
     var asofEl = document.getElementById('sp-asof');
-    priceEl.textContent = stale ? 'N/A' : money(c.price);
-    priceEl.className = 'sp-num' + (!stale && isNum(c.price) && c.price > 0 ? '' : ' is-flat');
-    var mv = stale ? null : c.move_30d;
+    priceEl.textContent = money(v.price);
+    priceEl.className = 'sp-num' + (v.price != null ? '' : ' is-flat');
+    var mv = v.move;
     moveEl.textContent = moveText(mv);
     moveEl.className = 'sp-num' + (isNum(mv) ? (mv > 0 ? ' is-up' : (mv < 0 ? ' is-down' : ' is-flat')) : ' is-flat');
-    asofEl.hidden = !showDate;
-    if (showDate) asofEl.textContent = 'Est. as of ' + c.as_of;
-    var spark = document.getElementById('sp-spark');
-    var series = !stale && Array.isArray(c.series_30d) && c.series_30d.length > 1 ? c.series_30d : null;
-    spark.hidden = !series;
-    if (series) drawSpark(spark, series);
+    asofEl.hidden = false;
+    asofEl.textContent = v.date;
+    drawSpark(v.series);
     var bits = [c.set_code + '-' + c.number];
     if (c.printing) bits.push(c.printing);
-    if (c.as_of && !stale) bits.push('Updated ' + c.as_of);
     document.getElementById('sp-meta').textContent = bits.join('  ·  ');
     art.alt = g.label + ', ' + c.name + ', ' + c.card_id;
     var src = '/binder/' + c.card_image_id + '.webp';
@@ -536,18 +613,33 @@
     paintCaption();
   }
 
-  function drawSpark(svg, series) {
-    var nums = series.filter(isNum);
-    if (nums.length < 2) { svg.hidden = true; return; }
+  /* Full-width 30 day line under the tiles, a dot on the last point, a "30D" label.
+     The row keeps its height when there is no series (no layout shift). */
+  function drawSpark(series) {
+    var row = document.getElementById('sp-trend');
+    var svg = document.getElementById('sp-spark');
+    var dot = document.getElementById('sp-spark-dot');
+    if (!row || !svg) return;
+    var nums = series ? series.filter(isNum) : [];
+    if (nums.length < 2) {
+      row.classList.add('is-empty');
+      svg.innerHTML = '';
+      return;
+    }
+    row.classList.remove('is-empty');
     var min = Math.min.apply(null, nums);
     var max = Math.max.apply(null, nums);
-    var span = max - min || 1;
-    var d = nums.map(function (v, i) {
-      var x = (i / (nums.length - 1)) * 120;
-      var y = 28 - ((v - min) / span) * 24;
-      return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
-    }).join(' ');
-    svg.innerHTML = '<path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.5"/>';
+    var span = max - min;
+    var pts = nums.map(function (v, i) {
+      return { x: (i / (nums.length - 1)) * 300, y: span > 0 ? 36 - ((v - min) / span) * 32 : 20 };
+    });
+    var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + p.x.toFixed(1) + ' ' + p.y.toFixed(1); }).join(' ');
+    svg.innerHTML = '<path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    var last = pts[pts.length - 1];
+    if (dot) {
+      dot.style.left = (last.x / 300 * 100).toFixed(2) + '%';
+      dot.style.top = (last.y / 40 * 100).toFixed(2) + '%';
+    }
   }
 
   /* The flat card flies between its slot and the detail pose. The start pose is the
@@ -685,10 +777,12 @@
 
   /* ---------- build ---------- */
 
-  function build(list) {
+  function build(list, prices) {
     var n = list.length;
+    var live = (prices && prices.cards && typeof prices.cards === 'object') ? prices.cards : {};
     var eagerFrom = Math.max(0, n - 3);
     list.forEach(function (raw, i) {
+      var pe = live[String(raw.card_id)] || {};
       var c = {
         card_id: String(raw.card_id),
         card_image_id: String(raw.card_image_id),
@@ -700,11 +794,10 @@
         printing: raw.printing || null,
         mat: raw.mat,
         chase: raw.chase === true,
-        price: isNum(raw.price) ? raw.price : null,
-        move_7d: isNum(raw.move_7d) ? raw.move_7d : null,
-        move_30d: isNum(raw.move_30d) ? raw.move_30d : null,
-        series_30d: raw.series_30d || null,
-        as_of: raw.as_of || null,
+        price: isNum(pe.price) && pe.price > 0 ? pe.price : null,
+        move_30d: isNum(pe.move_30d) ? pe.move_30d : null,
+        series_30d: Array.isArray(pe.series_30d) ? pe.series_30d : null,
+        as_of: typeof pe.as_of === 'string' ? pe.as_of : null,
         t: 0,
         th: 0,
         s: 1,
@@ -720,7 +813,8 @@
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'sp-btn';
-      btn.setAttribute('aria-label', g.label + ', ' + c.name + ', ' + c.card_id + ', Est. ' + money(c.price));
+      var shown = priceView(c).price;
+      btn.setAttribute('aria-label', g.label + ', ' + c.name + ', ' + c.card_id + (shown != null ? ', Est. ' + money(shown) : ''));
       var tilt = document.createElement('span');
       tilt.className = 'sp-tilt';
       tilt.style.transform = 'rotateZ(' + c.roll.toFixed(2) + 'deg) rotateX(' + c.pitch.toFixed(2) + 'deg)';
@@ -864,6 +958,7 @@
     root.classList.toggle('is-paused', !showOn);
     root.classList.toggle('is-still', still());
     if (hint) hint.hidden = reduced || interacted;
+    if (tap) tap.hidden = reduced || interacted;
     update();
   }
 
@@ -932,13 +1027,20 @@
   });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(); });
 
+  /* Prices are optional: a failed or missing prices.json leaves art and names, no numbers.
+     The query string is the UTC date so a CDN copy turns over once a day. */
+  var today = new Date().toISOString().slice(0, 10);
+  var pricesReq = fetch('/hero/prices.json?d=' + today, { credentials: 'same-origin' }).then(function (r) {
+    if (!r.ok) throw new Error('prices');
+    return r.json();
+  }).catch(function () { return null; });
   fetch('/hero/cards.json', { credentials: 'same-origin' }).then(function (r) {
     if (!r.ok) throw new Error('cards');
     return r.json();
   }).then(function (data) {
     var list = data && data.cards;
     if (!list || !list.length) throw new Error('empty');
-    build(list);
+    return pricesReq.then(function (prices) { build(list, prices); });
   }).catch(fail);
 
   root.classList.add('is-on');
