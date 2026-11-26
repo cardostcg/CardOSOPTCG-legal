@@ -1,6 +1,7 @@
 -- ============================================================================
--- 20261125200000_hero_prices_ro.sql  ·  P45.25 hero prices, read-only role
--- STATUS: NOT RUN. Art runs it by hand. Nothing in CI runs it.
+-- 20261126062302_hero_prices_ro.sql  ·  P45.25 hero prices, read-only role
+-- STATUS: APPLIED to prod 2026-11-26 (version 20261126062302, via the Supabase connector).
+-- The role has NO password yet; it cannot log in until Art sets one (see PASSWORD).
 --
 -- WHAT IT GRANTS
 --   One login role, hero_prices_ro, that can read one view, hero.prices_v.
@@ -94,7 +95,16 @@ BEGIN
   END IF;
 END $$;
 
-ALTER ROLE hero_prices_ro NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS CONNECTION LIMIT 3;
+-- Supabase's postgres is not a superuser, so it cannot set SUPERUSER, REPLICATION or
+-- BYPASSRLS on another role, even to NO. New roles default to NO on all three; assert it.
+ALTER ROLE hero_prices_ro NOCREATEDB NOCREATEROLE CONNECTION LIMIT 3;
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'hero_prices_ro'
+             AND (rolsuper OR rolreplication OR rolbypassrls OR rolcreatedb OR rolcreaterole)) THEN
+    RAISE EXCEPTION 'hero_prices_ro has an elevated attribute; aborting';
+  END IF;
+END $$;
 ALTER ROLE hero_prices_ro SET search_path = hero;
 ALTER ROLE hero_prices_ro SET statement_timeout = '15s';
 ALTER ROLE hero_prices_ro SET default_transaction_read_only = on;

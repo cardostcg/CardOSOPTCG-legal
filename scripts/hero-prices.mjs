@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // scripts/hero-prices.mjs · P45.25
 // Builds hero/prices.json from hero.prices_v (read-only role, see
-// supabase/migrations/20261125200000_hero_prices_ro.sql).
+// supabase/migrations/20261126062302_hero_prices_ro.sql).
 //
 //   node scripts/hero-prices.mjs                    live: reads HERO_PRICES_DB_URL via psql
 //   node scripts/hero-prices.mjs --fixture rows.json  no network: rows come from the file
