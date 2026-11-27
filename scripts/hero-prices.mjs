@@ -12,6 +12,10 @@
 //            --out <file>       default hero/prices.json
 //
 // Exits non-zero, with a message per card, and writes nothing when any check fails.
+// P45.29c: a card whose rows are all quarantined, stale or unpriced, or whose catalog
+// price is null, is skipped (left out of prices.json, so the page shows art and name
+// with no number) instead of failing the run. More than MAX_SKIPS skipped cards, or a
+// game left with no priced card, still fails. Wrong keys, parity and the guard still fail.
 // Never writes 0 for a missing number. Null stays null.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -23,6 +27,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PARITY_TOL = 0.01;   // job price vs card_catalog.market_price
 const GUARD_HI = 10;       // new / last committed
 const GUARD_LO = 0.1;
+const MAX_SKIPS = 3;      // of the 10 hand-list cards, per run
 const MOVE_MIN_DAYS = 25;  // 30 day move only from a row 25 to 35 days older
 const MOVE_MAX_DAYS = 35;
 const SERIES_WEEKS = 5;    // up to 5 weekly points: -28, -21, -14, -7, 0 days
@@ -162,7 +167,7 @@ function priceCard(card, rows, guardBase) {
     .filter((r) => isNum(r.price) && r.price > 0 && r.day != null)
     .sort((a, b) => a.day - b.day);
   if (!good.length) {
-    return { errors: [`${id}: ${mine.length} row(s), all quarantined, stale or unpriced`] };
+    return { errors: [], skip: `${mine.length} row(s), all quarantined, stale or unpriced` };
   }
   const latest = good[good.length - 1];
   const price = round2(latest.price);
@@ -170,8 +175,10 @@ function priceCard(card, rows, guardBase) {
   // Parity with the number the app shows.
   const mkt = num(latest.market_price);
   if (!isNum(mkt) || mkt <= 0) {
-    errors.push(`${id}: catalog market_price is missing, parity cannot be checked`);
-  } else if (Math.abs(price - mkt) / mkt > PARITY_TOL) {
+    // The app shows no price for this print, so the hero shows none either.
+    return { errors: [], skip: 'catalog market_price is null, the app shows no price' };
+  }
+  if (Math.abs(price - mkt) / mkt > PARITY_TOL) {
     errors.push(`${id}: parity fail, job ${price} vs catalog market_price ${mkt} (${(((price / mkt) - 1) * 100).toFixed(2)}%)`);
   }
 
@@ -228,11 +235,13 @@ function main() {
   const errors = [];
   const cards = {};
   const pricedByGame = {};
+  const skipped = [];
   for (const c of list) {
     const id = String(c.card_id);
     pricedByGame[c.game] = pricedByGame[c.game] || 0;
     const res = priceCard(c, rows, baselineFor(id, prev, baseline));
     errors.push(...res.errors);
+    if (res.skip) skipped.push(`${id}: ${res.skip}`);
     if (res.entry && !res.errors.length) {
       cards[id] = res.entry;
       pricedByGame[c.game]++;
@@ -241,6 +250,8 @@ function main() {
   for (const [game, n] of Object.entries(pricedByGame)) {
     if (n === 0) errors.push(`${game}: zero priced cards`);
   }
+  if (skipped.length > MAX_SKIPS) errors.push(`${skipped.length} cards skipped, more than ${MAX_SKIPS}`);
+  for (const sk of skipped) console.log(`hero-prices: skip ${sk}`);
   const unknown = [...new Set(rows.map((r) => r.hero_key))].filter((k) => !list.some((c) => String(c.card_id) === k));
   if (unknown.length) errors.push(`view returned cards not in the hand list: ${unknown.join(', ')}`);
 
@@ -258,6 +269,7 @@ function main() {
   writeFileSync(outFile, JSON.stringify(out, null, 2) + '\n');
   for (const c of list) {
     const e = cards[String(c.card_id)];
+    if (!e) { console.log(`  ${String(c.card_id).padEnd(10)} skipped, no number`); continue; }
     console.log(`  ${String(c.card_id).padEnd(10)} ${String(e.price).padStart(10)}  move ${e.move_30d ?? 'null'}  series ${e.series_30d ? e.series_30d.length : 'null'}  as_of ${e.as_of}`);
   }
   console.log(`hero-prices: ok, wrote ${list.length} cards to ${outFile.replace(ROOT + '/', '')}`);
