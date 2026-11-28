@@ -1,5 +1,7 @@
 # Hero prices, daily. P45.25.
 # Reads hero.prices_v with the hero_prices_ro role and commits hero/prices.json when it changed.
+# Also reads hero.stats_v (scripts/site-stats.mjs) and commits hero/stats.json plus the two pages
+# whose catalog counts it fills.
 # Inert until the HERO_PRICES_DB_URL repo secret exists: the job logs a notice and stops.
 #
 # Schedule: 08:23 UTC. The app repo's pg_cron runs the captures this reads at
@@ -61,15 +63,26 @@ jobs:
           HERO_PRICES_DB_URL: ${{ secrets.HERO_PRICES_DB_URL }}
         run: node scripts/hero-prices.mjs
 
-      - name: Commit if changed
-        if: steps.gate.outputs.ready == 'true'
+      # Site counts (trust pyramid #9). Runs even when the price step failed, so one
+      # stale hero card never freezes the counts. Inert until hero.stats_v exists.
+      - name: Build hero/stats.json and fill the page counts
+        if: ${{ !cancelled() && steps.gate.outputs.ready == 'true' }}
+        env:
+          HERO_PRICES_DB_URL: ${{ secrets.HERO_PRICES_DB_URL }}
         run: |
-          if git diff --quiet -- hero/prices.json; then
-            echo "hero/prices.json unchanged"
+          node scripts/site-stats.mjs fetch
+          node scripts/site-stats.mjs render
+
+      - name: Commit if changed
+        if: ${{ !cancelled() && steps.gate.outputs.ready == 'true' }}
+        run: |
+          FILES="hero/prices.json hero/stats.json index.html how-cardos-prices-cards.html"
+          if git diff --quiet -- $FILES; then
+            echo "hero/prices.json and the site counts unchanged"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add hero/prices.json
-          git commit -m "Hero prices: daily refresh $(date -u +%F)"
+          git add $FILES
+          git commit -m "Hero prices and site counts: daily refresh $(date -u +%F)"
           git push

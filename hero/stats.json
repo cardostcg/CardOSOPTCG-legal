@@ -1,0 +1,52 @@
+{
+  "as_of": "2026-11-28",
+  "source": "hero.stats_v",
+  "cards": 50009,
+  "sets": 290,
+  "games": 6,
+  "price_points": 1688793,
+  "by_game": [
+    {
+      "game": "MTG",
+      "cards": 29870,
+      "sets": 76,
+      "priced": 20602,
+      "live": true
+    },
+    {
+      "game": "DM",
+      "cards": 9391,
+      "sets": 101,
+      "priced": 9117,
+      "live": true
+    },
+    {
+      "game": "OP",
+      "cards": 6320,
+      "sets": 67,
+      "priced": 5678,
+      "live": true
+    },
+    {
+      "game": "GD",
+      "cards": 2198,
+      "sets": 27,
+      "priced": 2172,
+      "live": true
+    },
+    {
+      "game": "RB",
+      "cards": 1774,
+      "sets": 12,
+      "priced": 1679,
+      "live": true
+    },
+    {
+      "game": "PW",
+      "cards": 456,
+      "sets": 7,
+      "priced": 452,
+      "live": true
+    }
+  ]
+}
