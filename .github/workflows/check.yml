@@ -1,0 +1,27 @@
+# Site checks on every PR and push to main. Trust pyramid #9.
+# The catalog counts on index.html and how-cardos-prices-cards.html must match
+# hero/stats.json, and no page may call a priced game "next" or "soon".
+# To fix a failure: node scripts/site-stats.mjs render, then commit the pages.
+name: Site checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: site-stats tests
+        run: node --test scripts/site-stats.test.mjs
+      - name: Pages match hero/stats.json
+        run: node scripts/site-stats.mjs check
