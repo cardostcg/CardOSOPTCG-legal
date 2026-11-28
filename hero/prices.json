@@ -1,74 +1,133 @@
 {
-  "generated_at": "2026-11-25T20:00:00Z",
+  "generated_at": "2026-11-28T20:47:21Z",
   "cards": {
     "ST01-012": {
       "price": 3282.21,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "move_30d": 0,
+      "series_30d": [
+        3282.21,
+        3282.21,
+        3282.21,
+        3282.21,
+        3282.21
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_en"
     },
     "OGN-299": {
-      "price": 3114.31,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "price": 3131.26,
+      "move_30d": 0.5,
+      "series_30d": [
+        3114.31,
+        3114.31,
+        3114.31,
+        3137.69,
+        3131.26
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_rb"
     },
     "EBP01-001": {
-      "price": 393.96,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "price": 376.17,
+      "move_30d": -4.5,
+      "series_30d": [
+        393.96,
+        393.96,
+        384.98,
+        376.17,
+        376.17
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_pw"
     },
     "OP05-119": {
       "price": 13000,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "move_30d": 0,
+      "series_30d": [
+        13000,
+        13000,
+        13000,
+        13000,
+        13000
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_en"
     },
     "VEN-189": {
-      "price": 3229.71,
+      "price": 3160.18,
       "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "series_30d": [
+        3229.71,
+        3229.71,
+        3160.18,
+        3160.18
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_rb"
     },
     "EBP01-049": {
-      "price": 447.46,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "price": 434.47,
+      "move_30d": -5.6,
+      "series_30d": [
+        460.12,
+        447.46,
+        447.46,
+        434.47,
+        434.47
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_pw"
     },
     "EB04-061": {
       "price": 24995.95,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "move_30d": 0,
+      "series_30d": [
+        24995.95,
+        24995.95,
+        24995.95,
+        24995.95,
+        24995.95
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_en"
     },
     "SFD-227": {
-      "price": 3390.69,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "price": 3791.37,
+      "move_30d": 13.6,
+      "series_30d": [
+        3336.16,
+        3336.16,
+        3390.69,
+        3791.37,
+        3791.37
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_rb"
     },
     "EBP01-025": {
-      "price": 646.4,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "price": 577.14,
+      "move_30d": -14.1,
+      "series_30d": [
+        672.13,
+        648,
+        636.46,
+        599.84,
+        577.14
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_pw"
     },
     "OGN-303": {
       "price": 3711.35,
-      "move_30d": null,
-      "series_30d": null,
-      "as_of": "2026-11-11",
+      "move_30d": 0,
+      "series_30d": [
+        3711.35,
+        3711.35,
+        3711.35,
+        3711.35,
+        3711.35
+      ],
+      "as_of": "2026-11-28",
       "source": "tcgplayer_rb"
     }
   }
